@@ -1,0 +1,159 @@
+<mvc:View controllerName="ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.controller.Detail" 
+xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:mvc="sap.ui.core.mvc"
+displayBlock="true" 
+xmlns="sap.m" 
+xmlns:l="sap.ui.layout" 
+xmlns:f="sap.ui.layout.form" 
+xmlns:core="sap.ui.core"
+xmlns:u="sap.ui.unified"
+xmlns:fb="sap.ui.comp.filterbar">
+	<App>
+		<pages>
+			<Page title="{detailModelView>/PageTitle}" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					
+					<IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+						<items>
+							
+							<!--Hasar Bilgileri-->
+							<IconTabFilter text="Hasar Bilgileri" design="Horizontal" icon="sap-icon://add-equipment" iconColor="Positive">
+								<VBox class="sapUiSmallMargin">
+									
+									<f:Form id="FormHasarBilgileri" editable="true" ariaLabelledBy="Title1">
+										<f:layout>
+											<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+												emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+										</f:layout>
+										
+										<f:formContainers>
+											
+											<f:FormContainer ariaLabelledBy="Title2">
+												<f:formElements>
+													
+													<f:FormElement label="Hasar No">
+														<f:fields>
+															<Input id="id_hasarno" type="Text" textFormatMode="KeyValue" placeholder="0000" editable="false" value="{detailModelView>/Hasarno}"/>
+														</f:fields>
+													</f:FormElement>
+													
+													
+													
+													<f:FormElement label="Tarih">
+														<f:fields>
+															<DatePicker id="id_tarih" displayFormat="dd.MM.yyyy" required="true" placeholder="Tarih Giriniz ..."
+																class="sapUiSmallMarginBottom"
+																value="{path:'detailModelView>/Tarih' , formatter:'ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.util.formatter.formatdate'}"
+																editable="{detailModelView>/EditDetail}"/>
+														</f:fields>
+													</f:FormElement>
+													
+													
+													
+													
+													<f:FormElement label="Hasar Tür">
+														<f:fields>
+															<ComboBox id="id_cb_hasartur" required="true" textDirection="Inherit" selectedKey="{detailModelView>/Hasartur}"
+																items="{detailModelView>/HasarTurList}" selectionChange="handleHasarTurList" editable="{detailModelView>/EditDetail}">
+																<core:Item text="{detailModelView>Hasarturtxt}" key="{detailModelView>Hasartur}"/>
+															</ComboBox>
+														</f:fields>
+													</f:FormElement>
+													
+												
+												<f:FormElement label="Lokasyon">
+														<f:fields>
+															<Input showValueHelp="true" id="id_lokasyon"  valueHelpOnly="true" value="{detailModelView>/Lokasyontxt}"
+																filterSuggests="false" showSuggestion="true" valueHelpRequest="onValueHelpRequestLokasyon" 
+																 editable="{detailModelView>/EditDetail}" />
+														</f:fields>
+													</f:FormElement>
+													
+
+
+													
+
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</VBox>
+							</IconTabFilter>
+							
+							
+							
+							<!--Hasar Açıklaması-->
+							<IconTabFilter text="Açıklama" design="Horizontal" icon="sap-icon://form" iconColor="Default">
+								<VBox class="sapUiSmallMargin">
+									<f:Form id="FormAciklama" editable="true" ariaLabelledBy="Title1">
+										<f:layout>
+											<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+												emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer ariaLabelledBy="Title2">
+												
+												<f:formElements>
+
+
+													<f:FormElement label="Hasar Açıklaması">
+														<f:fields>
+														<TextArea id="id_ta_aciklama" required="true" rows="7"  liveChange="handleLiveChangeAciklama" visible="true"
+														   		value="{detailModelView>/Aciklama}" editable="{detailModelView>/EditDetail}"
+														   		placeholder="Hasar açıklaması giriniz.."/>
+														</f:fields>
+													</f:FormElement>
+													
+													
+													
+													
+												</f:formElements>
+												
+											</f:FormContainer>
+											
+										</f:formContainers>
+										
+									</f:Form>
+									
+								</VBox>
+								
+							</IconTabFilter>
+							
+							
+			
+							
+							
+
+							
+							
+							
+							
+							
+							</items>
+						</IconTabBar>
+						
+						
+					</content>
+					
+					
+					
+					
+					
+					<footer>
+						<Toolbar>
+							
+							<ToolbarSpacer/>
+							<Button text="Hasar Bildir" icon="sap-icon://paper-plane" type="Accept" id="Save_Button" visible="{detailModelView>/VisibleKaydetButton}" press="onPressSave"/>
+							<Button text="{detailModelView>/KapatButtonText}" icon="sap-icon://decline"   press="onNavBack" type="Reject" visible="{detailModelView>/VisibleKapatButton}"/>
+					
+					
+
+					
+					
+						</Toolbar>
+						
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</mvc:View>

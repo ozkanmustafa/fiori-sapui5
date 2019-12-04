@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<TableSelectDialog noDataText="Kaynak Depo Yeri bulunamadı.." title="Kaynak Depo Yeri Seçiniz..." search="handleSearchKynLgort" confirm="handleCloseKynLgort"
+		cancel="handleCloseKynLgort" items="{detailModelView>/KynLgortSet}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{detailModelView>Matnr}"/>
+				<ObjectIdentifier title="{detailModelView>Werks}"/>
+				<Text text="{detailModelView>Lgort}"/>
+				<Text text="{detailModelView>Prlab}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="Malzeme"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Üretim Yeri"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Depo Yeri"/>
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Stok"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

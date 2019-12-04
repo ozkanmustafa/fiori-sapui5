@@ -1,0 +1,227 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZCZM_CID.ZCZM_CID.controller.Main"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<SplitApp id="SplitAppDemo" initialDetail="defaultPage" initialMaster="master" orientationChange="onOrientationChange">
+		<masterPages>
+			<Page id="master" showNavButton="true">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://add-contact" tooltip="Müşteri Ekle" press="onPressCreateCustomer"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="{i18n>masterPageTittle}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://customer-briefing" tooltip="Danışmanlar"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<subHeader>
+					<Toolbar>
+						<SearchField liveChange="onSearchCustomers" width="100%"/>
+					</Toolbar>
+				</subHeader>
+				<content>
+					<List id="customerList" busy="{mainView>/customerListBusy}" items="{path:'mainView>/customerList'}" itemPress="onPressGoToDetail"
+						includeItemInSelection="true">
+						<items>
+							<StandardListItem title="{mainView>CustomerName}" description="{mainView>CustomerNo}" type="Active"/>
+						</items>
+					</List>
+				</content>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<MessagePage id="messagePage" showHeader="false" text="Çözümevi CID(Customer Information Database)"
+				description="Müşteri bilgilerini görüntülemek için yan taraftaki menüden seçim yapınız." icon="sap-icon://message-warning"></MessagePage>
+			<Page id="detail" showNavButton="true" navButtonPress="onPressDetailBack" class="sapUiStdPage">
+				<customHeader>
+					<Bar>
+						<contentMiddle>
+							<Text text="{mainView>/pageTitle}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://delete" press="onPostDeleteCustomer" tooltip="Sil"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<Page showHeader="false" showFooter="false" id="headerBox"></Page>
+					</VBox>
+					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<Table width="auto" delete="onDeleteEdit" id="baglantiTable" class="sapUiResponsiveMargin tableRowColor"
+							items="{path:'mainView>/baglantiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+							<headerToolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+									<Button id="editButtonBaglanti" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="addButtonBaglanti" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
+									<Button id="saveButtonBaglanti" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
+									<Button id="cancelButtonBaglanti" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<items>
+								<ColumnListItem id="baglantiColumnList">
+									<cells>
+										<ObjectIdentifier title="{mainView>Baglanti}" text="{mainView>Baglantitip}"/>
+										<ObjectIdentifier title="{mainView>Vpnuser}" text="{mainView>Vpnpass}"/>
+										<Text text="{mainView>Vpnip}"/>
+										<Link text="{mainView>Vpndosyasi}" target="_blank" href="{mainView>Vpnlink}"/>
+										<Text text="{path:'mainView>Chdate', formatter : '.formatter.formatdate'}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<!--// Tablo Başlıkları - Başlangıç	-->
+							<columns>
+								<Column hAlign="Center" width="7rem">
+									<header>
+										<Label text="Bağlantı" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" width="4rem">
+									<header>
+										<Label text="Kullanıcı" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
+									<header>
+										<Label text="IP" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
+									<header>
+										<Label text="VPN" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" width="10rem" minScreenWidth="Desktop">
+									<header>
+										<Label text="Güncelleme Tarihi" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+							</columns>
+						</Table>
+					</VBox>
+					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<Table width="auto" delete="onDeleteEdit" id="sistemBilgiTable" class="sapUiResponsiveMargin tableRowColor"
+							items="{path:'mainView>/sistemBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+							<headerToolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+									<Button id="editButtonSistem" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="addButtonSistem" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
+									<Button id="saveButtonSistem" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
+									<Button id="cancelButtonSistem" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<items>
+								<ColumnListItem id="sistemBilgiColumnList">
+									<cells>
+										<Text text="{mainView>Sysname}"/>
+										<ObjectIdentifier title="{mainView>Sysid}" text="{mainView>Sysno}"/>
+										<Text text="{mainView>Sysip}"/>
+										<Text text="{mainView>Sysrouter}"/>
+										<Text text="{path:'mainView>Chdate', formatter : '.formatter.formatdate'}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<!--// Tablo Başlıkları - Başlangıç	-->
+							<columns>
+								<Column hAlign="Center" width="7rem">
+									<header>
+										<Label text="Sistem" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" width="4rem">
+									<header>
+										<Label text="SID" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Phone">
+									<header>
+										<Label text="IP" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Tablet">
+									<header>
+										<Label text="Saprouter" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" width="10rem" minScreenWidth="Desktop">
+									<header>
+										<Label text="Güncelleme Tarihi" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+							</columns>
+						</Table>
+					</VBox>
+					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<Table width="auto" delete="onDeleteEdit" id="userTable" class="sapUiResponsiveMargin tableRowColor"
+							items="{path:'mainView>/userBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+							<headerToolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+									<Button id="editButtonUser" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="addButtonUser" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
+									<Button id="saveButtonUser" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
+									<Button id="cancelButtonUser" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<items>
+								<ColumnListItem id="userColumnList">
+									<cells>
+										<Text text="{mainView>Sysname}"/>
+										<Text text="{mainView>Clnt}"/>
+										<Text text="{mainView>Rol}"/>
+										<ObjectIdentifier title="{mainView>Uname}" text="{mainView>Passwrd}"/>
+										<Text text="{path:'mainView>Chdate', formatter : '.formatter.formatdate'}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<!--// Tablo Başlıkları - Başlangıç	-->
+							<columns>
+								<Column hAlign="Center" width="7rem">
+									<header>
+										<Label text="Sistem" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" width="4rem">
+									<header>
+										<Label text="Üst birim" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center">
+									<header>
+										<Label text="Rol" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
+									<header>
+										<Label text="Kullanıcı" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" demandPopin="true" width="10rem" minScreenWidth="Desktop">
+									<header>
+										<Label text="Güncelleme Tarihi" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+							</columns>
+						</Table>
+					</VBox>
+					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<Panel expandable="true" headerText="Kullanıcı Yorumları" width="auto" class="sapUiResponsiveMargin">
+							<content>
+								<FeedInput post="onPostComment" placeholder="Yorum Yaz" icon="sap-icon://customer" class="sapUiSmallMarginTopBottom"/>
+								<List id="commentList" noDataText="Henüz Yorum Eklenmemiş" busy="{mainView>/commentListBusy}" growing="true" growingThreshold="5"
+									showSeparators="Inner" mode="Delete" delete="onDeleteComment" items="{mainView>/commentList}">
+									<FeedListItem info="{mainView>Messageno}" sender="{mainView>Uname}" icon="sap-icon://customer" iconDensityAware="false"
+										timestamp="{path:'mainView>Commentdate', formatter:'.formatter.formatdate'}" text="{mainView>Usercomment}" convertLinksToAnchorTags="All"/>
+								</List>
+							</content>
+						</Panel>
+					</VBox>
+				</content>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

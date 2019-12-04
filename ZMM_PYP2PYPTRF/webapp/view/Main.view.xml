@@ -1,0 +1,103 @@
+<mvc:View controllerName="ZMM_PYP2PYPTRF.ZMM_PYP2PYPTRF.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page title="{i18n>title}">
+					<content>
+						<VBox class="sapUiSmallMargin">
+							<f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
+								<f:layout>
+									<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+										emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer ariaLabelledBy="Title3">
+										<f:formElements>
+											<f:FormElement label="Belge Tarihi" visible="{mainView>/belgeTrhVis}">
+												<f:fields>
+													<DatePicker class="sapUiSmallMarginBottom" displayFormat="short" change="handleChange" placeholder="Tarih Giriniz..." id="belgeTrhId"
+														enabled="{mainView>/belgeTrhEn}" value="{mainView>/belgeTrhVal}" visible="{mainView>/belgeTrhvis}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Malzeme" visible="{mainView>/malzemeVis}">
+												<f:fields>
+													<Input id="malzemeId" enabled="{mainView>/malzemeEn}" visible="{mainView>/malzemeVis}" value="{mainView>/malzemeVal}" required="true"
+														showValueHelp="true" valueHelpRequest="onValueHelpRequestMatnr" valueHelpOnly="true" filterSuggests="false" showSuggestion="true"
+														placeholder="Malzeme Giriniz..."/>
+													<!--<Button text="Seri Numarası Seç" icon="sap-icon://attachment" id="seriNoId" press="SeriNoSec" visible="{mainView>/seriNoSecVis}"/>-->
+													<MultiComboBox id="sernrId" selectionChange="handleSelectionChangeSerial" selectionFinish="handleSelectionFinishSerial" width="500px"
+														items="{mainView>/SerialNumber}" visible="{mainView>/seriNoSecVis}">
+														<core:Item key="{mainView>Sernr}" text="{mainView>Sernr}"/>
+													</MultiComboBox>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Üretim Yeri" visible="{mainView>/werksVis}">
+												<f:fields>
+													<Input id="werksId" enabled="{mainView>/werksEn}" visible="{mainView>/werksVis}" value="{mainView>/werksVal}" required="true"
+														showValueHelp="true" valueHelpRequest="onValueHelpRequestWerks" valueHelpOnly="true" filterSuggests="false" showSuggestion="true"
+														placeholder="Üretim Yeri Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Kaynak Depo Yeri " visible="{mainView>/kyn_lgortVis}">
+												<f:fields>
+													<Input id="kyn_lgortId" enabled="{mainView>/kyn_lgortEn}" visible="{mainView>/kyn_lgortVis}" value="{mainView>/kyn_lgortVal}"
+														required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestKynLgort" valueHelpOnly="true" filterSuggests="false"
+														showSuggestion="true" placeholder="Kaynak Depo Yeri Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Hedef Depo Yeri" visible="{mainView>/hdf_depoVis}">
+												<f:fields>
+													<Input id="hdf_lgortId" enabled="{mainView>/hdf_lgortEn}" visible="{mainView>/hdf_lgortVis}" value="{mainView>/hdf_lgortVal}"
+														required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestHdfLgort" valueHelpOnly="true" filterSuggests="false"
+														showSuggestion="true" placeholder="Hedef Depo Yeri Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Parti" visible="{mainView>/partiVis}">
+												<f:fields>
+													<Input id="partiId" enabled="{mainView>/partiEn}" visible="{mainView>/partiVis}" value="{mainView>/partiVal}"
+														showValueHelp="true" valueHelpRequest="onValueHelpRequestParti" valueHelpOnly="true" filterSuggests="false" showSuggestion="true"
+														placeholder="Parti Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Kaynak PYP öğesi" visible="{mainView>/kyn_pypVis}">
+												<f:fields>
+													<Input id="kyn_pypId" enabled="{mainView>/kyn_pypEn}" visible="{mainView>/kyn_pypVis}" value="{mainView>/kyn_pypVal}" required="true"
+														showValueHelp="true" valueHelpRequest="onValueHelpRequestKynPyp" valueHelpOnly="true" filterSuggests="false" showSuggestion="true"
+														placeholder="Kaynak Pyp Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Hedef PYP Öğesi" visible="{mainView>/hdf_pypVis}">
+												<f:fields>
+													<Input id="hdf_pypId" enabled="{mainView>/hdf_pypEn}" visible="{mainView>/hdf_pypVis}" value="{mainView>/hdf_pypVal}" required="true"
+														showValueHelp="true" valueHelpRequest="onValueHelpRequestHdfPyp" valueHelpOnly="true" filterSuggests="false" showSuggestion="true"
+														placeholder="Hedef Pyp Giriniz..."/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Miktar" visible="{mainView>/miktarVis}">
+												<f:fields>
+													<!--<Input id="miktarId" type="Number" enabled="{mainView>/miktarVisEn}" visible="{mainView>/miktarVis}" value="{mainView>/miktarVal}"-->
+													<!--	required="true"/>-->
+													<StepInput id="miktarId" value="{ path: 'myDecimal', type: 'sap.ui.model.odata.type.Decimal', constraints: { precision: 4, scale: 2 } }"
+														displayValuePrecision="{displayValuePrecision}" min="0.0" max="9999999" width="{width}" step="1" largerStep="{largerStep}"
+														stepMode="{stepMode}" valueState="{valueState}" enabled="{enabled}" editable="{editable}" description="ADT"
+														fieldWidth="93%" textAlign="{textAlign}" validationMode="{validationMode}" change="onChange"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</VBox>
+					</content>
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Button text="Onaya Gönder" icon="sap-icon://paper-plane" type="Accept" id="onayBtnId" press="OnayaGonder" visible="{mainView>/onayBtnVis}"/>
+						</Toolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:rte="sap.ui.richtexteditor">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay480_12120Dual" editable="false" layout="ResponsiveGridLayout" title="Address" labelSpanXL="4"
+			labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+			columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+			<f:toolbar>
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button id="edit" text="Edit" press="onEditPress"/>
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+				<core:HTML content="ASDASD"></core:HTML>
+				<!--<Label text="Müşteri Adı"/>-->
+				<!--<Text text="{SupplierName}"/>-->
+				<!--<Label text="Muhattap No"/>-->
+				<!--<Text text="{Street} {HouseNumber}"/>-->
+				<!--<HBox>-->
+				<!--	<CheckBox text="Lisans" class="sapUiSmallMarginEnd" id="id_lisans" editable="false"/>-->
+				<!--	<CheckBox text="Destek" id="id_destek" editable="false"/>-->
+				<!--</HBox>-->
+				<!--<Text text="Destek Mail"/>-->
+				<!--<Label text="{}"/>-->
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>

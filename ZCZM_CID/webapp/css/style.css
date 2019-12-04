@@ -1,0 +1,52 @@
+:not(.sapUiIcon) {
+    font-family: Candara;
+    font-size: 14px;
+}
+
+.tableRowColor tbody tr:nth-child(even) {
+    background: rgb(245, 245, 245);
+}
+
+.defaultPageHeader > span {
+    font-size: 20px;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+
+/*
+Yorumlar kısmında tarihten önce nokta oluyordu
+Görünümü kapatıldı
+*/
+
+.sapMFeedListItemFooter > span:nth-of-type(2) {
+    display: none;
+}
+
+
+/*
+Yorumlarda listenin info kısmında mesaj no saklanıyor
+Görünüme kapatıldı
+*/
+
+.sapMFeedListItemInfoText {
+    display: none;
+}
+
+.sapMFeedListItemInfo {
+    display: none;
+}
+
+.sapMListTbl {
+    border: outset;
+}
+
+.sapMListTbl th {
+    background: #eff4f9;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sapMSLIDescriptionDiv {
+    display: none;
+}

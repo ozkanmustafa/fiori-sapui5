@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<TableSelectDialog noDataText="Hedef Depo Yeri bulunamadı.." title="Hedef Depo Yeri Seçiniz..." search="handleSearchHdfLgort" confirm="handleCloseHdfLgort"
+		cancel="handleCloseHdfLgort" items="{detailModelView>/LgortSet}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{detailModelView>Werks}"/>
+				<ObjectIdentifier title="{detailModelView>Lgort}"/>
+				<Text text="{detailModelView>Lgobe}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="Üretim Yeri"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Depo Yeri"/>
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Depo Yeri Tanımı"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

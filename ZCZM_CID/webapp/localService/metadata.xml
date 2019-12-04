@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ZFIORI_CID_SRV" xml:lang="tr" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="Subscription" sap:semantics="subscriptions" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key><Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Sub. ID" sap:creatable="false" sap:updatable="false"
+					sap:filterable="false"/><Property Name="user" Type="Edm.String" MaxLength="12" m:FC_TargetPath="SyndicationAuthorName" m:FC_KeepInContent="false"
+					sap:label="Kullanıcı adı" sap:creatable="false" sap:filterable="false"/><Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false"
+					sap:label="Zaman damgası" sap:creatable="false" sap:filterable="false"/><Property Name="title" Type="Edm.String" MaxLength="255" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Title"
+					sap:filterable="false"/><Property Name="deliveryAddress" Type="Edm.String" sap:label="Delivery Address" sap:filterable="false"/><Property Name="persistNotifications" Type="Edm.Boolean" sap:label="Persist Notification" sap:filterable="false"/><Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection" sap:filterable="false"/><Property Name="filter" Type="Edm.String" sap:label="Filter" sap:filterable="false"/><Property Name="select" Type="Edm.String" MaxLength="255" sap:label="Select" sap:filterable="false"/><Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/></EntityType>
+			<EntityType Name="Notification" sap:semantics="notifications" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key><Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Notification ID"/><Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection"/><Property Name="title" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Notif. Text"/><Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false"
+					sap:label="Zaman damgası"/><Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/><Property Name="entriesOfInterest" Type="Edm.Int32" sap:label="No. of Entries"/><Property Name="recipient" Type="Edm.String" MaxLength="112" sap:label="Recipient" sap:creatable="false" sap:updatable="false"/></EntityType>
+			<EntityType Name="EtGetCustomers" sap:content-version="1">
+				<Key><PropertyRef Name="CustomerNo"/></Key><Property Name="CustomerNo" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="LisansCust" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DestekCust" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Bp" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DestekMail" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Destekbp" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EtGetBaglanti" sap:content-version="1">
+				<Key><PropertyRef Name="Custno"/></Key><Property Name="Chdate" Type="Edm.DateTime" Precision="8" sap:unicode="false"/><Property Name="IvCustno" Type="Edm.String" MaxLength="5" sap:unicode="false"/><Property Name="Custno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false"/><Property Name="Vpnuser" Type="Edm.String" MaxLength="64" sap:unicode="false"/><Property Name="Vpnpass" Type="Edm.String" MaxLength="30" sap:unicode="false"/><Property Name="Vpnip" Type="Edm.String" MaxLength="255" sap:unicode="false"/><Property Name="Baglanti" Type="Edm.String" MaxLength="30" sap:unicode="false"/><Property Name="Baglantitip" Type="Edm.String" MaxLength="50" sap:unicode="false"/><Property Name="Vpndosyasi" Type="Edm.String" MaxLength="255" sap:unicode="false"/><Property Name="Vpnlink" Type="Edm.String" MaxLength="255" sap:unicode="false"/></EntityType>
+			<EntityType Name="EtGetSistemBilgi" sap:content-version="1">
+				<Key><PropertyRef Name="Custno"/></Key><Property Name="IvCustno" Type="Edm.String" MaxLength="5" sap:unicode="false"/><Property Name="Chdate" Type="Edm.DateTime" Precision="7" sap:unicode="false"/><Property Name="Custno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false"/><Property Name="Sysid" Type="Edm.String" MaxLength="3" sap:unicode="false"/><Property Name="Sysname" Type="Edm.String" MaxLength="30" sap:unicode="false"/><Property Name="Sysip" Type="Edm.String" MaxLength="255" sap:unicode="false"/><Property Name="Sysno" Type="Edm.String" MaxLength="2" sap:unicode="false"/><Property Name="Sysrouter" Type="Edm.String" MaxLength="255" sap:unicode="false"/></EntityType>
+			<EntityType Name="EtGetUserBilgi" sap:content-version="1">
+				<Key><PropertyRef Name="Custno"/></Key><Property Name="Chdate" Type="Edm.DateTime" Precision="7" sap:unicode="false"/><Property Name="IvCustno" Type="Edm.String" MaxLength="5" sap:unicode="false"/><Property Name="Custno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false"/><Property Name="Sysname" Type="Edm.String" MaxLength="30" sap:unicode="false"/><Property Name="Uname" Type="Edm.String" MaxLength="12" sap:unicode="false"/><Property Name="Clnt" Type="Edm.String" MaxLength="3" sap:unicode="false"/><Property Name="Rol" Type="Edm.String" MaxLength="20" sap:unicode="false"/><Property Name="Passwrd" Type="Edm.String" MaxLength="30" sap:unicode="false"/></EntityType>
+			<EntityType Name="EtGetComments" sap:content-version="1">
+				<Key><PropertyRef Name="Custno"/></Key><Property Name="IvCustno" Type="Edm.String" MaxLength="5" sap:unicode="false"/><Property Name="Custno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false"/><Property Name="Messageno" Type="Edm.String" MaxLength="5" sap:unicode="false"/><Property Name="Uname" Type="Edm.String" MaxLength="12" sap:unicode="false"/><Property Name="Usercomment" Type="Edm.String" sap:unicode="false"/><Property Name="Commentdate" Type="Edm.DateTime" Precision="7" sap:unicode="false"/></EntityType>
+			<EntityType Name="EtDelComment" sap:content-version="1">
+				<Key><PropertyRef Name="IvCustno"/><PropertyRef Name="IvMessageno"/></Key><Property Name="IvCustno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="IvMessageno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="EvReturn" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EtAddComment" sap:content-version="1">
+				<Key><PropertyRef Name="IvComment"/><PropertyRef Name="IvCustno"/></Key><Property Name="IvComment" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="IvCustno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Custno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Messageno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Uname" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Usercomment" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Commentdate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="EvReturn" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityContainer Name="ZFIORI_CID_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="SubscriptionCollection" EntityType="ZFIORI_CID_SRV.Subscription" sap:content-version="1"/><EntitySet Name="NotificationCollection" EntityType="ZFIORI_CID_SRV.Notification" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="EtGetCustomersSet" EntityType="ZFIORI_CID_SRV.EtGetCustomers" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/><EntitySet Name="EtGetBaglantiSet" EntityType="ZFIORI_CID_SRV.EtGetBaglanti" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/><EntitySet Name="EtGetSistemBilgiSet" EntityType="ZFIORI_CID_SRV.EtGetSistemBilgi" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/><EntitySet Name="EtGetUserBilgiSet" EntityType="ZFIORI_CID_SRV.EtGetUserBilgi" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/><EntitySet Name="EtGetCommentsSet" EntityType="ZFIORI_CID_SRV.EtGetComments" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="EtDelCommentSet" EntityType="ZFIORI_CID_SRV.EtDelComment" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="EtAddCommentSet" EntityType="ZFIORI_CID_SRV.EtAddComment" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/></EntityContainer><atom:link rel="self"
+				href="https://webidecp-p2000417173trial.dispatcher.hanatrial.ondemand.com/destinations/CZM_SLD/sap/opu/odata/sap/ZFIORI_CID_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
+				href="https://webidecp-p2000417173trial.dispatcher.hanatrial.ondemand.com/destinations/CZM_SLD/sap/opu/odata/sap/ZFIORI_CID_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

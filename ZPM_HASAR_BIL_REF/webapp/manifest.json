@@ -1,0 +1,125 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZPM_HASAR_BIL_SRV": {
+				"uri": "/sap/opu/odata/sap/ZPM_HASAR_BIL_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.view.Main",
+			"type": "XML",
+			"async": true,
+			"id": "Main"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.i18n.i18n"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZPM_HASAR_BIL_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "worklist",
+				"pattern": "",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["worklist"]
+			}, {
+				"name": "post",
+				"pattern": "Detail(/{Hasarno}/{Mode}",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["post"]
+			}],
+			"targets": {
+				"worklist": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "Main",
+					"viewLevel": 1
+				},
+				"post": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "Detail",
+					"viewLevel": 2
+				}
+			}
+		}
+	}
+}

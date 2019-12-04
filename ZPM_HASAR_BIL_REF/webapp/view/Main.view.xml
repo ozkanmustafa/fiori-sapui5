@@ -1,0 +1,146 @@
+<mvc:View controllerName="ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.controller.Main"  
+xmlns:html="http://www.w3.org/1999/xhtml"
+xmlns:mvc="sap.ui.core.mvc"
+displayBlock="true" 
+xmlns="sap.m" 
+xmlns:l="sap.ui.layout" 
+xmlns:fm="sap.ui.layout.form" 
+xmlns:core="sap.ui.core"
+xmlns:fb="sap.ui.comp.filterbar">
+	
+	<App id ="app">
+		<pages>
+			<Page title="{i18n>title}">
+				<content>
+
+
+
+<!--Filter Bar Başlangıç-->
+					<l:VerticalLayout width="100%">
+						<fb:FilterBar search="GetHasarBilTable" reset="onReset" showRestoreButton="true" showClearButton="true">
+							<fb:filterItems>
+								
+								<fb:FilterItem name="A" label="Dönem Baş.">
+									<fb:control>
+										<DatePicker id="id_begda" valueFormat="yyyy-MM-dd" value="{mainView>/Begda}" displayFormat="short"/>
+									</fb:control>
+								</fb:FilterItem>
+							
+								<fb:FilterItem name="B" label="Dönem Btş.">
+									<fb:control>
+										<DatePicker id="id_endda" valueFormat="yyyy-MM-dd" value="{mainView>/Endda}" displayFormat="short"/>
+									</fb:control>
+								</fb:FilterItem>
+							
+								<fb:FilterItem name="C" label="Hasar Tür">
+									<fb:control>
+										<ComboBox id="id_cb_hasartur" items="{mainView>/HasarTurList}" textDirection="Inherit" selectedKey="{mainView>/Hasartur}">
+											<items >
+												<core:Item key="{mainView>Hasartur}" text="{mainView>Hasarturtxt}"/>
+											</items>
+										</ComboBox>
+									</fb:control>
+								</fb:FilterItem>
+							
+
+
+
+
+					
+							</fb:filterItems>
+						</fb:FilterBar>
+					</l:VerticalLayout>
+<!--Filter Bar Bitiş-->		
+	
+	
+	
+	<!--Hasar Bildirimleri Tablo Başlangıç-->					
+					<Table mode="SingleSelectLeft" id="id_tbl1" items="{mainView>/GetHasarBilTable}" 
+					noDataText="Listelenecek hasar kaydı bulunamamıştır.." >
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Hasar Bildirimleri" level="H2"/>
+							</Toolbar>
+						</headerToolbar>
+						
+						<items>
+							<ColumnListItem id="id_list_item1">
+								<cells>
+									<Text text="{mainView>Hasarno}" id="id_data_col1"/>
+									<Text text="{path: 'mainView>Tarih',formatter:'ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.util.formatter.formatdate'}" id="id_data_col2"/>
+									<Text text="{mainView>Hasarturtxt}" id="id_data_col3"/>
+									<Text text="{mainView>Lokasyontxt}" id="id_data_col4"/>
+									<Text text="{mainView>Aciklama}" id="id_data_col5"/>
+									
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+						<!--// Tablo Başlıkları - Başlangıç	-->
+						<columns>
+							
+							<Column id="id_col1" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Hasar No" id="id_lbl_col1" design="Bold"/>
+								</header>
+							</Column>
+							
+							<Column id="id_col2" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Bildirim Tarihi" id="id_lbl_col2" design="Bold"/>
+								</header>
+							</Column>
+							
+							<Column id="id_col3" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Hasar Tür" id="id_lbl_col3" design="Bold"/>
+								</header>
+							</Column>
+							
+							<Column id="id_col4" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Lokasyon" id="id_lbl_col4" design="Bold"/>
+								</header>
+							</Column>
+							
+							
+							<Column id="id_col5" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Açıklama" id="id_lbl_col5" design="Bold"/>
+								</header>
+							</Column>
+
+
+
+							
+							
+						</columns>
+						<!--// Tablo Başlıkları - Bitiş	-->
+					</Table>
+					
+	<!--Hasar Bildirimleri Tablo Başlangıç-->		
+
+				</content>
+			
+				
+
+				<footer>
+					
+					
+					<Toolbar >
+					
+						<ToolbarSpacer/>
+						<Button text="Yeni Hasar Bildir"  icon="sap-icon://add-equipment" type="Accept" id="New_Button" enabled="{mainView>/talepyaratb}" press="navToDetail"/>
+						<Button text="Görüntüle"   icon="sap-icon://show"  id="Display_Button" enabled="{mainView>/talepgorb}" type="Default" press="navToDetail"/>
+
+			
+						
+					</Toolbar>
+				</footer>
+				
+				
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
+	

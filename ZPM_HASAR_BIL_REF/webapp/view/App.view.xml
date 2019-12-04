@@ -1,0 +1,7 @@
+<mvc:View
+		controllerName="ZPM_HASAR_BIL_REF.ZPM_HASAR_BIL_REF.controller.App"
+		xmlns="sap.m"
+		xmlns:mvc="sap.ui.core.mvc"
+		displayBlock="true">
+	<App  id="app"/>
+</mvc:View>

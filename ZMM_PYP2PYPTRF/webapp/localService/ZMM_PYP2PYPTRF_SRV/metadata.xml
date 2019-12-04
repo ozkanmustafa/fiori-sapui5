@@ -1,0 +1,13 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZMM_PYP2PYPTRF_SRV" xml:lang="tr" sap:schema-version="1">
+			<EntityType Name="ZmmP2ptfShMatnr" sap:content-version="1">
+				<Key><PropertyRef Name="Matnr"/></Key><Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Malzeme"/><Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Tanım"/></EntityType>
+			<EntityType Name="P2PTF_SET" sap:content-version="1">
+				<Key><PropertyRef Name="IMatnr"/></Key><Property Name="IBldat" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Belge tarihi"/><Property Name="IHdfLgort" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Depo yeri"/><Property Name="IHdfPyp" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="PYP öğesi"/><Property Name="IKynLgort" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Depo yeri"/><Property Name="IKynPyp" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="PYP öğesi"/><Property Name="IMatnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Malzeme"/><Property Name="IMenge" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:label="Miktar"/><Property Name="IWerks" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Üretim yeri"/><Property Name="EHata" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Karakter 1"/><Property Name="EMessage" Type="Edm.String" MaxLength="250" sap:unicode="false" sap:label="Kyt.hata metni"/></EntityType>
+			<EntityContainer Name="ZMM_PYP2PYPTRF_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="ZmmP2ptfShMatnrSet" EntityType="ZMM_PYP2PYPTRF_SRV.ZmmP2ptfShMatnr" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="P2PTF_SETSet" EntityType="ZMM_PYP2PYPTRF_SRV.P2PTF_SET" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/></EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZMM_PYP2PYPTRF_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZMM_PYP2PYPTRF_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

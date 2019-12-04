@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog class="sapUiResponsiveContentPadding">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button/>
+				</contentLeft>
+				<contentMiddle>
+					<Title id="dialogTitle" text="Sonuç"/>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<l:VerticalLayout class="sapUiContentPadding" width="100%">
+			<l:content>
+				<List id="islemSonucMesajTable" items="{detailView>/inspInputReturn}" noDataText="Uyari Listesi Boş">
+					<NotificationListItem priority="Medium" unread="true" close="onItemClose"
+						title="{path: 'detailView>Sernr',formatter:'.formatter.formatnonzero', type : 'sap.ui.model.odata.type.String', constraints: { isDigitSequence : true}}"
+						description="{path: 'detailView>Message',formatter:'.formatter.formatMessage'}"></NotificationListItem>
+				</List>
+			</l:content>
+		</l:VerticalLayout>
+		<endButton>
+			<Button text="{i18n>dialogCloseButtonText}" icon="sap-icon://decline" press="closeDialog" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

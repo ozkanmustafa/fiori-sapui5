@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<TableSelectDialog noDataText="Hedef Pyp bulunamadı.." title="Hedef Pyp Seçiniz..." search="handleSearchHdfPyp" confirm="handleCloseHdfPyp"
+		cancel="handleClosehdfPyp" items="{ path : 'detailModelView>/HdfPspnrSet', sorter : { path : 'detailModelView>Posid', descending : false } }">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{detailModelView>Werks}"/>
+				<ObjectIdentifier title="{detailModelView>Posid}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="Üretim Yeri"/>
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Pyp"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

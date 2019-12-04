@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<TableSelectDialog noDataText="Parti bulunamadı.." title="Parti Seçiniz..." search="handleSearchParti" confirm="handleCloseParti"
+		cancel="handleCloseParti" items="{detailModelView>/ChargSet}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{detailModelView>Matnr}"/>
+				<ObjectIdentifier title="{detailModelView>Werks}"/>
+				<ObjectIdentifier title="{detailModelView>Lgort}"/>
+				<Text text="{detailModelView>Charg}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="9em">
+				<header>
+					<Text text="Malzeme No"/>
+				</header>
+			</Column>
+			<Column width="6em">
+				<header>
+					<Text text="Üretim Yeri"/>
+				</header>
+			</Column>
+			<Column width="6em">
+				<header>
+					<Text text="Depo Yeri"/>
+				</header>
+			</Column>
+			<Column width="7em">
+				<header>
+					<Text text="Parti"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

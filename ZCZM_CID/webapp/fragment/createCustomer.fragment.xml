@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog class="sapUiResponsiveContentPadding" title="Yeni Müşteri">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<f:Form id="customerCreateForm" editable="true" ariaLabelledBy="Title1">
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+							emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer ariaLabelledBy="Title2">
+							<f:formElements>
+								<f:FormElement label="Müşteri Adı">
+									<f:fields>
+										<Input id="id_musteri_ad" liveChange="changeInputValue" value="{mainView/>newCustomerName}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="">
+									<f:fields>
+										<HBox>
+											<CheckBox text="Lisans" class="sapUiSmallMarginEnd" id="id_lisans"/>
+											<CheckBox text="Destek" id="id_destek"/>
+										</HBox>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Muhattap No">
+									<f:fields>
+										<MaskInput mask="0(CCC)CCC-CC-CC" id="id_musteri_muhattap" placeholderSymbol="_" change="changeInputValue"
+											value="{mainView/>newCustomerMuhattap}">
+											<rules>
+												<MaskInputRule maskFormatSymbol="C" regex="[0-9]"/>
+											</rules>
+										</MaskInput>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Destek Mail">
+									<f:fields>
+										<Input type="Email" id="id_musteri_mail" liveChange="changeInputValue" value="{mainView/>newCustomerMail}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="{i18n>dialogSaveButtonText}" icon="sap-icon://save" press="createNewCustomer" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>dialogCloseButtonText}" icon="sap-icon://decline" press="createExit" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

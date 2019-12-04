@@ -1,0 +1,106 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	controllerName="ZSD_MAKINA_SEVK.ZSD_MAKINA_SEVK.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Teslimat Listeleme">
+				<content>
+					<VBox class="sapUiSmallMargin">
+						<f:Form id="formTeslimatListesi" editable="true" ariaLabelledBy="Title1">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+									emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer ariaLabelledBy="Title2">
+									<f:formElements>
+										<f:FormElement label="Teslimat No">
+											<f:fields>
+												<SearchField class="sapUiSmallMarginBottom" id="id_belgeno_sh" width="100%" placeholder="Ara..." showSearchButton="false"
+													enableSuggestions="true" suggest="onSuggestBelgeNo" search="onSHBelgeNo" suggestionItems="{mainView>/belgeNoShList}">
+													<suggestionItems>
+														<SuggestionItem text="{mainView>Vbeln}" key="{mainView>Vbeln}"/>
+													</suggestionItems>
+												</SearchField>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Mal Çıkış Tarihi">
+											<f:fields>
+												<DatePicker id="id_mal_cikis_low" change="onValueChangeMalCikisTarihiLow" valueFormat="yyyy-MM-dd" required="true"
+													placeholder="Tarih Giriniz ..."/>
+												<DatePicker id="id_mal_cikis_high" change="onValueChangeMalCikisTarihiHigh" valueFormat="yyyy-MM-dd" required="true"
+													placeholder="Tarih Giriniz ..."/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Teslim Alan">
+											<f:fields>
+												<Input showValueHelp="true" id="id_teslim_alan_low" valueHelpOnly="true" value="{mainView>/IvKunnrLow}" filterSuggests="false"
+													showSuggestion="true" valueHelpRequest="onValueHelpRequestTesAlanLow"/>
+												<Input showValueHelp="true" id="id_teslim_alan_high" valueHelpOnly="true" value="{mainView>/IvKunnrHigh}" filterSuggests="false"
+													showSuggestion="true" valueHelpRequest="onValueHelpRequestTesAlanHigh"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="">
+											<f:fields>
+												<Button text="Çıkış" type="Reject" press="methodCikis"/>
+												<Button text="Ara" type="Accept" press="methodGetTeslimatListSet"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<Table width="auto" id="mainTable" mode="SingleSelectLeft" selectionChange="methodMainTableSelected" class="tableRowColor"
+							items="{path:'mainView>/teslimatList'}" noDataText=" Listelenecek kayıt bulunamamıştır">
+							<headerToolbar>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<SearchField width="auto" placeholder="Teslimat No" search="onSearchBelgeNo"/>
+								</Toolbar>
+							</headerToolbar>
+							<items>
+								<ColumnListItem id="id_list_item1">
+									<cells>
+										<core:Icon src="sap-icon://circle-task-2" color="{path:'mainView>Statu', formatter:'.formatter.formatColor'}"/>
+										<Text text="{mainView>Vbeln}"/>
+										<Text text="{path:'mainView>Wadat', formatter:'.formatter.formatdate'}"/>
+										<ObjectIdentifier title="{mainView>Kunnr}" text="{mainView>Name1}" class="sapMTableContentMargin"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<!--// Tablo Başlıkları - Başlangıç	-->
+							<columns>
+								<Column hAlign="Center" width="2rem">
+									<header></header>
+								</Column>
+								<Column hAlign="Center">
+									<header>
+										<Label text="Teslimat No" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Mal Çıkış Tarihi" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Teslim Alan" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+							</columns>
+						</Table>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Görüntüle" icon="sap-icon://detail-view" id="Display_Button"
+							enabled="{path:'mainView>/tableSelectedVbeln', formatter:'.formatter.formatIsEnabled'}" type="Default" press="methodNavToDetail"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
