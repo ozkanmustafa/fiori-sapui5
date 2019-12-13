@@ -13,6 +13,13 @@ sap.ui.define(function (DateFormatter) {
 				return true;
 		},
 
+		headerVisible: function (oValue) {
+			if (oValue)
+				return false;
+			else
+				return true;
+		},
+
 		formatDateTimeStamp: function (value) {
 			if (value) {
 				var fIndex = value.indexOf("(");

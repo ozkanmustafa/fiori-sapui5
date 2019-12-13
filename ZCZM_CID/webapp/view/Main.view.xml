@@ -1,5 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZCZM_CID.ZCZM_CID.controller.Main"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:rte="sap.ui.richtexteditor"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<SplitApp id="SplitAppDemo" initialDetail="defaultPage" initialMaster="master" orientationChange="onOrientationChange">
 		<masterPages>
 			<Page id="master" showNavButton="true">
@@ -46,8 +47,18 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Page showHeader="false" showFooter="false" id="headerBox"></Page>
+					<VBox busy="" visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
+						<VBox class="sapUiSmallMargin">
+							<OverflowToolbar>
+								<ToolbarSpacer/>
+								<Button id="saveButtonHeader" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
+								<Button id="cancelButtonHeader" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
+								<Button id="editButtonHeader" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+							</OverflowToolbar>
+							<VBox id="htmlContentId"></VBox>
+							<rte:RichTextEditor id="rteId" editorType="TinyMCE4" customToolbar="true" showGroupFont="true" showGroupLink="true" showGroupInsert="true"
+								value="{mainView>/header}"></rte:RichTextEditor>
+						</VBox>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
 						<Table width="auto" delete="onDeleteEdit" id="baglantiTable" class="sapUiResponsiveMargin tableRowColor"

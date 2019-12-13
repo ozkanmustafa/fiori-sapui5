@@ -45,13 +45,13 @@ sap.ui.define([
 			//Detay sayfası başlangıçta gizleniyor.
 			jsonModel.setProperty("/detailPageVisible", false);
 			jsonModel.setSizeLimit(10000);
+			jsonModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			this.setModel(jsonModel, "mainView");
 			this.getCustomers();
 
 			oBaglantiTemplate = this.getById("baglantiColumnList");
 			oSistemTemplate = this.getById("sistemBilgiColumnList");
 			oUserTemplate = this.getById("userColumnList");
-			this._showFormFragment("readOnlyHeader");
 		},
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,6 @@ sap.ui.define([
 		///////////////////////////////////////////////////////////////////////////////
 
 		_rebindTable: function (tableName, oTemplate, path, sKeyboardMode) {
-
 			var oTable;
 
 			if (tableName === "Baglanti")
@@ -69,7 +68,7 @@ sap.ui.define([
 			else if (tableName === "User")
 				oTable = this.getById("userTable");
 
-			if (oTable.getMode() === "Delete")
+			if (sKeyboardMode === "Navigation")
 				oTable.setMode("None");
 			else
 				oTable.setMode("Delete");
@@ -125,37 +124,6 @@ sap.ui.define([
 			});
 		},
 
-		_getFormFragment: function (sFragmentName) {
-			var oFormFragment = this._formFragments[sFragmentName];
-
-			if (oFormFragment) {
-				return oFormFragment;
-			}
-
-			oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "ZCZM_CID.ZCZM_CID.fragment." + sFragmentName);
-
-			this._formFragments[sFragmentName] = oFormFragment;
-			return this._formFragments[sFragmentName];
-		},
-
-		_showFormFragment: function (sFragmentName) {
-			var box = this.getById("headerBox");
-
-			box.removeAllContent();
-			box.insertContent(this._getFormFragment(sFragmentName));
-		},
-
-		_toggleButtonsAndView: function (bEdit) {
-
-			// Show the appropriate action buttons
-			this.getById("editButtonHeader").setVisible(!bEdit);
-			this.getById("saveButtonHeader").setVisible(bEdit);
-			this.getById("cancelButtonHeader").setVisible(bEdit);
-
-			// Set the right form type
-			this._showFormFragment(bEdit ? "editHeader" : "readOnlyHeader");
-		},
-
 		///////////////////////////////////////////////////////////////////////////////
 		/*							GET METHODS 								     */
 		///////////////////////////////////////////////////////////////////////////////
@@ -187,14 +155,20 @@ sap.ui.define([
 			//Detay sayfası görünüme açılıyor.
 			jsonModel.setProperty("/detailPageVisible", true);
 
+			// this.getById("rteId").setValue("");
+			// this.getById("htmlId").setContent("");
+			jsonModel.setProperty("/header", "");
+
 			this.getHeader();
 			this.getBaglanti();
 			this.getSistemBilgi();
 			this.getUserBilgi();
 			this.getComments();
+			this.getDefaultView();
 		},
 
 		getHeader: function () {
+			var that = this;
 			jsonModel = this.getModel("mainView");
 
 			oModel.read("/EtGetHeaderSet(IvCustno='" + customerNo + "')", {
@@ -202,6 +176,13 @@ sap.ui.define([
 					dialogBusy.close();
 					if (resp.EvHeader !== undefined) {
 						jsonModel.setProperty("/header", resp.EvHeader);
+
+						var html = new sap.ui.core.HTML({
+							content: resp.EvHeader
+						});
+
+						that.getById("htmlContentId").removeAllItems();
+						that.getById("htmlContentId").addItem(html);
 					} else {
 						MessageToast.show("Başlık Bilgileri Yüklenemedi!");
 					}
@@ -314,6 +295,47 @@ sap.ui.define([
 			});
 		},
 
+		getDefaultView: function () {
+
+			var that = this;
+
+			jsonModel = this.getModel("mainView");
+
+			var tabArray = [{
+				tableName: "Header",
+				modelName: "mainView>/header"
+			}, {
+				tableName: "Baglanti",
+				modelName: "mainView>/baglantiList"
+			}, {
+				tableName: "Sistem",
+				modelName: "mainView>/sistemBilgiList"
+			}, {
+				tableName: "User",
+				modelName: "mainView>/userBilgiList"
+			}];
+
+			jQuery.each(tabArray, function (id, item) {
+				if (item.tableName !== "Header") {
+					if (item.tableName === "Baglanti")
+						that._rebindTable(item.tableName, oBaglantiTemplate, item.modelName, "Navigation");
+					if (item.tableName === "Sistem")
+						that._rebindTable(item.tableName, oSistemTemplate, item.modelName, "Navigation");
+					if (item.tableName === "User")
+						that._rebindTable(item.tableName, oUserTemplate, item.modelName, "Navigation");
+					that.getById("addButton" + item.tableName).setVisible(false);
+
+				}
+
+				that.getById("editButton" + item.tableName).setVisible(true);
+				that.getById("saveButton" + item.tableName).setVisible(false);
+				that.getById("cancelButton" + item.tableName).setVisible(false);
+				if (item.tableName === "Header")
+					that.changeHeaderEdit(false);
+			});
+
+		},
+
 		getSplitAppObj: function () {
 			var result = this.byId("SplitAppDemo");
 			if (!result) {}
@@ -416,6 +438,12 @@ sap.ui.define([
 			jsonModel.setProperty("/newCustomerName", cName);
 			jsonModel.setProperty("/newCustomerMuhattap", cMuhattap);
 			jsonModel.setProperty("/newCustomerMail", cMail);
+		},
+
+		changeHeaderEdit: function (oValue) {
+			this.getById("rteId").setVisible(oValue);
+			// this.getById("htmlId").setVisible(!oValue);
+			this.getById("htmlContentId").setVisible(!oValue);
 		},
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -529,15 +557,149 @@ sap.ui.define([
 				modelName = "mainView>/sistemBilgiList";
 			} else if (id.includes("User")) {
 				tableName = "User";
-				modelName = "mainView>/userBilgiLists";
+				modelName = "mainView>/userBilgiList";
+			} else if (id.includes("Header")) {
+				tableName = "Header";
+				modelName = "mainView>/header";
 			}
 
 			this.byId("editButton" + tableName).setVisible(true);
-			this.byId("addButton" + tableName).setVisible(false);
+			if (tableName !== "Header")
+				this.byId("addButton" + tableName).setVisible(false);
 			this.byId("saveButton" + tableName).setVisible(false);
 			this.byId("cancelButton" + tableName).setVisible(false);
 
-			this._rebindTable(tableName, oBaglantiTemplate, modelName, "Navigation");
+			if (tableName !== "Header") {
+				if (tableName === "Baglanti")
+					this._rebindTable(tableName, oBaglantiTemplate, modelName, "Navigation");
+				else if (tableName === "Sistem")
+					this._rebindTable(tableName, oSistemTemplate, modelName, "Navigation");
+				else if (tableName === "User")
+					this._rebindTable(tableName, oUserTemplate, modelName, "Navigation");
+			} else
+				this.changeHeaderEdit(false);
+		},
+
+		onSaveEdit: function (oEvent) {
+			dialogBusy.open();
+			var that = this;
+			var id = oEvent.getParameters().id;
+			var updateNo, tableName, modelName;
+
+			if (id.includes("Baglanti")) {
+				updateNo = "1";
+				tableName = "Baglanti";
+				modelName = "mainView>/baglantiList";
+			} else if (id.includes("Sistem")) {
+				updateNo = "2";
+				tableName = "Sistem";
+				modelName = "mainView>/sistemBilgiList";
+			} else if (id.includes("User")) {
+				updateNo = "3";
+				tableName = "User";
+				modelName = "mainView>/userBilgiList";
+			} else if (id.includes("Header")) {
+				updateNo = "4";
+				tableName = "Header";
+				modelName = "mainView>/header";
+			}
+
+			jsonModel = this.getModel("mainView");
+			var header = jsonModel.getProperty("/header");
+
+			var h = {
+				"IvUpdateno": updateNo,
+				"IvCustno": customerNo,
+				"IvHeader": header
+			};
+
+			h.EtUpdateBaglantiSet = [];
+			h.EtUpdateSistemBilgiSet = [];
+			h.EtUpdateUserBilgiSet = [];
+
+			if (updateNo === "1") {
+				jQuery.each(jsonModel.getProperty("/baglantiList"), function (id, item) {
+					var baglanti = {
+						"Custno": customerNo,
+						"Vpnuser": item.Vpnuser,
+						"Vpnpass": item.Vpnpass,
+						"Vpnip": item.Vpnip,
+						"Baglanti": item.Baglanti,
+						"Baglantitip": item.Baglantitip,
+						"Vpndosyasi": item.Vpndosyasi,
+						"Vpnlink": item.Vpnlink,
+						"Chdate": item.Chdate
+					};
+
+					h.EtUpdateBaglantiSet.push(baglanti);
+				});
+			} else if (updateNo === "2") {
+				jQuery.each(jsonModel.getProperty("/sistemBilgiList"), function (id, item) {
+					var sistem = {
+						"Custno": customerNo,
+						"Sysid": item.Sysid,
+						"Sysname": item.Sysname,
+						"Sysip": item.Sysip,
+						"Sysno": item.Sysno,
+						"Sysrouter": item.Sysrouter,
+						"Chdate": item.Chdate
+					};
+
+					h.EtUpdateSistemBilgiSet.push(sistem);
+				});
+			} else if (updateNo === "3") {
+				jQuery.each(jsonModel.getProperty("/userBilgiList"), function (id, item) {
+					var user = {
+						"Custno": customerNo,
+						"Sysname": item.Sysname,
+						"Uname": item.Uname,
+						"Clnt": item.Clnt,
+						"Rol": item.Rol,
+						"Passwrd": item.Passwrd,
+						"Chdate": item.Chdate
+					};
+
+					h.EtUpdateUserBilgiSet.push(user);
+				});
+			}
+
+			oModel.create("/EtUpdateHeaderSet", h, {
+				//async: false,
+				success: function (oResp) {
+					dialogBusy.close();
+					MessageToast.show("Değişiklikler Kaydedildi");
+
+					if (updateNo === "1") {
+						that.getBaglanti();
+					} else if (updateNo === "2") {
+						that.getSistemBilgi();
+					} else if (updateNo === "3") {
+						that.getUserBilgi();
+					} else if (updateNo === "4") {
+						that.getHeader();
+					}
+				},
+				error: function (oResp) {
+					dialogBusy.close();
+					MessageToast.show("Değişiklikler Kaydedilemedi!");
+				}
+			});
+
+			this.byId("editButton" + tableName).setVisible(true);
+			if (tableName !== "Header")
+				this.byId("addButton" + tableName).setVisible(false);
+			this.byId("saveButton" + tableName).setVisible(false);
+			this.byId("cancelButton" + tableName).setVisible(false);
+
+			if (tableName !== "Header") {
+				if (tableName === "Baglanti")
+					this._rebindTable(tableName, oBaglantiTemplate, modelName, "Navigation");
+				else if (tableName === "Sistem")
+					this._rebindTable(tableName, oSistemTemplate, modelName, "Navigation");
+				else if (tableName === "User")
+					this._rebindTable(tableName, oUserTemplate, modelName, "Navigation");
+			} else
+				this.changeHeaderEdit(false);
 		},
 
 		onAddEdit: function (oEvent) {
@@ -594,9 +756,12 @@ sap.ui.define([
 				tableName = "Sistem";
 			else if (id.includes("User"))
 				tableName = "User";
+			else if (id.includes("Header"))
+				tableName = "Header";
 
 			this.byId("editButton" + tableName).setVisible(false);
-			this.byId("addButton" + tableName).setVisible(true);
+			if (tableName !== "Header")
+				this.byId("addButton" + tableName).setVisible(true);
 			this.byId("saveButton" + tableName).setVisible(true);
 			this.byId("cancelButton" + tableName).setVisible(true);
 
@@ -713,26 +878,10 @@ sap.ui.define([
 				});
 			}
 
-			this._rebindTable(tableName, oEditableTemplate, modelName, "Edit");
-		},
-
-		onEditPress: function () {
-			this._oSupplier = jQuery.extend({}, this.getView().getModel().getData().SupplierCollection[0]);
-			this._toggleButtonsAndView(true);
-		},
-
-		onCancelPress: function () {
-			var oModel = this.getView().getModel();
-			var oData = oModel.getData();
-
-			oData.SupplierCollection[0] = this._oSupplier;
-
-			oModel.setData(oData);
-			this._toggleButtonsAndView(false);
-		},
-
-		onSavePress: function () {
-			this._toggleButtonsAndView(false);
+			if (tableName !== "Header")
+				this._rebindTable(tableName, oEditableTemplate, modelName, "Edit");
+			else
+				this.changeHeaderEdit(true);
 		},
 
 		openDialog: function (fragmentPath) {
