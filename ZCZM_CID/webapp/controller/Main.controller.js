@@ -61,12 +61,16 @@ sap.ui.define([
 		_rebindTable: function (tableName, oTemplate, path, sKeyboardMode) {
 			var oTable;
 
-			if (tableName === "Baglanti")
+			if (tableName === "Baglanti") {
 				oTable = this.getById("baglantiTable");
-			else if (tableName === "Sistem")
+				this.getBaglanti();
+			} else if (tableName === "Sistem") {
 				oTable = this.getById("sistemBilgiTable");
-			else if (tableName === "User")
+				this.getSistemBilgi();
+			} else if (tableName === "User") {
 				oTable = this.getById("userTable");
+				this.getUserBilgi();
+			}
 
 			if (sKeyboardMode === "Navigation")
 				oTable.setMode("None");
@@ -135,6 +139,7 @@ sap.ui.define([
 					dialogBusy.close();
 					if (resp.results !== undefined) {
 						jsonModel.setProperty("/customerList", resp.results);
+						jsonModel.refresh();
 						that.getModel("mainView").setProperty("/customerListBusy", false);
 					} else {
 						MessageToast.show("Müşteri Bilgileri Yüklenemedi!");
@@ -176,7 +181,7 @@ sap.ui.define([
 					dialogBusy.close();
 					if (resp.EvHeader !== undefined) {
 						jsonModel.setProperty("/header", resp.EvHeader);
-
+						jsonModel.refresh();
 						var html = new sap.ui.core.HTML({
 							content: resp.EvHeader
 						});
@@ -199,20 +204,25 @@ sap.ui.define([
 			var f = new Array();
 			var filter;
 
+			jsonModel.setProperty("/baglantiTableBusy", true);
+
 			filter = new Filter("IvCustno", FilterOperator.EQ, customerNo.toString());
 			f.push(filter);
 
 			oModel.read("/EtGetBaglantiSet", {
 				filters: f,
 				success: function (resp) {
+					jsonModel.setProperty("/baglantiTableBusy", false);
 					dialogBusy.close();
 					if (resp.results !== undefined) {
 						jsonModel.setProperty("/baglantiList", resp.results);
+						jsonModel.refresh();
 					} else {
 						MessageToast.show("Baglanti Bilgileri Yüklenemedi!");
 					}
 				},
 				error: function (resp) {
+					jsonModel.setProperty("/baglantiTableBusy", false);
 					dialogBusy.close();
 					MessageToast.show("Baglanti Bilgileri Yüklenemedi!");
 				}
@@ -224,20 +234,25 @@ sap.ui.define([
 			var f = new Array();
 			var filter;
 
+			jsonModel.setProperty("/sistemTableBusy", true);
+
 			filter = new Filter("IvCustno", FilterOperator.EQ, customerNo.toString());
 			f.push(filter);
 
 			oModel.read("/EtGetSistemBilgiSet", {
 				filters: f,
 				success: function (resp) {
+					jsonModel.setProperty("/sistemTableBusy", false);
 					dialogBusy.close();
 					if (resp.results !== undefined) {
 						jsonModel.setProperty("/sistemBilgiList", resp.results);
+						jsonModel.refresh();
 					} else {
 						MessageToast.show("Sistem Bilgileri Yüklenemedi!");
 					}
 				},
 				error: function (resp) {
+					jsonModel.setProperty("/sistemTableBusy", false);
 					dialogBusy.close();
 					MessageToast.show("Sistem Bilgileri Yüklenemedi!");
 				}
@@ -249,20 +264,25 @@ sap.ui.define([
 			var f = new Array();
 			var filter;
 
+			jsonModel.setProperty("/userTableBusy", true);
+
 			filter = new Filter("IvCustno", FilterOperator.EQ, customerNo.toString());
 			f.push(filter);
 
 			oModel.read("/EtGetUserBilgiSet", {
 				filters: f,
 				success: function (resp) {
+					jsonModel.setProperty("/userTableBusy", false);
 					dialogBusy.close();
 					if (resp.results !== undefined) {
 						jsonModel.setProperty("/userBilgiList", resp.results);
+						jsonModel.refresh();
 					} else {
 						MessageToast.show("Kullanıcı Bilgileri Yüklenemedi!");
 					}
 				},
 				error: function (resp) {
+					jsonModel.setProperty("/userTableBusy", false);
 					dialogBusy.close();
 					MessageToast.show("Kullanıcı Bilgileri Yüklenemedi!");
 				}
@@ -546,38 +566,55 @@ sap.ui.define([
 		},
 
 		onCancelEdit: function (oEvent) {
+			var that = this;
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			var id = oEvent.getParameters().id;
 			var tableName, modelName;
 
-			if (id.includes("Baglanti")) {
-				tableName = "Baglanti";
-				modelName = "mainView>/baglantiList";
-			} else if (id.includes("Sistem")) {
-				tableName = "Sistem";
-				modelName = "mainView>/sistemBilgiList";
-			} else if (id.includes("User")) {
-				tableName = "User";
-				modelName = "mainView>/userBilgiList";
-			} else if (id.includes("Header")) {
-				tableName = "Header";
-				modelName = "mainView>/header";
-			}
+			MessageBox.show(
+				"İptal Etmek İstediğinize Emin Misiniz?", {
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					icon: MessageBox.Icon.QUESTION,
+					title: "Uyarı",
+					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+					onClose: function (sAnswer) {
+						if (sAnswer === MessageBox.Action.NO) {
+							return;
+						} else {
+							if (id.includes("Baglanti")) {
+								tableName = "Baglanti";
+								modelName = "mainView>/baglantiList";
+							} else if (id.includes("Sistem")) {
+								tableName = "Sistem";
+								modelName = "mainView>/sistemBilgiList";
+							} else if (id.includes("User")) {
+								tableName = "User";
+								modelName = "mainView>/userBilgiList";
+							} else if (id.includes("Header")) {
+								tableName = "Header";
+								modelName = "mainView>/header";
+							}
 
-			this.byId("editButton" + tableName).setVisible(true);
-			if (tableName !== "Header")
-				this.byId("addButton" + tableName).setVisible(false);
-			this.byId("saveButton" + tableName).setVisible(false);
-			this.byId("cancelButton" + tableName).setVisible(false);
+							that.byId("editButton" + tableName).setVisible(true);
+							if (tableName !== "Header")
+								that.byId("addButton" + tableName).setVisible(false);
+							that.byId("saveButton" + tableName).setVisible(false);
+							that.byId("cancelButton" + tableName).setVisible(false);
 
-			if (tableName !== "Header") {
-				if (tableName === "Baglanti")
-					this._rebindTable(tableName, oBaglantiTemplate, modelName, "Navigation");
-				else if (tableName === "Sistem")
-					this._rebindTable(tableName, oSistemTemplate, modelName, "Navigation");
-				else if (tableName === "User")
-					this._rebindTable(tableName, oUserTemplate, modelName, "Navigation");
-			} else
-				this.changeHeaderEdit(false);
+							if (tableName !== "Header") {
+								if (tableName === "Baglanti")
+									that._rebindTable(tableName, oBaglantiTemplate, modelName, "Navigation");
+								if (tableName === "Sistem")
+									that._rebindTable(tableName, oSistemTemplate, modelName, "Navigation");
+								if (tableName === "User")
+									that._rebindTable(tableName, oUserTemplate, modelName, "Navigation");
+							} else {
+								that.changeHeaderEdit(false);
+							}
+						}
+					}
+				}
+			);
 		},
 
 		onSaveEdit: function (oEvent) {

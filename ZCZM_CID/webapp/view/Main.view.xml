@@ -61,8 +61,8 @@
 						</VBox>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" id="baglantiTable" class="sapUiResponsiveMargin tableRowColor"
-							items="{path:'mainView>/baglantiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/baglantiTableBusy}" id="baglantiTable"
+							class="sapUiResponsiveMargin tableRowColor" items="{path:'mainView>/baglantiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
 									<ToolbarSpacer/>
@@ -114,8 +114,8 @@
 						</Table>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" id="sistemBilgiTable" class="sapUiResponsiveMargin tableRowColor"
-							items="{path:'mainView>/sistemBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/sistemTableBusy}" id="sistemBilgiTable"
+							class="sapUiResponsiveMargin tableRowColor" items="{path:'mainView>/sistemBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
 									<ToolbarSpacer/>
@@ -167,7 +167,7 @@
 						</Table>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" id="userTable" class="sapUiResponsiveMargin tableRowColor"
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/userTableBusy}" id="userTable" class="sapUiResponsiveMargin tableRowColor"
 							items="{path:'mainView>/userBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
