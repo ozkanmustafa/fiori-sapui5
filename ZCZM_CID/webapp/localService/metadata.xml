@@ -45,6 +45,8 @@
 					ToRole="ToRole_HeadToUserBilgi"/><NavigationProperty Name="EtUpdateSistemBilgiSet" Relationship="ZFIORI_CID_SRV.HeadToSistemBilgi" FromRole="FromRole_HeadToSistemBilgi"
 					ToRole="ToRole_HeadToSistemBilgi"/><NavigationProperty Name="EtUpdateBaglantiSet" Relationship="ZFIORI_CID_SRV.HeadToBaglanti" FromRole="FromRole_HeadToBaglanti"
 					ToRole="ToRole_HeadToBaglanti"/></EntityType>
+			<EntityType Name="EtIsAdmin" sap:content-version="1">
+				<Key><PropertyRef Name="IvUsername"/></Key><Property Name="IvUsername" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Kullanıcı adı"/><Property Name="EvReturn" Type="Edm.String" sap:unicode="false" sap:label="EV_RETURN"/></EntityType>
 			<Association Name="HeadToSistemBilgi" sap:content-version="1"><End Type="ZFIORI_CID_SRV.EtUpdateHeader" Multiplicity="1" Role="FromRole_HeadToSistemBilgi"/><End Type="ZFIORI_CID_SRV.EtUpdateSistemBilgi" Multiplicity="*" Role="ToRole_HeadToSistemBilgi"/>
 				<ReferentialConstraint>
 					<Principal Role="FromRole_HeadToSistemBilgi"><PropertyRef Name="IvCustno"/></Principal>
@@ -78,8 +80,9 @@
 				sap:content-version="1"/><EntitySet Name="EtUpdateSistemBilgiSet" EntityType="ZFIORI_CID_SRV.EtUpdateSistemBilgi" sap:searchable="true" sap:requires-filter="true"
 				sap:content-version="1"/><EntitySet Name="EtUpdateUserBilgiSet" EntityType="ZFIORI_CID_SRV.EtUpdateUserBilgi" sap:searchable="true" sap:requires-filter="true"
 				sap:content-version="1"/><EntitySet Name="EtUpdateBaglantiSet" EntityType="ZFIORI_CID_SRV.EtUpdateBaglanti" sap:searchable="true" sap:requires-filter="true"
-				sap:content-version="1"/><EntitySet Name="EtUpdateHeaderSet" EntityType="ZFIORI_CID_SRV.EtUpdateHeader" sap:creatable="false" sap:updatable="false"
-				sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+				sap:content-version="1"/><EntitySet Name="EtUpdateHeaderSet" EntityType="ZFIORI_CID_SRV.EtUpdateHeader" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/><EntitySet Name="EtIsAdminSet" EntityType="ZFIORI_CID_SRV.EtIsAdmin" sap:searchable="true" sap:requires-filter="true"
+				sap:content-version="1"/>
 				<AssociationSet Name="HeadToUserBilgiSet" Association="ZFIORI_CID_SRV.HeadToUserBilgi" sap:creatable="false" sap:updatable="false"
 					sap:deletable="false" sap:content-version="1"><End EntitySet="EtUpdateHeaderSet" Role="FromRole_HeadToUserBilgi"/><End EntitySet="EtUpdateUserBilgiSet" Role="ToRole_HeadToUserBilgi"/></AssociationSet>
 				<AssociationSet Name="HeadToSistemBilgiSet" Association="ZFIORI_CID_SRV.HeadToSistemBilgi" sap:creatable="false" sap:updatable="false"

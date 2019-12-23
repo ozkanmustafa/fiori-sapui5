@@ -50,3 +50,13 @@ Görünüme kapatıldı
 .sapMSLIDescriptionDiv {
     display: none;
 }
+
+.sapMSwtOn:not(.sapMSwtAcceptReject) {
+    background: #8db5d8;
+    border-color: #2d5475;
+}
+
+.sapMSwtHoverable.sapMSwtOn:not(.sapMSwtAcceptReject):hover {
+    background: #64a5dc;
+    border-color: #427cac;
+}

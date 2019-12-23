@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog class="sapUiResponsiveContentPadding" title="Şifre Değiştir">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<f:Form id="editUserInfoForm" editable="true" ariaLabelledBy="Title1">
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+							emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer ariaLabelledBy="Title2">
+							<f:formElements>
+								<f:FormElement label="Eski Şifre">
+									<f:fields>
+										<Input type="Password" id="id_old_password" liveChange="changeUserInputValue" value="{mainView/>oldPassword}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Yeni Şifre">
+									<f:fields>
+										<Input type="Password" id="id_new_password" liveChange="changeUserInputValue" value="{mainView/>newPassword}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Yeni Şifre Tekrar">
+									<f:fields>
+										<Input type="Password" id="id_new_password2" liveChange="changeUserInputValue" value="{mainView/>newPasswordAgain}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="{i18n>dialogSaveButtonText}" icon="sap-icon://save" press="changeUserInfo" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>dialogCloseButtonText}" icon="sap-icon://decline" press="createExit" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

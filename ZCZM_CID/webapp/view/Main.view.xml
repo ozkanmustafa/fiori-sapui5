@@ -1,19 +1,20 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZCZM_CID.ZCZM_CID.controller.Main"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:rte="sap.ui.richtexteditor"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<SplitApp id="SplitAppDemo" initialDetail="defaultPage" initialMaster="master" orientationChange="onOrientationChange">
+	<SplitApp id="SplitAppDemo" busyIndicatorDelay="0" initialDetail="defaultPage" initialMaster="master"
+		orientationChange="onOrientationChange">
 		<masterPages>
 			<Page id="master" showNavButton="true">
 				<customHeader>
 					<Bar>
 						<contentLeft>
-							<Button icon="sap-icon://add-contact" tooltip="Müşteri Ekle" press="onPressCreateCustomer"/>
+							<Button icon="sap-icon://add-contact" visible="false" tooltip="Müşteri Ekle" press="onPressCreateCustomer"/>
 						</contentLeft>
 						<contentMiddle>
 							<Text text="{i18n>masterPageTittle}"/>
 						</contentMiddle>
 						<contentRight>
-							<Button icon="sap-icon://customer-briefing" tooltip="Danışmanlar"/>
+							<Button icon="sap-icon://customer-briefing" visible="false" press="onPressEditUserInfo" tooltip="Şifre Değiştir"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -23,8 +24,8 @@
 					</Toolbar>
 				</subHeader>
 				<content>
-					<List id="customerList" busy="{mainView>/customerListBusy}" items="{path:'mainView>/customerList'}" itemPress="onPressGoToDetail"
-						includeItemInSelection="true">
+					<List selectionChange="changeListSelectedItem" mode="SingleSelectMaster" id="customerList" busy="{mainView>/customerListBusy}"
+						busyIndicatorDelay="0" items="{path:'mainView>/customerList'}" itemPress="onPressGoToDetail" includeItemInSelection="true">
 						<items>
 							<StandardListItem title="{mainView>CustomerName}" description="{mainView>CustomerNo}" type="Active"/>
 						</items>
@@ -38,11 +39,14 @@
 			<Page id="detail" showNavButton="true" navButtonPress="onPressDetailBack" class="sapUiStdPage">
 				<customHeader>
 					<Bar>
+						<contentLeft>
+							<Switch state="true" id="idStatusSwitch" visible="{mainView>/isAdmin}" change="changeShowAll"/>
+						</contentLeft>
 						<contentMiddle>
 							<Text text="{mainView>/pageTitle}"/>
 						</contentMiddle>
 						<contentRight>
-							<Button icon="sap-icon://delete" press="onPostDeleteCustomer" tooltip="Sil"/>
+							<Button icon="sap-icon://delete" visible="{mainView>/isAdmin}" press="onPostDeleteCustomer" tooltip="Sil"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -53,7 +57,7 @@
 								<ToolbarSpacer/>
 								<Button id="saveButtonHeader" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
 								<Button id="cancelButtonHeader" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
-								<Button id="editButtonHeader" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+								<Button id="editButtonHeader" icon="sap-icon://edit" visible="{mainView>/isAdmin}" type="Transparent" press="onEdit"/>
 							</OverflowToolbar>
 							<VBox id="htmlContentId"></VBox>
 							<rte:RichTextEditor id="rteId" editorType="TinyMCE4" customToolbar="true" showGroupFont="true" showGroupLink="true" showGroupInsert="true"
@@ -61,12 +65,13 @@
 						</VBox>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/baglantiTableBusy}" id="baglantiTable"
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/baglantiTableBusy}" busyIndicatorDelay="0" id="baglantiTable"
 							class="sapUiResponsiveMargin tableRowColor" items="{path:'mainView>/baglantiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
+									<Title level="H1" text="Vpn"/>
 									<ToolbarSpacer/>
-									<Button id="editButtonBaglanti" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="editButtonBaglanti" icon="sap-icon://edit" visible="{mainView>/isAdmin}" type="Transparent" press="onEdit"/>
 									<Button id="addButtonBaglanti" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
 									<Button id="saveButtonBaglanti" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
 									<Button id="cancelButtonBaglanti" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
@@ -75,8 +80,9 @@
 							<items>
 								<ColumnListItem id="baglantiColumnList">
 									<cells>
-										<ObjectIdentifier title="{mainView>Baglanti}" text="{mainView>Baglantitip}"/>
-										<ObjectIdentifier title="{mainView>Vpnuser}" text="{mainView>Vpnpass}"/>
+										<Text text="{mainView>Baglanti}"/>
+										<Text text="{mainView>Vpnuser}"/>
+										<Text text="{mainView>Vpnpass}"/>
 										<Text text="{mainView>Vpnip}"/>
 										<Link text="{mainView>Vpndosyasi}" target="_blank" href="{mainView>Vpnlink}"/>
 										<Text text="{path:'mainView>Chdate', formatter : '.formatter.formatdate'}"></Text>
@@ -85,14 +91,19 @@
 							</items>
 							<!--// Tablo Başlıkları - Başlangıç	-->
 							<columns>
-								<Column hAlign="Center" width="7rem">
+								<Column hAlign="Center" width="8rem">
 									<header>
 										<Label text="Bağlantı" wrapping="true" design="Bold"/>
 									</header>
 								</Column>
-								<Column hAlign="Center" width="4rem">
+								<Column hAlign="Center" width="7rem">
 									<header>
 										<Label text="Kullanıcı" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" width="7rem">
+									<header>
+										<Label text="Şifre" wrapping="true" design="Bold"/>
 									</header>
 								</Column>
 								<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
@@ -114,12 +125,13 @@
 						</Table>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/sistemTableBusy}" id="sistemBilgiTable"
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/sistemTableBusy}" busyIndicatorDelay="0" id="sistemBilgiTable"
 							class="sapUiResponsiveMargin tableRowColor" items="{path:'mainView>/sistemBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
+									<Title level="H1" text="Sap GUI"/>
 									<ToolbarSpacer/>
-									<Button id="editButtonSistem" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="editButtonSistem" icon="sap-icon://edit" visible="{mainView>/isAdmin}" type="Transparent" press="onEdit"/>
 									<Button id="addButtonSistem" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
 									<Button id="saveButtonSistem" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
 									<Button id="cancelButtonSistem" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
@@ -167,12 +179,13 @@
 						</Table>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/userTableBusy}" id="userTable" class="sapUiResponsiveMargin tableRowColor"
-							items="{path:'mainView>/userBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
+						<Table width="auto" delete="onDeleteEdit" busy="{mainView>/userTableBusy}" busyIndicatorDelay="0" id="userTable"
+							class="sapUiResponsiveMargin tableRowColor" items="{path:'mainView>/userBilgiList'}" noDataText="Herhangi bir bağlantı bulunamadı!">
 							<headerToolbar>
 								<OverflowToolbar>
+									<Title level="H1" text="Kullanıcı"/>
 									<ToolbarSpacer/>
-									<Button id="editButtonUser" icon="sap-icon://edit" type="Transparent" press="onEdit"/>
+									<Button id="editButtonUser" icon="sap-icon://edit" visible="{mainView>/isAdmin}" type="Transparent" press="onEdit"/>
 									<Button id="addButtonUser" icon="sap-icon://add" type="Transparent" press="onAddEdit" visible="false"/>
 									<Button id="saveButtonUser" icon="sap-icon://save" type="Transparent" press="onSaveEdit" visible="false"/>
 									<Button id="cancelButtonUser" icon="sap-icon://decline" type="Transparent" press="onCancelEdit" visible="false"/>
@@ -193,12 +206,12 @@
 							<columns>
 								<Column hAlign="Center" width="7rem">
 									<header>
-										<Label text="Sistem" wrapping="true" design="Bold"/>
+										<Label text="SID" wrapping="true" design="Bold"/>
 									</header>
 								</Column>
 								<Column hAlign="Center" width="4rem">
 									<header>
-										<Label text="Üst birim" wrapping="true" design="Bold"/>
+										<Label text="Üst Birim" wrapping="true" design="Bold"/>
 									</header>
 								</Column>
 								<Column hAlign="Center">
@@ -223,8 +236,8 @@
 						<Panel expandable="true" headerText="Kullanıcı Yorumları" width="auto" class="sapUiResponsiveMargin">
 							<content>
 								<FeedInput post="onPostComment" placeholder="Yorum Yaz" icon="sap-icon://customer" class="sapUiSmallMarginTopBottom"/>
-								<List id="commentList" noDataText="Henüz Yorum Eklenmemiş" busy="{mainView>/commentListBusy}" growing="true" growingThreshold="5"
-									showSeparators="Inner" mode="Delete" delete="onDeleteComment" items="{mainView>/commentList}">
+								<List id="commentList" noDataText="Henüz Yorum Eklenmemiş" busyIndicatorDelay="0" busy="{mainView>/commentListBusy}" growing="true"
+									growingThreshold="5" showSeparators="Inner" mode="Delete" delete="onDeleteComment" items="{mainView>/commentList}">
 									<FeedListItem info="{mainView>Messageno}" sender="{mainView>Uname}" icon="sap-icon://customer" iconDensityAware="false"
 										timestamp="{path:'mainView>Commentdate', formatter:'.formatter.formatdate'}" text="{mainView>Usercomment}" convertLinksToAnchorTags="All"/>
 								</List>

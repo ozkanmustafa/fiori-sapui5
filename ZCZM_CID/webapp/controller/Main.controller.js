@@ -47,11 +47,28 @@ sap.ui.define([
 			jsonModel.setSizeLimit(10000);
 			jsonModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			this.setModel(jsonModel, "mainView");
+
+			jsonModel.setProperty("/isAdmin", false);
 			this.getCustomers();
 
 			oBaglantiTemplate = this.getById("baglantiColumnList");
 			oSistemTemplate = this.getById("sistemBilgiColumnList");
 			oUserTemplate = this.getById("userColumnList");
+		},
+
+		onBeforeRendering: function () {
+			var that = this;
+			jsonModel = this.getModel("mainView");
+
+			oModel.read("/EtIsAdminSet(IvUsername='" + customerName + "')", {
+				success: function (resp) {
+					if (resp.EvReturn === 'OK') {
+						jsonModel.setProperty("/isAdmin", true);
+						jsonModel.refresh();
+					}
+				},
+				error: function (resp) {}
+			});
 		},
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -169,7 +186,11 @@ sap.ui.define([
 			this.getSistemBilgi();
 			this.getUserBilgi();
 			this.getComments();
-			this.getDefaultView();
+			if (jsonModel.getProperty("/isAdmin"))
+				this.getDefaultView();
+			else {
+				this.changeHeaderEdit(false);
+			}
 		},
 
 		getHeader: function () {
@@ -188,6 +209,8 @@ sap.ui.define([
 
 						that.getById("htmlContentId").removeAllItems();
 						that.getById("htmlContentId").addItem(html);
+
+						that.getById("idStatusSwitch").setState(resp.EvStatu === 'X' ? true : false);
 					} else {
 						MessageToast.show("Başlık Bilgileri Yüklenemedi!");
 					}
@@ -460,10 +483,65 @@ sap.ui.define([
 			jsonModel.setProperty("/newCustomerMail", cMail);
 		},
 
+		changeUserInputValue: function (oEvent) {
+			jsonModel = this.getModel("mainView");
+
+			var oldPass = this.getById("id_old_password").getValue();
+			var newPass = this.getById("id_new_password").getValue();
+			var newPassAgain = this.getById("id_new_password2").getValue();
+
+			jsonModel.setProperty("/oldPassword", oldPass);
+			jsonModel.setProperty("/newPassword", newPass);
+			jsonModel.setProperty("/newPasswordAgain", newPassAgain);
+		},
+
 		changeHeaderEdit: function (oValue) {
 			this.getById("rteId").setVisible(oValue);
 			// this.getById("htmlId").setVisible(!oValue);
 			this.getById("htmlContentId").setVisible(!oValue);
+		},
+
+		changeShowAll: function (oEvent) {
+			var that = this;
+			var bState = oEvent.getParameter("state");
+			var value;
+
+			var f = new Array();
+			var filter;
+
+			jsonModel = this.getModel("mainView");
+
+			value = bState === true ? 'X' : '';
+
+			this.getById("SplitAppDemo").setBusy(true);
+
+			filter = new Filter("IvCustno", FilterOperator.EQ, customerNo.toString());
+			f.push(filter);
+
+			if (value === 'X') {
+				filter = new Filter("IvStatu", FilterOperator.EQ, value.toString());
+				f.push(filter);
+			}
+
+			oModel.read("/EtUpdateCustShowAllSet", {
+				filters: f,
+				success: function (resp) {
+					that.getById("SplitAppDemo").setBusy(false);
+					if (resp.results !== undefined) {
+						jsonModel.setProperty("/customerList", resp.results);
+						jsonModel.refresh();
+					} else {
+						MessageToast.show("Beklenmeyen bir hata oluştu!");
+						that.getById("idStatusSwitch").setState(!bState);
+					}
+				},
+				error: function (resp) {
+					that.getById("SplitAppDemo").setBusy(false);
+					MessageToast.show("Beklenmeyen bir hata oluştu!");
+					that.getById("idStatusSwitch").setState(!bState);
+				}
+			});
+
 		},
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -508,6 +586,10 @@ sap.ui.define([
 		onPressCreateCustomer: function () {
 			this.openDialog("ZCZM_CID.ZCZM_CID.fragment.createCustomer");
 			this.clearInputs();
+		},
+
+		onPressEditUserInfo: function () {
+			this.openDialog("ZCZM_CID.ZCZM_CID.fragment.editUserInfo");
 		},
 
 		onPostDeleteCustomer: function () {
@@ -662,7 +744,6 @@ sap.ui.define([
 						"Vpnpass": item.Vpnpass,
 						"Vpnip": item.Vpnip,
 						"Baglanti": item.Baglanti,
-						"Baglantitip": item.Baglantitip,
 						"Vpndosyasi": item.Vpndosyasi,
 						"Vpnlink": item.Vpnlink,
 						"Chdate": item.Chdate
@@ -812,24 +893,16 @@ sap.ui.define([
 								new sap.m.Input({
 									value: "{mainView>Baglanti}",
 									placeholder: "Bağlanti"
-								}),
-								new sap.m.Input({
-									value: "{mainView>Baglantitip}",
-									placeholder: "Bağlanti Tipi"
 								})
 							]
 						}),
-						new sap.m.VBox({
-							items: [
-								new sap.m.Input({
-									value: "{mainView>Vpnuser}",
-									placeholder: "Kullanıcı"
-								}),
-								new sap.m.Input({
-									value: "{mainView>Vpnpass}",
-									placeholder: "Şifre"
-								})
-							]
+						new sap.m.Input({
+							value: "{mainView>Vpnuser}",
+							placeholder: "Kullanıcı"
+						}),
+						new sap.m.Input({
+							value: "{mainView>Vpnpass}",
+							placeholder: "Şifre"
 						}),
 						new sap.m.Input({
 							value: "{mainView>Vpnip}",
