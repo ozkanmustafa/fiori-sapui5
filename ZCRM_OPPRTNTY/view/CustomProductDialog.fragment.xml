@@ -1,0 +1,96 @@
+<Dialog 
+	xmlns="sap.m" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	ontentWidth="480px" 
+	contentHeight="960px"
+	showHeader="false"
+	stretch="{device>/isPhone}"
+	draggable="true">
+	<content>
+		<NavContainer id="navCon" xmlns="sap.m">
+			<pages>
+				<!-- Fist page for to add istek and aroma -->
+				<Page id="listIstekID" xmlns="sap.m">
+					<customHeader>
+						<Bar xmlns="sap.m">
+							<contentMiddle>
+								<Label id="listProd" text="{i18n>PRODUCTS}">
+								</Label>
+							</contentMiddle>
+							<contentRight>
+								<Button  id="productEditID" visible="{Update>/EditButton}" type="Emphasized" tooltip="{i18n>EDITAROMA}" icon="sap-icon://edit" press="onEditToProduct"/>
+								<Button  id="istekButtonID" type="Emphasized" tooltip="{i18n>ADDISTEK}" icon="sap-icon://add-product" press="onNavigateToIstek"/>
+								<Button id="AromaButtonID" type="Emphasized" tooltip="{i18n>ADDAROMA}" icon="sap-icon://basket" press="onNavigateToAroma"/>
+							</contentRight>
+						</Bar>						
+					</customHeader>
+					<content>
+					    <!-- Navigation List deneyebilirsin -->
+						<Tree
+							id="treeID"
+						 	items="{path:'customProducts>/istekCollection',parameters: {arrayNames:['Nodes']}}"
+						 	mode="SingleSelect"
+							includeItemInSelection="true">
+						    <StandardTreeItem id="test"
+							    title="{customProducts>PypTanim}"
+							    icon="sap-icon://product"/>
+						</Tree>
+					</content>
+					
+					<footer>
+						<Bar xmlns="sap.m">
+							<contentRight>
+								<Button id="productOKID" type="Accept" icon="sap-icon://save" press="onCustomProductKeep" />
+								<Button id="productCancelID" type="Reject" icon="sap-icon://decline" press="onCustomProductCancel" />
+							</contentRight>
+						</Bar>
+					</footer>
+					
+				</Page>
+				<!-- Second Page for add istek -->
+				<Page id="createIstekID" title="{i18n>CREATEISTEK}" showNavButton="true" navButtonPress="onNavBackToProduct" xmlns="sap.m">
+					<content>
+                    	<VBox class="sapUiSmallMargin">
+                    		<f:SimpleForm id="SimpleFormIstekID"
+                    			layout="ResponsiveGridLayout"
+                    			labelSpanXL="3"
+                    			labelSpanL="3"
+                    			labelSpanM="3"
+                    			labelSpanS="12"
+                    			adjustLabelSpan="false"
+                    			emptySpanXL="4"
+                    			emptySpanL="4"
+                    			emptySpanM="4"
+                    			emptySpanS="0"
+                    			columnsXL="1"
+                    			columnsL="1"
+                    			columnsM="1"
+                    			singleContainerFullSize="false" >
+                    			<f:content>
+                    			    <Label text="{i18n>KALEM_NO}" visible="false" />
+                    			    <Input id="KalemInputID" visible="false" value="{customProducts>/tempIstek/NumberInt}" editable="false"/>
+                    				<Label text="{i18n>ISTEK_DESCRIPTION}" />
+                    				<Input id="NodeInputID" value="{customProducts>/tempIstek/PypTanim}" maxLength="40" />
+                    				<Label  visible="false" text="{i18n>ISTEK_QUANTITY}" />
+                    				<Input visible="false" id="QuantityID" placeholder="ADT" value="{customProducts>/tempIstek/Quantity}"  />
+                    			</f:content>
+                    		</f:SimpleForm>
+                    	</VBox>
+					    	
+					</content>
+					
+					<footer>
+						<Bar xmlns="sap.m">
+							<contentRight>
+								<Button id="istekOKID" icon="sap-icon://add" press="onCustomIstekKeep" />
+								<Button id="istekCancelID" icon="sap-icon://decline" press="onNavBackToProduct" />
+							</contentRight>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</NavContainer>
+	</content>
+	
+</Dialog>

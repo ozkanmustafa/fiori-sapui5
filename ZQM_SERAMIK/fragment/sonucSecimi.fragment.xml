@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog class="sapUiResponsiveContentPadding">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button/>
+				</contentLeft>
+				<contentMiddle>
+					<Title id="dialogTitle" text="Sonuç"/>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<Table id="sonucSecimiTable" keyboardMode="Navigation" class="tableRowColor" items="{detailView>/valuesSet}" noDataText="Listelenecek kayıt bulunamamıştır">
+			<items>
+				<ColumnListItem type="Navigation"  press="methodSonucTableSelected">
+					<cells>
+						<Text text="{detailView>Codegruppe}"/>
+						<Text text="{detailView>Code}"/>
+						<Text text="{detailView>Kurztext}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+			<!--// Tablo Başlıkları - Başlangıç	-->
+			<columns>
+				<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+					<header>
+						<Label text="Kod Grubu" design="Bold"/>
+					</header>
+				</Column>
+				<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+					<header>
+						<Label text="Kod" design="Bold"/>
+					</header>
+				</Column>
+				<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+					<header>
+						<Label text="Kod Kısa Metni" design="Bold"/>
+					</header>
+				</Column>
+			</columns>
+			<!--// Tablo Başlıkları - Bitiş	-->
+		</Table>
+		<endButton>
+			<Button text="{i18n>dialogCloseButtonText}" icon="sap-icon://decline" press="closeDialog" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,532 @@
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" showHeader="false" stretch="true"
+	verticalScrolling="true">
+	<Panel id="projectPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" headerText="{i18n>PROJECTINFORMATION}"
+		width="auto" class="sapUiResponsiveMargin">
+		<f:SimpleForm id="SimpleFormProjectInfo" class="sapUiResponsiveMargin" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3"
+			labelSpanL="3" labelSpanM="3" labelSpanS="12" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="2"
+			columnsM="1">
+			<f:content>
+				<core:Title text=""/>
+				<Label text="{i18n>PYPDESCRIPTION}" required="true"/>
+				<Input id="ZZPYP_TANIM" value="{aromaEdit>/PypTanim}" maxLength="40" liveChange="onCheckPypTanim"/>
+				<Label text="{i18n>PROJETYPE}" required="true"/>
+				<ComboBox id="ZZPROJE_TURU" text="{aromaEdit>/ProjeTuruDesc}" selectedKey="{aromaEdit>/ProjeTuru}"
+					selectionChange="onCallServiceForValidations" items="{ path: 'ComboBox>/ZZPROJE_TURU'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PROJENAME}" required="true"/>
+				<Input id="ZZMUSTERI_ADI" maxLength="60" change="onCheckMandatoryInput" value="{aromaEdit>/MusteriAdi}" liveChange="onCheckMusteriAdi"/>
+				<Label text="{i18n>CUSTOMERSIZE}"/>
+				<ComboBox id="ZZMUSTERI_BUYUK" text="{aromaEdit>/MusteriBuyukDesc}" selectedKey="{aromaEdit>/MusteriBuyuk}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZMUSTERI_BUYUK'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>CONVERTOSALE}"/>
+				<ComboBox id="ZZSATISA_DONUS" text="{aromaEdit>/SatisaDonusDesc}" selectedKey="{aromaEdit>/SatisaDonus}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZSATISA_DONUS' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>CONVERTPOSSIBILITY}"/>
+				<ComboBox id="ZZLIKELIHD" text="{aromaEdit>/SatisaDonOlasDesc}" selectedKey="{aromaEdit>/SatisaDonOlas}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZLIKELIHD' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>SENDER}"/>
+				<Input id="ZZGONDER_KISI" maxLength="20" liveChange="onCheckMandatoryInput" value="{aromaEdit>/GonderKisi}"/>
+				<Label text="{i18n>SENDINGFORM}"/>
+				<ComboBox id="ZZGONDERME_SEKLI" text="{aromaEdit>/GondermeSekliDesc}" selectedKey="{aromaEdit>/GondermeSekli}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZGONDERME_SEKLI' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>CARGOSENDING}"/>
+				<ComboBox id="ZZKARGO_ODEMESI" text="{aromaEdit>/KargoOdemesiDesc}" selectedKey="{aromaEdit>/KargoOdemesi}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZKARGO_ODEMESI' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PROJECTTARGET}"/>
+				<Input id="ZZPROJE_AMACI" value="{aromaEdit>/ProjeAmaci}" />
+				<core:Title text=""/>
+				<Label text="{i18n>FACTORYVISIT}"/>
+				<ComboBox id="ZZMSTRI_F_ZIYRTI" text="{aromaEdit>/MstriFZiyrtiDesc}" selectedKey="{aromaEdit>/MstriFZiyrti}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZMSTRI_F_ZIYRTI' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>SAMPLERATE}"/>
+				<ComboBox id="ZZNUMUNE_BEDELI" text="{aromaEdit>/NumuneBedeliDesc}" selectedKey="{aromaEdit>/NumuneBedeli}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZNUMUNE_BEDELI' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PROACTIVE}"/>
+				<ComboBox id="ZZPROAKTIF" text="{aromaEdit>/ProaktifDesc}" selectedKey="{aromaEdit>/Proaktif}" selectionChange="onCheckMandatoryCombo"
+					items="{path: 'ComboBox>/ZZPROAKTIF'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>ANNUALSALESAMOUNT}"/>
+				<!--<Text text="{aromaEdit>/YillikSatisMik}" />-->
+				<Input value="{aromaEdit>/YillikSatisMik}" liveChange="onCheckMandatoryInput" id="ZZTNYILLIK"/>
+				<Input value="{aromaEdit>/YillikSatisMik2}" id="ZZFLD000056" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true"
+					valueHelpRequest="onVHAnnualSalesAmount"/>
+				<Label text="{i18n>ESTIMATEDRMC}"/>
+				<!--	<Text text="{aromaEdit>/TahRmcBrm}" />-->
+				<Input value="{aromaEdit>/TahRmcBrm}" liveChange="onCheckMandatoryInput" id="ZZTAH_RMC_BRM"/>
+				<Input value="{aromaEdit>/TahRmBrm}" id="ZZFLD00000A" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true"
+					valueHelpRequest="onVHEstimatedRMCMax"/>
+				<Label text="{i18n>DELIVERYTIME}"/>
+				<!--        				<Input id="ZZPOTNCIAL"  
+        				    change="onCheckMandatoryInput"
+        				    value="{aromaEdit>/Potansiyel}" />-->
+				<ComboBox id="ZZTESLIM_SURESI" text="{aromaEdit>/TeslimSuresiDesc}" selectedKey="{aromaEdit>/TeslimSuresi}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZTESLIM_SURESI'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>DELIVERYDATE}"/>
+				<DatePicker id="ZZDATUM" value="{path : 'aromaEdit>/TeslimTarih', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}}"
+					placeholder="{i18n>DATE_PLACEHOLDER}" change="onSelectDeliveryDate" class="sapUiSmallMarginBottom"/>
+				<!--        				
+        				<Input id="ZZDATUM"  
+        				    change="onCheckMandatoryInput"
+        				    value="{aromaEdit>/TeslimTarih}" />
+        				-->
+				<Label visible="false" text="{i18n>PROJECTOUTCOME}"/>
+				<Input visible="false" id="ZZPROJE_SONUC" maxLength="1" liveChange="onCheckMandatoryInput" value="{aromaEdit>/ProjeSonuc}"/>
+				<Label text="{i18n>ARGEPRIORITY}" visible="false"/>
+				<Input id="ZZARGE_ONCELIK" maxLength="3" visible="false" liveChange="onCheckMandatoryInput" value="{aromaEdit>/ArgeOncelik}"
+					editable="false"/>
+			</f:content>
+		</f:SimpleForm>
+	</Panel>
+	<Panel id="aromaPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" headerText="{i18n>AROMAINFO}" width="auto"
+		class="sapUiResponsiveMargin">
+		<f:SimpleForm id="SimpleFormAromaInfo" class="sapUiResponsiveMargin" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3"
+			labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+			columnsXL="1" columnsL="2" columnsM="1" singleContainerFullSize="false">
+			<f:content>
+				<core:Title text=""/>
+				<Label text="{i18n>AROMAFEATURE}"/>
+				<ComboBox id="ZZAROMA_OZELLIK" text="{aromaEdit>/AromaOzellikDesc}" selectedKey="{aromaEdit>/AromaOzellik}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZAROMA_OZELLIK'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>FINISHEDCODE}"/>
+				<Input id="ZZBITMIS_URUN" maxLength="18" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BitmisUrun}"/>
+				<Label text="{i18n>FINISHEDREQUEST}"/>
+				<CheckBox id="ZZBTMS_URUN_ISTK" select="onChangeFinishRequest"
+					selected="{path: 'aromaEdit>/BtmsUrunIstk',formatter : '.customFormatter.isBitmisUrun'}"/>
+				<Label text="{i18n>FINISHEDQUANTITY}"/>
+				<Input id="ZZBTMS_URUN_ADET" maxLength="5" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BtmsUrunAdet}"/>
+				<Label text="{i18n>RECIPE}"/>
+				<ComboBox id="ZZBU_RECETE" text="{aromaEdit>/BUReceteDesc}" selectedKey="{aromaEdit>/BURecete}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZBU_RECETE' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>RESOLUTION}"/>
+				<ComboBox id="ZZCOZUNURLUK" text="{aromaEdit>/CozunurlukDesc}" selectedKey="{aromaEdit>/Cozunurluk}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZCOZUNURLUK'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>MATERIALCODE}"/>
+				<Input id="ZZMALZ_KODU" valueState="{Update>/MaterialCodeState}" valueStateText="{i18n>ENTER_MATERIAL_CODE}" maxLength="10"
+					placeholder="{i18n>ENTER_MATERIAL_CODE}" change="onCheckMaterialCode" value="{aromaEdit>/MalzemeKod}" submit="onCheckMaterialCode"/>
+				<Label text="{i18n>ORIGINALCODE}" visible="{Update>/BayiDurumu}"/>
+				<Input id="ZZMALZEME" visible="{Update>/BayiDurumu}" maxLength="18" liveChange="onCheckMandatoryInput" value="{aromaEdit>/Malzeme}"
+					editable="false"/>
+				<Input value="{aromaEdit>/OrijinTanim}" visible="{Update>/BayiDurumu}" maxLength="40" liveChange="onCheckMandatoryInput" editable="false"/>
+				<Label id="ZZDOUBLE_KOD_L" text="{i18n>MATERIALDOUBLECODE}" visible="{Update>/BayiDurumu}"/>
+				<Input id="ZZDOUBLE_KOD" visible="{Update>/BayiDurumu}" maxLength="18" liveChange="onCheckMandatoryInput" value="{aromaEdit>/DoubleKod}"
+					editable="false"/>
+				<Input id="ZZDOUBLE_TANIM" visible="{Update>/BayiDurumu}" maxLength="40" value="{aromaEdit>/DoubleTanim}" liveChange="onCheckMandatoryInput"
+					editable="false"/>
+				<Label text="{i18n>PHYSICALCONDITION}"/>
+				<ComboBox id="ZZFIZIK_DURUM" text="{aromaEdit>/FizikDurumDesc}" selectedKey="{aromaEdit>/FizikDurum}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZFIZIK_DURUM'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>ALTERNATIVE}"/>
+				<ComboBox id="ZZALTERNATIF" text="{aromaEdit>/AlternatifDesc}" selectedKey="{aromaEdit>/Alternatif}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZALTERNATIF'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label id="ZZHANGI_KOD_L" text="{i18n>WITHWHICHCODE}" visible="{Update>/BayiDurumu}"/>
+				<ComboBox id="ZZHANGI_KOD" visible="{Update>/BayiDurumu}" text="{aromaEdit>/HangiKodDesc}" selectedKey="{aromaEdit>/HangiKod}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZHANGI_KOD'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<core:Title text=""/>
+				<Label text="{i18n>DESIREDAMOUNT}"/>
+				<!--<Text text="{aromaEdit>/IstnnArmMik}" />-->
+				<Input value="{aromaEdit>/IstnnArmMik}" liveChange="onCheckMandatoryInput" id="ZZISTNN_ARM_MIK"/>
+				<Input value="{aromaEdit>/IstnnArmMik2}" maxLength="3" id="ZZFLD00000P" enabled="true" editable="true" showValueHelp="true"
+					valueHelpOnly="true" valueHelpRequest="onVHDesiredAromaAmount"/>
+				<Label text="{i18n>DESIREDQUANTITY}"/>
+				<!--<Text text="{aromaEdit>/İstenenAromaaDEDI}" />-->
+				<Input value="{aromaEdit>/Quantity}" liveChange="onCheckMandatoryInput" id="QUANTITY"/>
+				<Input value="{aromaEdit>/IstenenAromaBirim}" id="PROCESS_QTY_UNIT" visible="false" enabled="true" editable="true" showValueHelp="true"
+					valueHelpOnly="false" valueHelpRequest="onDesiredAromaQuantity"/>
+				<Label text="{i18n>CODEDESCRIPTION}"/>
+				<ComboBox id="ZZKOD_ACIKLAMA" text="{aromaEdit>/KodAciklamaDesc}" selectedKey="{aromaEdit>/KodAciklama}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZKOD_ACIKLAMA' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>MODE}"/>
+				<ComboBox id="ZZMOD" text="{aromaEdit>/ModDesc}" selectedKey="{aromaEdit>/Mod}" selectionChange="onGetClassServiceByMode"
+					items="{ path: 'ComboBox>/ModeCollection' }">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>DESIREDTYPE}"/>
+				<ComboBox id="ZZNUMUNE_TIPI" text="{aromaEdit>/NumuneTipiDesc}" selectedKey="{aromaEdit>/NumuneTipi}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZNUMUNE_TIPI'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>CLASSREQUEST}"/>
+				<ComboBox id="ZZSINIF_ISTEGI" showSecondaryValues="true" text="{aromaEdit>/SinifIstegiDesc}" selectedKey="{aromaEdit>/SinifIstegi}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZSINIF_ISTEGI' }">
+					<core:ListItem key="{ComboBox>Key}" text="{ComboBox>Value}" additionalText="{ComboBox>Key}"/>
+				</ComboBox>
+				<Label text="{i18n>CLASS1}"/>
+				<ComboBox id="ZZSINIF_1" text="{aromaEdit>/Sinif1Desc}" selectedKey="{aromaEdit>/Sinif1}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZSINIF_1'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>CLASS2}"/>
+				<ComboBox id="ZZSINIF_2" text="{aromaEdit>/Sinif2Desc}" selectedKey="{aromaEdit>/Sinif2}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZSINIF_2'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PRODUCTBASE}"/>
+				<ComboBox id="ZZURUN_BAZI" text="{aromaEdit>/UrunBaziDesc}" selectedKey="{aromaEdit>/UrunBazi}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZSINIF_2'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PRODUCTFEATURE}"/>
+				<Input id="ZZURUN_OZ" maxLength="30" liveChange="onCheckMandatoryInput" value="{aromaEdit>/UrunOz}"/>
+				<Label text="{i18n>PRACTICE}"/>
+				<ComboBox id="ZZUYGULAMA" text="{aromaEdit>/UygulamaDesc}" selectedKey="{aromaEdit>/Uygulama}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZUYGULAMA'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PRACTICEAREA}"/>
+				<!--<Text text="{aromaEdit>/UyguAlani}" UyguAlaniDesc />-->
+				<Input value="{aromaEdit>/TanimUyg}" maxLength="50" id="ZZUYGU_ALANI" enabled="true" editable="true" showValueHelp="true"
+					valueHelpOnly="true" valueHelpRequest="onPracticeArea"/>
+				<Input value="{aromaEdit>/UyguAlani}" maxLength="12" id="UyguAlaniID2" editable="false"/>
+				<!--
+        				<Label text="{i18n>CUSTOMERGROUP}" />
+        				<Input value="{aromaEdit>/MusteriGrubu}" editable="false"  />-->
+			</f:content>
+		</f:SimpleForm>
+	</Panel>
+	<Panel id="sosPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" headerText="{i18n>SOSINFO}" width="auto"
+		class="sapUiResponsiveMargin">
+		<f:SimpleForm id="SimpleFormSOSInfo" class="sapUiResponsiveMargin" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3"
+			labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+			columnsXL="1" columnsL="2" columnsM="1" singleContainerFullSize="false">
+			<f:content>
+				<core:Title text=""/>
+				<Label text="{i18n>ALCOHOL}"/>
+				<Input id="ZZALKOL_YUZDE" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/AlkolYuzde}"/>
+				<Label text="{i18n>BASENAME}"/>
+				<Input id="ZZAROMASIZ_BAZ" maxLength="30" liveChange="onCheckMandatoryInput" value="{aromaEdit>/AromasizBaz}"/>
+				<Label text="{i18n>ACIDRANGE}"/>
+				<Input id="ZZASIT_ARALIK" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/AsitAralik}"/>
+				<Label text="{i18n>ACIDTYPE}"/>
+				<Input id="ZZASIT_TIPI" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/AsitTipi}"/>
+				<Label text="{i18n>PAINTTYPE}"/>
+				<ComboBox id="ZZBOYA_TIPI" text="{aromaEdit>/BoyaTipiDesc}" selectedKey="{aromaEdit>/BoyaTipi}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZBOYA_TIPI'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>BRIXINTERVAL}"/>
+				<Input id="ZZBRIX_ARALIK" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BrixAralik}"/>
+				<Label text="{i18n>PACKAGINGTYPE}"/>
+				<Input id="ZZBTMS_AMB_TIP" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BtmsAmbTip}"/>
+				<Label text="{i18n>COOKINGTYPE}"/>
+				<Input id="ZZBU_SURE_SICAK" maxLength="20" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BUSureSicak}"/>
+				<Label text="{i18n>MILKDOSAGE}"/>
+				<Input id="ZZBU_SUT_DOZ" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/BUSutDoz}"/>
+				<Label text="{i18n>PROTECTOR}"/>
+				<ComboBox id="ZZKORUYUCU" text="{aromaEdit>/KoruyucuDesc}" selectedKey="{aromaEdit>/Koruyucu}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZKORUYUCU'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>FRUIT}"/>
+				<Input id="ZZMEYVE_YUZDE" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/MeyveYuzde}"/>
+				<core:Title text=""/>
+				<Label text="{i18n>SAMPLEPACKAGETYPE}"/>
+				<ComboBox id="ZZNUMUNE_AMB_TIP" text="{aromaEdit>/NumuneAmbTipDesc}" selectedKey="{aromaEdit>/NumuneAmbTip}"
+					selectionChange="onCheckMandatoryCombo" items="{ path: 'ComboBox>/ZZNUMUNE_AMB_TIP'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>PASTEURIZATION}"/>
+				<Input id="ZZPASTORIZASYON" maxLength="1" liveChange="onCheckMandatoryInput" value="{aromaEdit>/Pastorizasyon}"/>
+				<Label text="{i18n>PH_INTERVAL}"/>
+				<Input id="ZZPH_ARALIK" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/PhAralik}"/>
+				<Label text="{i18n>PULP}"/>
+				<Input id="ZZPULP_YUZDE" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/PulpYuzde}"/>
+				<Label text="{i18n>SOSPACKAGINGTYPE}"/>
+				<ComboBox id="ZZSOS_AMB_TIP" text="{aromaEdit>/SosAmbTipDesc}" selectedKey="{aromaEdit>/SosAmbTip}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZSOS_AMB_TIP'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>SOSFEATURE}"/>
+				<Input id="ZZSOS_OZELLIK" maxLength="50" liveChange="onCheckMandatoryInput" value="{aromaEdit>/SosOzellik}"/>
+				<Label text="{i18n>SOSTYPE}"/>
+				<ComboBox id="ZZSOS_TIPI" text="{aromaEdit>/SosTipiDesc}" selectedKey="{aromaEdit>/SosTipi}" selectionChange="onCheckMandatoryCombo"
+					items="{ path: 'ComboBox>/ZZSOS_TIPI'}">
+					<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+				</ComboBox>
+				<Label text="{i18n>SOSPRACTICETIME}"/>
+				<Input id="ZZSOS_UYG_ZMN" maxLength="20" liveChange="onCheckMandatoryInput" value="{aromaEdit>/SosUygZmn}"/>
+				<Label text="{i18n>WATERACTIVATION}"/>
+				<Input id="ZZSU_AKTIVITESI" maxLength="10" liveChange="onCheckMandatoryInput" value="{aromaEdit>/SuAktivitesi}"/>
+				<Label text="{i18n>SWEETENER_TYPE}"/>
+				<Input id="ZZTATLAN_CESIT" maxLength="50" liveChange="onCheckMandatoryInput" value="{aromaEdit>/TatlanCesit}"/>
+				<Label text="{i18n>VISCO_AND_MEASURE}"/>
+				<Input id="ZZVIZKOZITE" maxLength="50" liveChange="onCheckMandatoryInput" value="{aromaEdit>/Vizkozite}"/>
+			</f:content>
+		</f:SimpleForm>
+	</Panel>
+	<Panel id="pypPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" headerText="PYP" width="auto"
+		backgroundDesign="Solid " class="sapUiResponsiveMargin">
+		<t:TreeTable id="editProduct_Tab" class="sapUiResponsiveMargin" visibleRowCount="5"
+			rows="{path: 'aromaEdit>/Pypler/results', parameters: {arrayNames:['Childs']}}" noDataText="{i18n>NOPRODUCTS}" selectionMode="None"
+			ariaLabelledBy="title">
+			<t:toolbar>
+				<Toolbar id="customProductHeaderToolbar">
+					<Title id="title" text="{{path:'i18n>PRODUCTS_HEADER'}, formatter:'cus.crm.opportunity.util.Formatter.formatTabHeader'}"/>
+				</Toolbar>
+			</t:toolbar>
+			<t:columns>
+				<t:Column width="12rem">
+					<Label text="{i18n>PYP_NUMBER}"/>
+					<t:template>
+						<Text text="{aromaEdit>PypNo}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>MALZEME_NO}"/>
+					<t:template>
+						<Text text="{aromaEdit>MalzemeNo}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="5rem">
+					<Label text="{i18n>MODE}"/>
+					<t:template>
+						<Text text="{aromaEdit>Mod}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>MALZEME_KOD_TANIM}"/>
+					<t:template>
+						<Text text="{aromaEdit>OrjKodTanim}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SAMPLE_STATUS}"/>
+					<t:template>
+						<Text text="{aromaEdit>NumuneDurumDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>ARGE_DURUMU}"/>
+					<t:template>
+						<Text text="{aromaEdit>ArgeDurumuDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SONRAKI_ADIM}"/>
+					<t:template>
+						<Text text="{aromaEdit>SonrakiAdimDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem" visible="{path : 'json>/ProcessType', formatter : '.customFormatter.isDoubleKodVisible'}">
+					<Label text="{i18n>DOUBLECODE_DESC}"/>
+					<t:template>
+						<Text text="{aromaEdit>DoubleKodTanim}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem" visible="{path : 'json>/ProcessType', formatter : '.customFormatter.isDoubleKodVisible'}">
+					<Label text="{i18n>DOUBLE_CODE}"/>
+					<t:template>
+						<Text text="{aromaEdit>DoubleKod}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>URUN_AGACI}"/>
+					<t:template>
+						<Text text="{path : 'aromaEdit>MusteriSipNoEki',formatter: '.customFormatter.isChangeText'}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="12rem">
+					<Label text="{i18n>RESULT}"/>
+					<t:template>
+						<ComboBox id="ZZFLD00004C" selectedKey="{aromaEdit>Sonuc}" visible="{path:'aromaEdit>MalzemeNo', formatter : '.customFormatter.isMalzeme'}"
+							enabled="{parts: [{path:'aromaEdit>NumuneDurum'},{path:'aromaEdit>TeslimatNo'}], formatter : '.customFormatter.isSonucEnabled'}"
+							items="{ path: 'ComboBox>/ZZFLD00004C'}" selectionChange="onChangePypSonucField">
+							<core:Item key="{ComboBox>Key}" text="{ComboBox>Value}"/>
+						</ComboBox>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SHIPMENT_DATE}"/>
+					<t:template>
+						<Text text="{aromaEdit>TeslimatTarih}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>APPLICATION_AREA}"/>
+					<t:template>
+						<Text text="{aromaEdit>UygAlaniTanim}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>DOSAGE_MIN}"/>
+					<t:template>
+						<Text text="{aromaEdit>DozajMin}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>DOSAGE_MAX}"/>
+					<t:template>
+						<Text text="{aromaEdit>DozajMax}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>LEGAL_STATUS_1}"/>
+					<t:template>
+						<Text text="{aromaEdit>YasalSinif1Desc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>LEGAL_STATUS_2}"/>
+					<t:template>
+						<Text text="{aromaEdit>YasalSinif2Desc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>DELIVERY_NUMBER}"/>
+					<t:template>
+						<Text text="{aromaEdit>TeslimatNo}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SHIPMENT_ADDRESS}"/>
+					<t:template>
+						<Text text="{aromaEdit>TeslimatAdres}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SHIPMENT_ATTENTION}"/>
+					<t:template>
+						<Text text="{aromaEdit>GonderilecekKisi}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>DELIVERY_METHOD}"/>
+					<t:template>
+						<Text text="{aromaEdit>GondermeSekli}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SHIPMENT_QUANTITY}"/>
+					<t:template>
+						<Text text="{aromaEdit>TeslimatMiktar}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>SHIPMENT_QUANTITY_Q}"/>
+					<t:template>
+						<Text text="{aromaEdit>TeslimatMiktar2}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>PROJECT_TYPE}"/>
+					<t:template>
+						<Text text="{aromaEdit>AromsaProjeTuruDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>PROJECTTYPE_DESC}"/>
+					<t:template>
+						<Text text="{aromaEdit>ProjeTuruDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>AROMATISYEN}"/>
+					<t:template>
+						<Text text="{aromaEdit>Aromatisyen}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<!--					<t:Column width="9rem">
+                        <Label text="Aromsa Proje Türü"/>
+                        <t:template>
+                         <Text text="{aromaEdit>AromsaProjeTuru}" wrapping="true"  />
+                        </t:template>
+					</t:Column>-->
+				<t:Column width="9rem">
+					<Label text="{i18n>APPLICATION_DONE}"/>
+					<t:template>
+						<Text text="{aromaEdit>UygYapan}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>APPLICATION_PHASE}"/>
+					<t:template>
+						<Text text="{aromaEdit>UygDurumDesc}" wrapping="true"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>HALAL_INFORMATION}"/>
+					<t:template>
+						<Text text="{aromaEdit>HelalBilgisiDesc}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>CUSTOMER_SAMPLE_CODE}"/>
+					<t:template>
+						<Text text="{aromaEdit>MustEsantKod}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="9rem">
+					<Label text="{i18n>EQUIVALENT_MARKET}"/>
+					<t:template>
+						<Text text="{aromaEdit>MuadPiyUrunu}" wrapping="false"/>
+					</t:template>
+				</t:Column>
+			</t:columns>
+		</t:TreeTable>
+	</Panel>
+	<Panel id="ilgiliPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" headerText="{i18n>ILGILIKISILER}" width="auto"
+		class="sapUiResponsiveMargin">
+		<f:SimpleForm id="SimpleFormRelPerson" class="sapUiResponsiveMargin" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3"
+			labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+			columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+			<f:content>
+				<Label text="{i18n>RELATED_PERSON}"/>
+				<Input value="{aromaEdit>/SorumluCalisan}" id="relatedPersonID" editable="true" showValueHelp="true" valueHelpOnly="true"
+					valueHelpRequest="onSelectRelatedValueHelp"/>
+				<Label text="{i18n>DELIVERY_PERSON}"/>
+				<Input value="{aromaEdit>/MalTeslimAlan}" id="deliveryPersonID" editable="true" showValueHelp="true" valueHelpOnly="true"
+					valueHelpRequest="onSelectDeliveryValueHelp"/>
+			</f:content>
+		</f:SimpleForm>
+	</Panel>
+	<Panel id="NotlarPanelID" expand="onAdjustPanelExpand_E" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>NOTES}"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://add" press="onOpenNoteForUpdate"/>
+			</Toolbar>
+		</headerToolbar>
+		<List id="listNote" showSeparators="Inner" growing="true" growingThreshold="4" growingScrollToLoad="false"
+			items="{path : 'aromaEdit>/ComplexNotes/results'}">
+			<FeedListItem sender="{path : 'aromaEdit>Creator'}" senderActive="false"
+				timestamp="{path:'aromaEdit>CreatedAt' , formatter: 'cus.crm.opportunity.util.Formatter.notesDateFormatter'}"
+				text="{path : 'aromaEdit>Content'}"/>
+		</List>
+	</Panel>
+	<buttons>
+		<Button text="{i18n>SAVE}" type="Accept" press="onEditAromaUpdate"/>
+		<Button text="{i18n>CLOSEAROMA}" type="Reject" press="onEditAromaClose"/>
+	</buttons>
+</Dialog>

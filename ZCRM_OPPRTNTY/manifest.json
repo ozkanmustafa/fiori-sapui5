@@ -1,0 +1,62 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "cus.crm.opportunity.CRM_OPPRTNTYExtension",
+		"type": "application",
+		"applicationVersion": {
+			"version": "1.0"
+		},
+		"title": "{{SHELL_TITLE}}",
+		"dataSources": {
+			"CRM_ODATA": {
+				"uri": "/sap/opu/odata/sap/ZCRM_OPPORTUNITY_SRV/",
+				"settings": {
+					"localUri": "./localService/metadata.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "fioriexttemplate.replaceservicecomponent",
+			"version": "1.4.0"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://Fiori2/F0012",
+			"favIcon": "./resources/sap/ca/ui/themes/base/img/favicon/F0012_My_Opportunities.ico"
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb,sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"dependencies": {
+			"minUI5Version": "1.38.3"
+		},
+		"extends": {
+			"component": "cus.crm.opportunity",
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": false,
+			"cozy": true
+		},
+		"config": {
+			"sap.ca.serviceConfigs": [
+				{
+					"name": "CRM_ODATA",
+					"isDefault": true
+				}
+			]
+		}
+	}
+}

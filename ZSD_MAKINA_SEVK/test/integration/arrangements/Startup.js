@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/test/Opa5"],function(t){"use strict";return t.extend("ZSD_MAKINA_SEVK.ZSD_MAKINA_SEVK.test.integration.arrangements.Startup",{iStartMyApp:function(t){var a=t||{};a.delay=a.delay||50;this.iStartMyUIComponent({componentConfig:{name:"ZSD_MAKINA_SEVK.ZSD_MAKINA_SEVK",async:true},hash:a.hash,autoWait:a.autoWait})}})});

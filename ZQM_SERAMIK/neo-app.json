@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/webapp/index.html",
+  "welcomeFile": "/index.html",
   "routes": [
     {
       "path": "/resources",
@@ -20,7 +20,7 @@
       "description": "SAPUI5 Resources"
     },
     {
-      "path": "/webapp/resources",
+      "path": "/resources",
       "target": {
         "type": "service",
         "name": "sapui5",
@@ -29,7 +29,7 @@
       "description": "SAPUI5 Resources"
     },
     {
-      "path": "/webapp/test-resources",
+      "path": "/test-resources",
       "target": {
         "type": "service",
         "name": "sapui5",
@@ -43,6 +43,15 @@
         "type": "destination",
         "name": "NurolDEV",
         "entryPath": "/sap/opu/odata"
+      },
+      "description": "Nurol DEV"
+    },
+    {
+      "path": "/sap/bc/ui5_ui5",
+      "target": {
+        "type": "destination",
+        "name": "NurolDEV",
+        "entryPath": "/sap/bc/ui5_ui5"
       },
       "description": "Nurol DEV"
     }

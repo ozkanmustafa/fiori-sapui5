@@ -1,0 +1,36 @@
+<Dialog 
+	xmlns="sap.m" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	showHeader="false"
+	verticalScrolling="true">
+	<f:SimpleForm
+		editable="true"
+		layout="ResponsiveGridLayout" >
+	    <f:content>
+	        <Label text="{i18n>NOTESTYPE}" />
+	        <Text text="{i18n>NOTES_TYPE}"/>
+<!--			<ComboBox text="{aroma>/NotesType}"
+				items="{
+					path: '/CustomizingSearchHelpSet',
+					filters:  [{path: 'FieldName', operator: 'EQ', value1: 'NOTECATEGORY'}]
+				}">
+				<core:Item key="{key}" text="{Value}" />
+			</ComboBox>-->
+			<Label text="{i18n>LANGTYPE}" />
+			<ComboBox text="{aroma>/NotesLangType}"
+			    showSecondaryValues="true"
+        		selectedKey="{aroma>/NotesLanguageID}"
+				items="{
+					path: '/TextLanguageSet'
+				}">
+			    <core:ListItem key="{TextLanguageID}" text="{TextLanguageDescription}" additionalText = "{TextLanguageID}"/>
+			</ComboBox>
+			<TextArea value="{aroma>/CustomNotes}" growing="true" width="100%"/>
+		</f:content>
+	</f:SimpleForm>
+		<buttons>
+			<Button type="Accept" icon="sap-icon://add" press="onAddNotesToAroma"/>
+			<Button type="Reject" icon="sap-icon://decline" press="onAddNotesCancel"/>
+		</buttons>
+</Dialog>

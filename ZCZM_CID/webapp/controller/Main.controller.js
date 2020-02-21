@@ -1025,9 +1025,30 @@ sap.ui.define([
 			value = value.replace(/\ /g, "%20");
 			value = value.replace(/\+/g, "%2B");
 			value = value.replace(/\//g, "%2F");
+			value = value.replace(/\n/g, "%0a");
 			value = value.replace(/\?/g, "%3F");
 			value = value.replace(/\&/g, "%25");
 			value = value.replace(/\#/g, "%26");
+			value = value.replace(/\'/g, "%27");
+			value = value.replace(/\:/g, "%3A");
+
+			value = value.replace(/\Ç/g, "%C3%87");
+			value = value.replace(/\ç/g, "%C3%A7");
+
+			value = value.replace(/\Ğ/g, "%C4%9E");
+			value = value.replace(/\ğ/g, "%C4%9F");
+
+			value = value.replace(/\İ/g, "%C4%B0");
+			value = value.replace(/\ı/g, "%C4%B1");
+
+			value = value.replace(/\Ö/g, "%C3%96");
+			value = value.replace(/\ö/g, "%C3%B6");
+
+			value = value.replace(/\Ş/g, "%C5%9E");
+			value = value.replace(/\ş/g, "%C5%9F");
+
+			value = value.replace(/\Ü/g, "%C3%9C");
+			value = value.replace(/\ü/g, "%C3%BC");
 			return value;
 		}
 	});

@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog noDataText="Listelenecek alt müşteri bulunamadı" title="Alt Müşteri Seç" search="onSearchKunnr" confirm="onConfirmKunnr"
+		cancel="closeDialog" showClearButton="true" items="{ path: 'mainView>/kunnrData' }">
+		<StandardListItem title="{mainView>Partner}" description="{mainView>McName1}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

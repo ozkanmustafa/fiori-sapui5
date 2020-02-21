@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout">
+    	<SelectDialog
+    		noDataText="{i18n>NODATATEXT}"
+    		title="{i18n>RMCMAXTITLE}"
+    		search="onEstimatedRMCSearch"
+    		confirm="onEstimatedRMCSelect"
+    		cancel="onEstimatedRMCCancel"
+    		items="{path : 'ComboBox>/CurrenciesSet'}">
+        	<StandardListItem
+    			title="{ComboBox>CurrencyText}"
+    			description="{ComboBox>CurrencyKey}"
+    			type="Active" />
+    	</SelectDialog>
+</core:FragmentDefinition>

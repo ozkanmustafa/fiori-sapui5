@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ResponsivePopover title="Filtrele" class="sapUiPopupWithPadding" placement="Bottom">
+		<content>
+			<Table width="12rem" id="detailTableColumnFilter" mode="MultiSelect" class="tableRowColor " items="{detailView>/columns}" noDataText="Sütun Yok!">
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{detailView>Name}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column hAlign="Center" demandPopin="true">
+						<header>
+							<Label text="Tümünü Seç" design="Bold"/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</content>
+		<beginButton>
+			<Button type="Accept" text="Tamam" press="onTableColumnFilter"/>
+		</beginButton>
+		<endButton>
+			<Button type="Reject" text="Kapat" press="closeDialog"/>
+		</endButton>
+	</ResponsivePopover>
+</core:FragmentDefinition>

@@ -1,0 +1,127 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="ZSD_MAKINA_SEVK.ZSD_MAKINA_SEVK.controller.Detail">
+	<App>
+		<pages>
+			<Page title="El Terminali" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<VBox class="sapUiSmallMargin">
+						<f:Form id="formTeslimatListesiItems" editable="true" ariaLabelledBy="Title1">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="5" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="5"
+									emptySpanM="4" emptySpanS="2" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer ariaLabelledBy="Title2">
+									<f:formElements>
+										<f:FormElement label="Teslimat No">
+											<f:fields>
+												<Input editable="false" id="id_teslimat_no" value="{detailView>/belgeNo}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Barkod">
+											<f:fields>
+												<Input editable="true" id="id_barkod" value="{detailView>/barkod}" submit="methodBarkodRead" change="methodBarkodRead"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Malzeme">
+											<f:fields>
+												<Input editable="false" id="id_malzeme" value="{detailView>/malzeme}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Parti">
+											<f:fields>
+												<Input editable="false" id="id_parti" value="{detailView>/parti}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Seri No">
+											<f:fields>
+												<Input editable="false" id="id_seri_no" value="{detailView>/seriNo}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Miktar">
+											<f:fields>
+												<!--<Input editable="true" id="id_miktar_edt" type="Number" value="{detailView>/Mengeedt}"/>-->
+												<StepInput id="id_miktar_edt" value="{detailView>/Mengeedt}" displayValuePrecision="3" min="0.000" max="9999999" step="1"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<Table width="auto" id="detailTable" selectionChange="methodDetailTableSelected" class="tableRowColor"
+							items="{path:'detailView>/teslimatListItems'}" noDataText=" Listelenecek kayıt bulunamamıştır">
+							<headerToolbar>
+								<Toolbar>
+									<Title text="" level="H2"/>
+									<ToolbarSpacer/>
+									<Button id="id_teslimat_yenile" class="refreshButton" text="Yenile"
+										enabled="{path:'detailView>/teslimat_yuklenme', formatter:'.formatter.formatIsEnabled2'}" press="methodClearFormInputs"
+										icon="sap-icon://refresh" type="Emphasized"/>
+									<Button id="id_teslimat_indir" type="Reject" text="Sil"
+										enabled="{path:'detailView>/teslimat_yuklenme', formatter:'.formatter.formatIsEnabled2'}" press="methodTeslimatIndirConfirm"
+										icon="sap-icon://delete"/>
+									<Button id="id_teslimat_yukle" type="Accept" text="Yükle"
+										enabled="{path:'detailView>/teslimat_yuklenme', formatter:'.formatter.formatIsEnabled2'}" press="methodSeriKontrolConfirm"
+										icon="sap-icon://create-form"/>
+								</Toolbar>
+							</headerToolbar>
+							<items>
+								<ColumnListItem id="id_list_item1" type="Navigation" press="methodNavToBarkodlar">
+									<cells>
+										<ObjectIdentifier title="{detailView>Matnr}" text="{detailView>Arktx}" class="sapMTableContentMargin"/>
+										<ObjectNumber number="{parts:[{path:'detailView>Lfimg'},{path:'detailView&gt;Vrkme'}], formatter:'.formatter.formatInt'}"
+											unit="{detailView>Vrkme}" state="Success"/>
+										<ObjectNumber number="{parts:[{path:'detailView>Lfimg2'},{path:'detailView&gt;Vrkme'}], formatter:'.formatter.formatInt'}"
+											unit="{detailView>Vrkme}"/>
+										<ObjectNumber
+											number="{parts:[{path:'detailView>Lfimg'},{path:'detailView&gt;Lfimg2'},{path:'detailView>Vrkme'}], formatter:'.formatter.formatInt2'}"
+											unit="{detailView>Vrkme}"/>
+										<Text text="{detailView>Posid}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<!--// Tablo Başlıkları - Başlangıç	-->
+							<columns>
+								<Column hAlign="Left" demandPopin="true">
+									<header>
+										<Label text="Malzeme" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Teslimat Miktarı" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Çekilen Miktar" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Kalan Miktar" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+								<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+									<header>
+										<Label text="Proje" wrapping="true" design="Bold"/>
+									</header>
+								</Column>
+							</columns>
+						</Table>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Çıkış" icon="sap-icon://decline" id="id_cikis" type="Reject" press="methodCikis"/>
+						<Button text="Mal Çıkışı" icon="sap-icon://product" id="id_mal_cikisi"
+							enabled="{path:'detailView>/mal_cikisi', formatter:'.formatter.formatIsEnabled2'}" type="Accept" press="methodMalCikisiConfirm"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

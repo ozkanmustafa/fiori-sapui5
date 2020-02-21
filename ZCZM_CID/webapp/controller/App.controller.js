@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"./Base.controller"
+], function (Base) {
 	"use strict";
 
-	return Controller.extend("ZCZM_CID.ZCZM_CID.controller.App", {
+	return Base.extend("ZCZM_CID.ZCZM_CID.controller.App", {
 		onInit: function () {
 
 		}

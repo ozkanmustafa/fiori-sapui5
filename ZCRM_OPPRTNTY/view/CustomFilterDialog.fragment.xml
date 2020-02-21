@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="onCustomFilterConfirm">
+		<filterItems>
+			<ViewSettingsFilterItem text="{i18n>ISLEM_TURU}" key="Z003" multiSelect="false">
+				<items>
+					<ViewSettingsItem text="{i18n>AROMSA_SATIS_FIRSATI}" 
+						visible="{path : 'Update>/UserAuth',formatter : '.customFormatter.isVisibleBayi'}" key="Z003" />
+					<ViewSettingsItem text="{i18n>BAYI_SATIS_FIRSATI}" key="Z004" />
+					<ViewSettingsItem text="{i18n>AROMSA_NUMUNE_FIRSATI}" 
+						visible="{path : 'Update>/UserAuth',formatter : '.customFormatter.isVisibleBayi'}" key="Z007" />
+					<ViewSettingsItem text="{i18n>BAYI_NUMUNE_FIRSATI}" key="Z008" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="{i18n>ONAY_DURUMU}" key="ON" multiSelect="false">
+				<items>
+					<ViewSettingsItem text="{i18n>ONAYLANMIS}" key="ON" />
+					<ViewSettingsItem text="{i18n>ONAYLANMAMIS}" key="NO" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="{i18n>SONUC_DURUMU}" key="SON" multiSelect="false">
+				<items>
+					<ViewSettingsItem text="{i18n>SONUC_GIRILMIS}" key="SON" />
+					<ViewSettingsItem text="{i18n>SONUC_GIRILMEMIS}" key="NOS" />
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

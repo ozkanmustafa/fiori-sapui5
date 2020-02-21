@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout">
+    	<SelectDialog
+		noDataText="{i18n>NODATATEXT}"
+		title="{i18n>PRACTICEAREATITLE}"
+		search="onPracticeAreaSearch"
+		confirm="onPracticeAreaSelect"
+		cancel="onPracticeAreaCancel"
+		items="{path : '/CustomizingSearchHelpSet',
+		        filters: [{path: 'FieldName', operator: 'EQ', value1: 'ZZUYGU_ALANI'}]
+		       }">
+    	<StandardListItem
+			title="{Value}"
+			description="{Key}"
+			type="Active" />
+    	</SelectDialog>
+</core:FragmentDefinition>

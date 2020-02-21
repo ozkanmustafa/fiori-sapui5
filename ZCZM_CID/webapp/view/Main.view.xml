@@ -40,7 +40,7 @@
 				<customHeader>
 					<Bar>
 						<contentLeft>
-							<Switch state="true" id="idStatusSwitch" visible="{mainView>/isAdmin}" change="changeShowAll"/>
+							<Switch state="true" id="idStatusSwitch" customTextOn="Açık" customTextOff="Kapalı" visible="{mainView>/isAdmin}" change="changeShowAll"/>
 						</contentLeft>
 						<contentMiddle>
 							<Text text="{mainView>/pageTitle}"/>
@@ -233,7 +233,7 @@
 						</Table>
 					</VBox>
 					<VBox visible="{mainView>/detailPageVisible}" class="sapUiSmallMargin">
-						<Panel expandable="true" headerText="Kullanıcı Yorumları" width="auto" class="sapUiResponsiveMargin">
+						<Panel expandable="true" expanded="true" headerText="Kullanıcı Yorumları" width="auto" class="sapUiResponsiveMargin">
 							<content>
 								<FeedInput post="onPostComment" placeholder="Yorum Yaz" icon="sap-icon://customer" class="sapUiSmallMarginTopBottom"/>
 								<List id="commentList" noDataText="Henüz Yorum Eklenmemiş" busyIndicatorDelay="0" busy="{mainView>/commentListBusy}" growing="true"

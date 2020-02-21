@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout">
+    	<SelectDialog
+		noDataText="{i18n>NODATATEXT}"
+		title="{i18n>DESIREDAROMA_Q}"
+		search="onDesiredAromaQuantitySearch"
+		confirm="onDesiredAromaQuantitySelect"
+		cancel="onDesiredAromaQuantityCancel"
+		items="">
+    	<StandardListItem
+			title="{Key}"
+			description="{Value}"
+			type="Active" />
+    	</SelectDialog>
+</core:FragmentDefinition>

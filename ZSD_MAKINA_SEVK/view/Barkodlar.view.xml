@@ -1,0 +1,54 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="ZSD_MAKINA_SEVK.ZSD_MAKINA_SEVK.controller.Barkodlar" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Okunan Barkodlar" navButtonPress="onNavBack" showNavButton="true">
+				<content>
+					<Table width="auto" id="barkodlarTable" mode="None" class="tableRowColor" items="{path:'barkodlarView>/okunanBarkodlarList'}"
+						noDataText=" Listelenecek kayıt bulunamamıştır">
+						<items>
+							<ColumnListItem id="id_list_item1">
+								<cells>
+									<Text text="{barkodlarView>Barcd}"/>
+									<Text text="{barkodlarView>Charg}"/>
+									<Text text="{barkodlarView>Sernr}"/>
+									<ObjectNumber
+										number="{path:'barkodlarView>Rfmng', type : 'sap.ui.model.odata.type.Decimal', constraints : { precision: 2, scale: 2 }, formatOptions: { decimals: 3 }}"/>
+									<Text text="{barkodlarView>Meins}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+						<!--// Tablo Başlıkları - Başlangıç	-->
+						<columns>
+							<Column hAlign="Center">
+								<header>
+									<Label text="Barkod No" wrapping="true" design="Bold"/>
+								</header>
+							</Column>
+							<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Parti" wrapping="true" design="Bold"/>
+								</header>
+							</Column>
+							<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Seri No" wrapping="true" design="Bold"/>
+								</header>
+							</Column>
+							<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Yükleme Miktarı" wrapping="true" design="Bold"/>
+								</header>
+							</Column>
+							<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+								<header>
+									<Label text="Ölçü Birimi" wrapping="true" design="Bold"/>
+								</header>
+							</Column>
+						</columns>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

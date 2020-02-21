@@ -1,0 +1,1127 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="CRM_OPPORTUNITY" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="OpportunityStatus" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="StatusProfile"/>
+                    <PropertyRef Name="UserStatusCode"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusProfile" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Status Profile"/>
+                <Property Name="UserStatusCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Status"/>
+                <Property Name="UserStatusText" Type="Edm.String" Nullable="false" MaxLength="30" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Status"/>
+                <Property Name="BusinessTransaction" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Bus.transaction"/>
+                <Property Name="StatusOrderNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Status Number"/>
+            </EntityType>
+            <EntityType Name="OpportunityProduct" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="ItemGuid"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ItemGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductGuid" Type="Edm.Guid" sap:label="Product GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductId" Type="Edm.String" MaxLength="54" sap:label="Product"/>
+                <Property Name="ProductCategory" Type="Edm.String" MaxLength="80" sap:label="Category Description"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Short Text"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="Unit" sap:label="Quantity"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Sales Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="NetValue" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="CurrencyCode" sap:label="Net Value"/>
+                <Property Name="TotalExpectedNetValue" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="CurrencyCode" sap:label="Exp.Total Value"/>
+                <Property Name="ProcessingMode" Type="Edm.String" MaxLength="1" sap:label="Processing mode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="Etag" Type="Edm.String" MaxLength="40" sap:label="Hash Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="OpportunitySalesTeam" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="PartnerFunctionCode"/>
+                    <PropertyRef Name="PartnerNumber"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerGuid" Type="Edm.Guid" sap:label="Partner GUID" sap:sortable="false"/>
+                <Property Name="PartnerFunctionCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Partner func."/>
+                <Property Name="PartnerFunctionText" Type="Edm.String" MaxLength="30" sap:label="Text"/>
+                <Property Name="PartnerNumber" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Partner Number"/>
+                <Property Name="PartnerName" Type="Edm.String" MaxLength="50" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description"/>
+                <Property Name="MainPartner" Type="Edm.Boolean" sap:label="Main Partner"/>
+                <Property Name="TelephoneNumber" Type="Edm.String" MaxLength="30" sap:label="Telephone no."/>
+                <Property Name="MobileNumber" Type="Edm.String" MaxLength="30" sap:label="Telephone no."/>
+                <Property Name="EMail" Type="Edm.String" MaxLength="241" sap:label="E-Mail Address"/>
+            </EntityType>
+            <EntityType Name="OpportunityCompetitor" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="PartnerGuid"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerGuid" Type="Edm.Guid" Nullable="false" sap:label="BP GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerNumber" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Partner Number"/>
+                <Property Name="PartnerName" Type="Edm.String" Nullable="false" MaxLength="50" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="OpportunityChangeDoc" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="PartnerName"/>
+                    <PropertyRef Name="UpdateDate"/>
+                    <PropertyRef Name="UpdateTime"/>
+                    <PropertyRef Name="UpdateField"/>
+                    <PropertyRef Name="OldValue"/>
+                    <PropertyRef Name="NewValue"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerName" Type="Edm.String" Nullable="false" MaxLength="50" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description"/>
+                <Property Name="UpdateDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Date"/>
+                <Property Name="UpdateTime" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time"/>
+                <Property Name="UpdateField" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Field Name"/>
+                <Property Name="UpdateFieldText" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Short text"/>
+                <Property Name="OldValue" Type="Edm.String" Nullable="false" MaxLength="254" sap:label="Old value"/>
+                <Property Name="NewValue" Type="Edm.String" Nullable="false" MaxLength="254" sap:label="New value"/>
+                <Property Name="ChangeId" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Change Ind." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangeDocDescription" Type="Edm.String" Nullable="false" MaxLength="220" sap:label="Action" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Opportunity" sap:service-schema-version="7" sap:service-version="1" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Guid"/>
+                </Key>
+                <Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Transaction ID"/>
+                <Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description"/>
+                <Property Name="StartDate" Type="Edm.DateTime" Precision="0" sap:label="Start Date"/>
+                <Property Name="ClosingDate" Type="Edm.DateTime" Precision="0" sap:label="Closing Date"/>
+                <Property Name="ExpectedSalesVolume" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="CurrencyCode" sap:label="Expected Sales Vol."/>
+                <Property Name="TotalExpectedNetValue" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unit="CurrencyCode" sap:label="Exp.Total Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="SalesStageCode" Type="Edm.String" MaxLength="3" sap:label="Sales Stage"/>
+                <Property Name="SalesStageText" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="ChanceOfSuccess" Type="Edm.String" MaxLength="3" sap:label="Chance of Success %"/>
+                <Property Name="PriorityCode" Type="Edm.String" MaxLength="1" sap:label="Priority"/>
+                <Property Name="PriorityText" Type="Edm.String" MaxLength="60" sap:label="Priority"/>
+                <Property Name="ProspectNumber" Type="Edm.String" MaxLength="10" sap:label="Prospect"/>
+                <Property Name="ProspectName" Type="Edm.String" MaxLength="80" sap:label="Sales Prospect"/>
+                <Property Name="UserStatusCode" Type="Edm.String" MaxLength="5" sap:label="Status"/>
+                <Property Name="UserStatusText" Type="Edm.String" MaxLength="40" sap:label="User status"/>
+                <Property Name="ForecastRelevance" Type="Edm.Boolean" sap:label="Rel. for Forecast"/>
+                <Property Name="MainContactId" Type="Edm.String" MaxLength="10" sap:label="Contact Pers."/>
+                <Property Name="MainContactName" Type="Edm.String" MaxLength="80" sap:label="Contact Person"/>
+                <Property Name="EmployeeResponsibleNumber" Type="Edm.String" MaxLength="10" sap:label="Employee Resp."/>
+                <Property Name="EmployeeResponsibleName" Type="Edm.String" MaxLength="80" sap:label="Person Responsible"/>
+                <Property Name="PredecessorID" Type="Edm.String" MaxLength="10" sap:label="Transaction ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeDescription" Type="Edm.String" MaxLength="20" sap:label="Short Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeDescriptionLong" Type="Edm.String" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PredecessorGUID" Type="Edm.Guid" sap:label="Object GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="14" sap:label="Sales Org. ID"/>
+                <Property Name="SalesOrganizationDescription" Type="Edm.String" MaxLength="40" sap:label="Sales Org Desc."/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" sap:label="Distribution Channel"/>
+                <Property Name="DistributionChannelDescription" Type="Edm.String" MaxLength="40" sap:label="Distr.Chan.Desc"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2" sap:label="Division"/>
+                <Property Name="DivisionDescription" Type="Edm.String" MaxLength="40" sap:label="Division Desc."/>
+                <Property Name="Etag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="searchText" Type="Edm.String" MaxLength="300" sap:label="Search Text" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="bypassMaxHit" Type="Edm.Boolean" sap:label="Boolean Variable (X=true, -=false, space=unknown)" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="IsMyOppt" Type="Edm.Boolean" sap:label="Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <NavigationProperty Name="Attachments" Relationship="CRM_OPPORTUNITY.Opportunity_Attachments" FromRole="FromRole_Opportunity_Attachments" ToRole="ToRole_Opportunity_Attachments"/>
+                <NavigationProperty Name="Statuses" Relationship="CRM_OPPORTUNITY.Opportunity_Statuses" FromRole="FromRole_Opportunity_Statuses" ToRole="ToRole_Opportunity_Statuses"/>
+                <NavigationProperty Name="Products" Relationship="CRM_OPPORTUNITY.Opportunity_Products" FromRole="FromRole_Opportunity_Products" ToRole="ToRole_Opportunity_Products"/>
+                <NavigationProperty Name="SalesTeam" Relationship="CRM_OPPORTUNITY.Opportunity_SalesTeam" FromRole="FromRole_Opportunity_SalesTeam" ToRole="ToRole_Opportunity_SalesTeam"/>
+                <NavigationProperty Name="Competitors" Relationship="CRM_OPPORTUNITY.Opportunity_Competitors" FromRole="FromRole_Opportunity_Competitors" ToRole="ToRole_Opportunity_Competitors"/>
+                <NavigationProperty Name="ChangeDocs" Relationship="CRM_OPPORTUNITY.Opportunity_ChangeDocs" FromRole="FromRole_Opportunity_ChangeDocs" ToRole="ToRole_Opportunity_ChangeDocs"/>
+                <NavigationProperty Name="Notes" Relationship="CRM_OPPORTUNITY.Opportunity_Notes" FromRole="FromRole_Opportunity_Notes" ToRole="ToRole_Opportunity_Notes"/>
+                <NavigationProperty Name="OpportunityLogSet" Relationship="CRM_OPPORTUNITY.Opportunity_Logs" FromRole="FromRole_Opportunity_Logs" ToRole="ToRole_Opportunity_Logs"/>
+                <NavigationProperty Name="DocumentHistory" Relationship="CRM_OPPORTUNITY.Opportunity_DocHistory" FromRole="FromRole_Opportunity_DocHistory" ToRole="ToRole_Opportunity_DocHistory"/>
+                <NavigationProperty Name="Account" Relationship="CRM_OPPORTUNITY.Opportunity_To_M_Account" FromRole="FromRole_Opportunity_To_M_Account" ToRole="ToRole_Opportunity_To_M_Account"/>
+                <NavigationProperty Name="MainContact" Relationship="CRM_OPPORTUNITY.Opportunity_To_0_Contact" FromRole="FromRole_Opportunity_To_0_Contact" ToRole="ToRole_Opportunity_To_0_Contact"/>
+                <NavigationProperty Name="ContactRel" Relationship="CRM_OPPORTUNITY.Opportunity_To_M_Contact" FromRole="FromRole_Opportunity_To_M_Contact" ToRole="ToRole_Opportunity_To_M_Contact"/>
+                <NavigationProperty Name="EmployeeRel" Relationship="CRM_OPPORTUNITY.Opportunity_To_M_Employee" FromRole="FromRole_Opportunity_To_M_Employee" ToRole="ToRole_Opportunity_To_M_Employee"/>
+                <NavigationProperty Name="ComplexNotes" Relationship="CRM_OPPORTUNITY.Opportunity_ComplexNotes" FromRole="FromRole_Opportunity_ComplexNotes" ToRole="ToRole_Opportunity_ComplexNotes"/>
+            </EntityType>
+            <EntityType Name="OpportunityAttachment" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="DocumentId"/>
+                    <PropertyRef Name="DocumentClass"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DocumentId" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Object ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DocumentClass" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="DocuClass" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="255" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Component name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:label="MIME type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="photo"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Url" Type="Edm.String" sap:label="URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Product" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductGuid"/>
+                </Key>
+                <Property Name="ProductGuid" Type="Edm.Guid" Nullable="false" sap:label="Product GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductId" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Product ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseCategoryId" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Category ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseCategoryText" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Category Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Sales Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="OpportunityNotes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Creator" Type="Edm.String" MaxLength="80" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Full Name"/>
+                <Property Name="Content" Type="Edm.String" sap:label="Text Lines" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+            </EntityType>
+            <EntityType Name="SalesStage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LanguageCode"/>
+                    <PropertyRef Name="SalesStageCode"/>
+                </Key>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesStageCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Sales Stage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesStageDescription" Type="Edm.String" Nullable="false" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesStageOrder" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChanceOfSuccess" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Chance of Success %" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="UserStatus" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LanguageCode"/>
+                    <PropertyRef Name="StatusProfile"/>
+                    <PropertyRef Name="UserStatusCode"/>
+                </Key>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusProfile" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Status Profile" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UserStatusCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UserStatusText" Type="Edm.String" Nullable="false" MaxLength="30" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BusinessTransaction" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Bus. Transaction" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InitialStatus" Type="Edm.Boolean" sap:label="Initial status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ProcessType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LanguageCode"/>
+                    <PropertyRef Name="ProcessTypeCode"/>
+                </Key>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeCode" Type="Edm.String" Nullable="false" MaxLength="4" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Priority" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LanguageCode"/>
+                    <PropertyRef Name="PriorityCode"/>
+                </Key>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriorityCode" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriorityText" Type="Edm.String" Nullable="false" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Currency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LanguageCode"/>
+                    <PropertyRef Name="CurrencyKey"/>
+                </Key>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrencyKey" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="CurrencyText" Type="Edm.String" Nullable="false" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Long Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="OpportunityLog" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MessageClass"/>
+                    <PropertyRef Name="MessageNo"/>
+                </Key>
+                <Property Name="MessageClass" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Message Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageNo" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Message number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogMessage" Type="Edm.String" sap:label="Text Lines" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogType" Type="Edm.String" MaxLength="1" sap:label="Message Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="DocumentHistory" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Guid"/>
+                </Key>
+                <Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TransactionId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Transaction ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TransactionType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TransTypeDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Created At" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ObjectType" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Trans. Cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Relationship" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="PartnerFunction" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PartnerFunctionCode"/>
+                    <PropertyRef Name="TransactionType"/>
+                </Key>
+                <Property Name="PartnerDetermineProcedure" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="PartnerDetProc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Partner Function" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangeableFlag" Type="Edm.Boolean" Nullable="false" sap:label="Changeable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountLow" Type="Edm.Int16" Nullable="false" sap:label="No. of occurrences" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountHigh" Type="Edm.Int16" Nullable="false" sap:label="No. of occurrences" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionName" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Text (length 35)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionCategory" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Function category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RelationshipCategory" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Relatshp Cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TransactionType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="mainPartnerFunction" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="RetrieveMaxHit" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaxHitNumber"/>
+                </Key>
+                <Property Name="MaxHitNumber" Type="Edm.Int32" Nullable="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActionSuccessful" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="X Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SalesArea" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesOrganizationId"/>
+                    <PropertyRef Name="DistrubutionChannelId"/>
+                    <PropertyRef Name="DivisionId"/>
+                </Key>
+                <Property Name="SalesOrganizationId" Type="Edm.String" Nullable="false" MaxLength="14" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Sales Org. ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganizationText" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Sales Org Desc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistrubutionChannelId" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distribution Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistrubutionChannelText" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Distr.Chan.Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DivisionId" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DivisionText" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Division Desc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProspectNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Prospect" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DummySalesareaIncl" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Dummy" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="paramPrecedingDocumentID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Character field, length 32" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="Account" sap:service-schema-version="1" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="accountID"/>
+                </Key>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="name1" Type="Edm.String" MaxLength="40" sap:label="Name 1"/>
+                <Property Name="name2" Type="Edm.String" MaxLength="40" sap:label="Name 2"/>
+                <Property Name="fullName" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="searchText" Type="Edm.String" MaxLength="200" sap:label="Search Text"/>
+                <Property Name="category" Type="Edm.String" MaxLength="1" sap:label="Partner Cat."/>
+                <Property Name="titleID" Type="Edm.String" MaxLength="4" sap:label="Title" sap:filterable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="30" sap:label="Title" sap:filterable="false"/>
+                <Property Name="academicTitleID" Type="Edm.String" MaxLength="4" sap:label="Academic Title" sap:filterable="false"/>
+                <Property Name="academicTitle" Type="Edm.String" MaxLength="40" sap:label="Ac.title descr." sap:filterable="false"/>
+                <Property Name="birthDate" Type="Edm.DateTime" Precision="0" sap:label="Date of Birth" sap:filterable="false"/>
+                <Property Name="isMyAccount" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+                <NavigationProperty Name="MainContact" Relationship="CRM_OPPORTUNITY.Account_To_0_Contact" FromRole="FromRole_Account_To_0_Contact" ToRole="ToRole_Account_To_0_Contact"/>
+                <NavigationProperty Name="Contacts" Relationship="CRM_OPPORTUNITY.Account_To_M_Contact" FromRole="FromRole_Account_To_M_Contact" ToRole="ToRole_Account_To_M_Contact"/>
+                <NavigationProperty Name="Classification" Relationship="CRM_OPPORTUNITY.Account_To_0_Classification" FromRole="FromRole_Account_To_0_Classification" ToRole="ToRole_Account_To_0_Classification"/>
+                <NavigationProperty Name="Logo" Relationship="CRM_OPPORTUNITY.Account_To_0_Attachment" FromRole="FromRole_Account_To_0_Attachment" ToRole="ToRole_Account_To_0_Attachment"/>
+                <NavigationProperty Name="MainAddress" Relationship="CRM_OPPORTUNITY.Account_To_0_Address" FromRole="FromRole_Account_To_0_Address" ToRole="ToRole_Account_To_0_Address"/>
+                <NavigationProperty Name="Addresses" Relationship="CRM_OPPORTUNITY.Account_To_M_Address" FromRole="FromRole_Account_To_M_Address" ToRole="ToRole_Account_To_M_Address"/>
+                <NavigationProperty Name="MarketingAttributes" Relationship="CRM_OPPORTUNITY.Account_To_M_MarketingAttribute" FromRole="FromRole_Account_To_M_MarketingAttribute" ToRole="ToRole_Account_To_M_MarketingAttribute"/>
+                <NavigationProperty Name="Opportunities" Relationship="CRM_OPPORTUNITY.Account_To_M_Opportunity" FromRole="FromRole_Account_To_M_Opportunity" ToRole="ToRole_Account_To_M_Opportunity"/>
+                <NavigationProperty Name="Leads" Relationship="CRM_OPPORTUNITY.Account_To_M_Lead" FromRole="FromRole_Account_To_M_Lead" ToRole="ToRole_Account_To_M_Lead"/>
+                <NavigationProperty Name="Attachments" Relationship="CRM_OPPORTUNITY.Account_To_M_Attachment" FromRole="FromRole_Account_To_M_Attachment" ToRole="ToRole_Account_To_M_Attachment"/>
+                <NavigationProperty Name="Notes" Relationship="CRM_OPPORTUNITY.Account_To_M_Note" FromRole="FromRole_Account_To_M_Note" ToRole="ToRole_Account_To_M_Note"/>
+                <NavigationProperty Name="EmployeeResponsible" Relationship="CRM_OPPORTUNITY.Account_To_0_Employee" FromRole="FromRole_Account_To_0_Employee" ToRole="ToRole_Account_To_0_Employee"/>
+                <NavigationProperty Name="EmployeeResponsibles" Relationship="CRM_OPPORTUNITY.Account_To_M_Employee" FromRole="FromRole_Account_To_M_Employee" ToRole="ToRole_Account_To_M_Employee"/>
+                <NavigationProperty Name="Appointments" Relationship="CRM_OPPORTUNITY.Account_To_M_Appointment" FromRole="FromRole_Account_To_M_Appointment" ToRole="ToRole_Account_To_M_Appointment"/>
+                <NavigationProperty Name="Tasks" Relationship="CRM_OPPORTUNITY.Account_To_M_Task" FromRole="FromRole_Account_To_M_Task" ToRole="ToRole_Account_To_M_Task"/>
+                <NavigationProperty Name="Relationships" Relationship="CRM_OPPORTUNITY.Account_To_M_Relationship" FromRole="FromRole_Account_To_M_Relationship" ToRole="ToRole_Account_To_M_Relationship"/>
+                <NavigationProperty Name="EmployeeResponsibleRel" Relationship="CRM_OPPORTUNITY.Account_To_0_Relationship" FromRole="FromRole_Account_To_0_Relationship" ToRole="ToRole_Account_To_0_Relationship"/>
+                <NavigationProperty Name="ERPCustomer" Relationship="CRM_OPPORTUNITY.Account_To_0_Customer" FromRole="FromRole_Account_To_0_Customer" ToRole="ToRole_Account_To_0_Customer"/>
+                <NavigationProperty Name="LifeCycle" Relationship="CRM_OPPORTUNITY.Account_To_0_Role" FromRole="FromRole_Account_To_0_Role" ToRole="ToRole_Account_To_0_Role"/>
+            </EntityType>
+            <EntityType Name="Contact" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="contactID"/>
+                    <PropertyRef Name="accountID"/>
+                </Key>
+                <Property Name="contactID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="40" sap:label="First Name"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="40" sap:label="Last Name"/>
+                <Property Name="fullName" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="searchText" Type="Edm.String" MaxLength="200" sap:label="Search Text"/>
+                <Property Name="birthDate" Type="Edm.DateTime" Precision="0" sap:label="Date of Birth"/>
+                <Property Name="company" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="function" Type="Edm.String" MaxLength="40" sap:label="Function"/>
+                <Property Name="department" Type="Edm.String" MaxLength="40" sap:label="Company dept."/>
+                <Property Name="titleID" Type="Edm.String" MaxLength="4" sap:label="Title"/>
+                <Property Name="title" Type="Edm.String" MaxLength="30" sap:label="Title"/>
+                <Property Name="academicTitleID" Type="Edm.String" MaxLength="4" sap:label="Academic Title"/>
+                <Property Name="academicTitle" Type="Edm.String" MaxLength="40" sap:label="Ac.title descr."/>
+                <Property Name="isMyContact" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="isMainContact" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="createdAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+                <NavigationProperty Name="WorkAddress" Relationship="CRM_OPPORTUNITY.Contact_To_0_Address" FromRole="FromRole_Contact_To_0_Address" ToRole="ToRole_Contact_To_0_Address"/>
+                <NavigationProperty Name="MainAddress" Relationship="CRM_OPPORTUNITY.Contact_To_0_Address" FromRole="FromRole_Contact_To_0_Address" ToRole="ToRole_Contact_To_0_Address"/>
+                <NavigationProperty Name="Photo" Relationship="CRM_OPPORTUNITY.Contact_To_0_Attachment" FromRole="FromRole_Contact_To_0_Attachment" ToRole="ToRole_Contact_To_0_Attachment"/>
+                <NavigationProperty Name="Notes" Relationship="CRM_OPPORTUNITY.Contact_To_M_Note" FromRole="FromRole_Contact_To_M_Note" ToRole="ToRole_Contact_To_M_Note"/>
+                <NavigationProperty Name="Attachments" Relationship="CRM_OPPORTUNITY.Contact_To_M_Attachment" FromRole="FromRole_Contact_To_M_Attachment" ToRole="ToRole_Contact_To_M_Attachment"/>
+                <NavigationProperty Name="Account" Relationship="CRM_OPPORTUNITY.Account_To_M_Contact" FromRole="ToRole_Account_To_M_Contact" ToRole="FromRole_Account_To_M_Contact"/>
+                <NavigationProperty Name="MarketingAttributes" Relationship="CRM_OPPORTUNITY.Contact_To_M_MarketingAttribute" FromRole="FromRole_Contact_To_M_MarketingAttribute" ToRole="ToRole_Contact_To_M_MarketingAttribute"/>
+            </EntityType>
+            <EntityType Name="Classification" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="accountID"/>
+                </Key>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="ratingID" Type="Edm.String" MaxLength="2" sap:label="Classification"/>
+                <Property Name="ratingText" Type="Edm.String" MaxLength="20" sap:label="Description"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+            </EntityType>
+            <EntityType Name="Attachment" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="documentID"/>
+                    <PropertyRef Name="documentClass"/>
+                    <PropertyRef Name="objectType"/>
+                    <PropertyRef Name="objectID"/>
+                </Key>
+                <Property Name="documentID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Object ID"/>
+                <Property Name="documentClass" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="DocuClass"/>
+                <Property Name="objectType" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Object Type"/>
+                <Property Name="objectID" Type="Edm.String" Nullable="false" MaxLength="70" sap:label="Instance ID"/>
+                <Property Name="businessPartnerID" Type="Edm.String" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="name" Type="Edm.String" MaxLength="40" sap:label="Name"/>
+                <Property Name="description" Type="Edm.String" MaxLength="64" sap:label="Description"/>
+                <Property Name="createdAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="40" sap:label="Empl./appl.name"/>
+                <Property Name="fileSize" Type="Edm.String" MaxLength="12" sap:label="File Size"/>
+                <Property Name="mimeType" Type="Edm.String" MaxLength="128" sap:label="MIME type"/>
+                <Property Name="URL" Type="Edm.String" sap:label="URL"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+                <Property Name="belongsToMyObjects" Type="Edm.Boolean" sap:label="TRUE"/>
+            </EntityType>
+            <EntityType Name="Address" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="addressNumber"/>
+                    <PropertyRef Name="accountID"/>
+                    <PropertyRef Name="contactID"/>
+                </Key>
+                <Property Name="addressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Address number"/>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="contactID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="mobilePhone" Type="Edm.String" MaxLength="30" sap:label="Telephone no."/>
+                <Property Name="phone" Type="Edm.String" MaxLength="30" sap:label="Telephone no."/>
+                <Property Name="email" Type="Edm.String" MaxLength="241" sap:label="E-Mail Address"/>
+                <Property Name="website" Type="Edm.String" MaxLength="132" sap:label="URI"/>
+                <Property Name="address" Type="Edm.String" sap:label="Text Lines"/>
+                <Property Name="street" Type="Edm.String" MaxLength="60" sap:label="Street"/>
+                <Property Name="houseNumber" Type="Edm.String" MaxLength="10" sap:label="House Number"/>
+                <Property Name="postcode" Type="Edm.String" MaxLength="10" sap:label="Postal Code"/>
+                <Property Name="city" Type="Edm.String" MaxLength="40" sap:label="City"/>
+                <Property Name="countryID" Type="Edm.String" MaxLength="3" sap:label="Country"/>
+                <Property Name="country" Type="Edm.String" MaxLength="15" sap:label="Name"/>
+                <Property Name="regionID" Type="Edm.String" MaxLength="3" sap:label="Region"/>
+                <Property Name="region" Type="Edm.String" MaxLength="20" sap:label="Description"/>
+                <Property Name="department" Type="Edm.String" MaxLength="40" sap:label="Department"/>
+                <Property Name="function" Type="Edm.String" MaxLength="40" sap:label="Function"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+            </EntityType>
+            <EntityType Name="MarketingAttribute" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="accountID"/>
+                    <PropertyRef Name="attributeSetID"/>
+                    <PropertyRef Name="attributeID"/>
+                    <PropertyRef Name="valueID"/>
+                </Key>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="attributeSetID" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Attribute Set"/>
+                <Property Name="attributeSet" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="attributeID" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Attribute"/>
+                <Property Name="attribute" Type="Edm.String" MaxLength="90" sap:label="Attr. Description"/>
+                <Property Name="attributeDatatype" Type="Edm.String" MaxLength="18" sap:label="Format"/>
+                <Property Name="valueID" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Char. Value"/>
+                <Property Name="value" Type="Edm.String" MaxLength="90" sap:label="Attr. Description"/>
+                <Property Name="dateValue" Type="Edm.DateTime" Precision="0" sap:label="Date"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="hasChecktable" Type="Edm.Boolean" sap:label="Flag"/>
+                <Property Name="valueRestricted" Type="Edm.Boolean" sap:label="Flag"/>
+                <Property Name="attributeLength" Type="Edm.String" MaxLength="2" sap:label="Number of characters"/>
+                <Property Name="decimalPlaces" Type="Edm.String" MaxLength="2" sap:label="Decimal places"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" sap:label="Hash Value"/>
+            </EntityType>
+            <EntityType Name="Lead" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Guid"/>
+                </Key>
+                <Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID"/>
+                <Property Name="objectId" Type="Edm.String" MaxLength="10" sap:label="Transaction ID"/>
+                <Property Name="description" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="validFrom" Type="Edm.DateTime" Precision="0" sap:label="Start Date"/>
+                <Property Name="validTo" Type="Edm.DateTime" Precision="0" sap:label="End Date"/>
+                <Property Name="qualificationLevel" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="status" Type="Edm.String" MaxLength="5" sap:label="Status"/>
+                <Property Name="statusText" Type="Edm.String" MaxLength="30" sap:label="Status"/>
+                <Property Name="importanceText" Type="Edm.String" MaxLength="60" sap:label="Priority"/>
+                <NavigationProperty Name="EmployeeResponsible" Relationship="CRM_OPPORTUNITY.Lead_To_0_Employee" FromRole="FromRole_Lead_To_0_Employee" ToRole="ToRole_Lead_To_0_Employee"/>
+            </EntityType>
+            <EntityType Name="Employee" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="employeeID"/>
+                </Key>
+                <Property Name="employeeID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="40" sap:label="First Name"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="40" sap:label="Last Name"/>
+                <Property Name="titleID" Type="Edm.String" MaxLength="4" sap:label="Title"/>
+                <Property Name="title" Type="Edm.String" MaxLength="30" sap:label="Title"/>
+                <Property Name="academicTitleID" Type="Edm.String" MaxLength="4" sap:label="Academic Title"/>
+                <Property Name="academicTitle" Type="Edm.String" MaxLength="20" sap:label="Academic Title"/>
+                <Property Name="fullName" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="position" Type="Edm.String" MaxLength="40" sap:label="Name"/>
+                <Property Name="isDefaultEmployee" Type="Edm.Boolean" sap:label="TRUE"/>
+                <NavigationProperty Name="WorkAddress" Relationship="CRM_OPPORTUNITY.Employee_To_0_Address" FromRole="FromRole_Employee_To_0_Address" ToRole="ToRole_Employee_To_0_Address"/>
+                <NavigationProperty Name="Company" Relationship="CRM_OPPORTUNITY.Employee_To_0_Account" FromRole="FromRole_Employee_To_0_Account" ToRole="ToRole_Employee_To_0_Account"/>
+                <NavigationProperty Name="Photo" Relationship="CRM_OPPORTUNITY.Employee_To_0_Attachment" FromRole="FromRole_Employee_To_0_Attachment" ToRole="ToRole_Employee_To_0_Attachment"/>
+            </EntityType>
+            <EntityType Name="Note" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="tdname"/>
+                    <PropertyRef Name="tdid"/>
+                    <PropertyRef Name="tdspras"/>
+                </Key>
+                <Property Name="tdname" Type="Edm.String" Nullable="false" MaxLength="70" sap:label="Text Name"/>
+                <Property Name="tdid" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Text ID"/>
+                <Property Name="tdspras" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language"/>
+                <Property Name="content" Type="Edm.String" sap:label="Text Lines"/>
+                <Property Name="createdAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="creator" Type="Edm.String" MaxLength="50" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="Appointment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Guid"/>
+                </Key>
+                <Property Name="Note" Type="Edm.String" sap:label="Text Lines" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Responsible" Type="Edm.String" MaxLength="10" sap:label="Employee Resp." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ResponsibleTxt" Type="Edm.String" MaxLength="80" sap:label="Person Responsible" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PrivatFlag" Type="Edm.Boolean" sap:label="Private" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Priority" Type="Edm.String" MaxLength="1" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriorityTxt" Type="Edm.String" MaxLength="60" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AllDay" Type="Edm.Boolean" sap:label="All day event" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="5" sap:label="Status" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusTxt" Type="Edm.String" MaxLength="40" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Account" Type="Edm.String" MaxLength="10" sap:label="ActivityPartner" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AccountTxt" Type="Edm.String" MaxLength="80" sap:label="Activity Partner" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contact" Type="Edm.String" MaxLength="10" sap:label="Contact Pers." sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContactTxt" Type="Edm.String" MaxLength="80" sap:label="Contact Person" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangedAt" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ResponsArea" Type="Edm.String" MaxLength="2" sap:label="X" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" MaxLength="100" sap:label="Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromOffset" Type="Edm.Int16" sap:label="Offset in Minutes" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ToOffset" Type="Edm.Int16" sap:label="Offset in Minutes" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FromDate" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="ToDate" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="HasAttachment" Type="Edm.Boolean" sap:label="Data element to simulate bool: 'X' is true and ' ' is false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MyOwn" Type="Edm.Boolean" sap:label="Data element to simulate bool: 'X' is true and ' ' is false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContactAccount" Type="Edm.String" MaxLength="10" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Task" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Guid"/>
+                </Key>
+                <Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID"/>
+                <Property Name="objectId" Type="Edm.String" MaxLength="10" sap:label="Transaction ID"/>
+                <Property Name="description" Type="Edm.String" sap:label="Description"/>
+                <Property Name="note" Type="Edm.String" sap:label="Note"/>
+                <Property Name="priority" Type="Edm.String" MaxLength="1" sap:label="Priority"/>
+                <Property Name="privateFlag" Type="Edm.Boolean" sap:label="Private"/>
+                <Property Name="completed" Type="Edm.Boolean" sap:label="Flag"/>
+                <Property Name="dueDate" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="accountID" Type="Edm.String" MaxLength="10" sap:label="ActivityPartner"/>
+                <Property Name="contactName" Type="Edm.String" MaxLength="50" sap:label="Description"/>
+                <Property Name="searchText" Type="Edm.String" MaxLength="300" sap:label="Search Text"/>
+            </EntityType>
+            <EntityType Name="Relationship" sap:service-schema-version="2" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="accountID"/>
+                    <PropertyRef Name="account2ID"/>
+                    <PropertyRef Name="relationshipCategory"/>
+                </Key>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="account2ID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="relationshipCategory" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Relationsh.Cat."/>
+                <Property Name="relationshipCategoryText" Type="Edm.String" MaxLength="50" sap:label="Description"/>
+                <Property Name="relationshipCategoryTextReversed" Type="Edm.String" MaxLength="50" sap:label="Description"/>
+                <Property Name="accountFullName" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="account2FullName" Type="Edm.String" MaxLength="80" sap:label="BP Description"/>
+                <Property Name="main" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+            </EntityType>
+            <EntityType Name="Customer" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="customerNumber"/>
+                </Key>
+                <Property Name="customerNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer"/>
+            </EntityType>
+            <EntityType Name="Role" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="accountID"/>
+                    <PropertyRef Name="roleID"/>
+                </Key>
+                <Property Name="accountID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner"/>
+                <Property Name="roleID" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="BP Role"/>
+                <Property Name="role" Type="Edm.String" MaxLength="25" sap:label="Title"/>
+                <Property Name="eTag" Type="Edm.String" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value"/>
+            </EntityType>
+            <EntityType Name="REQUESTEDPARTNER" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PartnerNo"/>
+                </Key>
+                <Property Name="PartnerNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="First Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Empl./appl.name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunction" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Partner Function" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerCategory" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Function category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="partnerFunctionName" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="paramPrecedingDocumentID" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="paramPartnerNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="paramPartnerFunction" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Partner Function" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="mainPartner" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Main Partner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="OpportunityComplexNotes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HeaderGuid"/>
+                    <PropertyRef Name="TextLanguageID"/>
+                    <PropertyRef Name="TextObjectID"/>
+                </Key>
+                <Property Name="HeaderGuid" Type="Edm.Guid" Nullable="false" sap:label="Object GUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Creator" Type="Edm.String" Nullable="false" MaxLength="80" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Full Name" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Content" Type="Edm.String" Nullable="false" sap:label="Text Lines" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextLanguageID" Type="Edm.String" Nullable="false" MaxLength="2" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Lang. (ISO)" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextObjectID" Type="Edm.String" Nullable="false" MaxLength="4" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Text Type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Etag" Type="Edm.String" Nullable="false" MaxLength="40" ConcurrencyMode="Fixed" sap:label="Hash Value" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="TextCustomizing" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProcessType"/>
+                    <PropertyRef Name="TextObjectID"/>
+                </Key>
+                <Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextObjectID" Type="Edm.String" Nullable="false" MaxLength="4" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Text Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextObjectDescription" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextEditType" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Changes" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DefaultNoteType" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Boolean Variable (X=true, -=false, space=unknown)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ObjectType" Type="Edm.String" MaxLength="10" sap:label="Trans. Category" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="TextLanguage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TextLanguageID"/>
+                </Key>
+                <Property Name="TextLanguageID" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DefaultLanguage" Type="Edm.Boolean" Nullable="false" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Boolean Variable (X=true, -=false, space=unknown)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextLanguageDescription" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <ComplexType Name="AppointProcTypeList">
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PrivateFlag" Type="Edm.Boolean" sap:label="Private" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="TaskProcTypeList">
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PrivateFlag" Type="Edm.Boolean" sap:label="Private" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="OpptPartnerFctTypeList">
+                <Property Name="PartnerDetermineProcedure" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="PartnerDetProc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Partner Function" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangeableFlag" Type="Edm.Boolean" Nullable="false" sap:label="Changeable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountLow" Type="Edm.Int16" Nullable="false" sap:label="No. of occurrences" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountHigh" Type="Edm.Int16" Nullable="false" sap:label="No. of occurrences" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionName" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Text (length 35)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerFunctionCategory" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Function category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RelationshipCategory" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Relatshp Cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="OpportunityProcTypeList">
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang. (ISO)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessTypeCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="MaxHit">
+                <Property Name="MaxHitNumber" Type="Edm.Int16" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActionResult" Type="Edm.String" MaxLength="1" sap:label="X Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="ActionResult">
+                <Property Name="ActionSuccessful" Type="Edm.String" MaxLength="1" sap:label="X Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" sap:label="String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="Employee_To_0_Address" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="0..1" Role="FromRole_Employee_To_0_Address"/>
+                <End Type="CRM_OPPORTUNITY.Address" Multiplicity="0..1" Role="ToRole_Employee_To_0_Address"/>
+            </Association>
+            <Association Name="Employee_To_0_Account" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="0..1" Role="FromRole_Employee_To_0_Account"/>
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="ToRole_Employee_To_0_Account"/>
+            </Association>
+            <Association Name="Employee_To_0_Attachment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="0..1" Role="FromRole_Employee_To_0_Attachment"/>
+                <End Type="CRM_OPPORTUNITY.Attachment" Multiplicity="0..1" Role="ToRole_Employee_To_0_Attachment"/>
+            </Association>
+            <Association Name="Lead_To_0_Employee" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Lead" Multiplicity="*" Role="FromRole_Lead_To_0_Employee"/>
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="0..1" Role="ToRole_Lead_To_0_Employee"/>
+            </Association>
+            <Association Name="Opportunity_Statuses" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Statuses"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityStatus" Multiplicity="*" Role="ToRole_Opportunity_Statuses"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Statuses">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Statuses">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_Products" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Products"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityProduct" Multiplicity="*" Role="ToRole_Opportunity_Products"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Products">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Products">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_SalesTeam" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_SalesTeam"/>
+                <End Type="CRM_OPPORTUNITY.OpportunitySalesTeam" Multiplicity="*" Role="ToRole_Opportunity_SalesTeam"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_SalesTeam">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_SalesTeam">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_Competitors" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Competitors"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityCompetitor" Multiplicity="*" Role="ToRole_Opportunity_Competitors"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Competitors">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Competitors">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_ChangeDocs" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_ChangeDocs"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityChangeDoc" Multiplicity="*" Role="ToRole_Opportunity_ChangeDocs"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_ChangeDocs">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_ChangeDocs">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_Notes" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Notes"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityNotes" Multiplicity="*" Role="ToRole_Opportunity_Notes"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Notes">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Notes">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_Logs" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Logs"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityLog" Multiplicity="*" Role="ToRole_Opportunity_Logs"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Logs">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Logs">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_DocHistory" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_DocHistory"/>
+                <End Type="CRM_OPPORTUNITY.DocumentHistory" Multiplicity="*" Role="ToRole_Opportunity_DocHistory"/>
+            </Association>
+            <Association Name="Opportunity_To_M_Account" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="0..1" Role="FromRole_Opportunity_To_M_Account"/>
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="*" Role="ToRole_Opportunity_To_M_Account"/>
+            </Association>
+            <Association Name="Opportunity_To_0_Contact" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_To_0_Contact"/>
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="ToRole_Opportunity_To_0_Contact"/>
+            </Association>
+            <Association Name="Opportunity_To_M_Contact" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_To_M_Contact"/>
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="*" Role="ToRole_Opportunity_To_M_Contact"/>
+            </Association>
+            <Association Name="Opportunity_To_M_Employee" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="0..1" Role="FromRole_Opportunity_To_M_Employee"/>
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="*" Role="ToRole_Opportunity_To_M_Employee"/>
+            </Association>
+            <Association Name="Opportunity_ComplexNotes" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_ComplexNotes"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityComplexNotes" Multiplicity="*" Role="ToRole_Opportunity_ComplexNotes"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_ComplexNotes">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_ComplexNotes">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Opportunity_Attachments" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="1" Role="FromRole_Opportunity_Attachments"/>
+                <End Type="CRM_OPPORTUNITY.OpportunityAttachment" Multiplicity="*" Role="ToRole_Opportunity_Attachments"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Opportunity_Attachments">
+                        <PropertyRef Name="Guid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Opportunity_Attachments">
+                        <PropertyRef Name="HeaderGuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Account_To_0_Contact" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="1" Role="FromRole_Account_To_0_Contact"/>
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="ToRole_Account_To_0_Contact"/>
+            </Association>
+            <Association Name="Account_To_M_Contact" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Contact"/>
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="*" Role="ToRole_Account_To_M_Contact"/>
+            </Association>
+            <Association Name="Account_To_0_Classification" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_0_Classification"/>
+                <End Type="CRM_OPPORTUNITY.Classification" Multiplicity="0..1" Role="ToRole_Account_To_0_Classification"/>
+            </Association>
+            <Association Name="Account_To_0_Attachment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_0_Attachment"/>
+                <End Type="CRM_OPPORTUNITY.Attachment" Multiplicity="0..1" Role="ToRole_Account_To_0_Attachment"/>
+            </Association>
+            <Association Name="Account_To_0_Address" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_0_Address"/>
+                <End Type="CRM_OPPORTUNITY.Address" Multiplicity="0..1" Role="ToRole_Account_To_0_Address"/>
+            </Association>
+            <Association Name="Account_To_M_Address" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Address"/>
+                <End Type="CRM_OPPORTUNITY.Address" Multiplicity="*" Role="ToRole_Account_To_M_Address"/>
+            </Association>
+            <Association Name="Account_To_M_MarketingAttribute" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_MarketingAttribute"/>
+                <End Type="CRM_OPPORTUNITY.MarketingAttribute" Multiplicity="*" Role="ToRole_Account_To_M_MarketingAttribute"/>
+            </Association>
+            <Association Name="Account_To_M_Opportunity" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Opportunity"/>
+                <End Type="CRM_OPPORTUNITY.Opportunity" Multiplicity="*" Role="ToRole_Account_To_M_Opportunity"/>
+            </Association>
+            <Association Name="Account_To_M_Lead" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Lead"/>
+                <End Type="CRM_OPPORTUNITY.Lead" Multiplicity="*" Role="ToRole_Account_To_M_Lead"/>
+            </Association>
+            <Association Name="Account_To_M_Attachment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Attachment"/>
+                <End Type="CRM_OPPORTUNITY.Attachment" Multiplicity="*" Role="ToRole_Account_To_M_Attachment"/>
+            </Association>
+            <Association Name="Account_To_M_Note" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Note"/>
+                <End Type="CRM_OPPORTUNITY.Note" Multiplicity="*" Role="ToRole_Account_To_M_Note"/>
+            </Association>
+            <Association Name="Account_To_0_Employee" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="*" Role="FromRole_Account_To_0_Employee"/>
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="0..1" Role="ToRole_Account_To_0_Employee"/>
+            </Association>
+            <Association Name="Account_To_M_Employee" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="*" Role="FromRole_Account_To_M_Employee"/>
+                <End Type="CRM_OPPORTUNITY.Employee" Multiplicity="*" Role="ToRole_Account_To_M_Employee"/>
+            </Association>
+            <Association Name="Account_To_M_Appointment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Appointment"/>
+                <End Type="CRM_OPPORTUNITY.Appointment" Multiplicity="*" Role="ToRole_Account_To_M_Appointment"/>
+            </Association>
+            <Association Name="Account_To_M_Task" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_M_Task"/>
+                <End Type="CRM_OPPORTUNITY.Task" Multiplicity="*" Role="ToRole_Account_To_M_Task"/>
+            </Association>
+            <Association Name="Account_To_M_Relationship" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="*" Role="FromRole_Account_To_M_Relationship"/>
+                <End Type="CRM_OPPORTUNITY.Relationship" Multiplicity="*" Role="ToRole_Account_To_M_Relationship"/>
+            </Association>
+            <Association Name="Account_To_0_Relationship" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="*" Role="FromRole_Account_To_0_Relationship"/>
+                <End Type="CRM_OPPORTUNITY.Relationship" Multiplicity="0..1" Role="ToRole_Account_To_0_Relationship"/>
+            </Association>
+            <Association Name="Account_To_0_Customer" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_0_Customer"/>
+                <End Type="CRM_OPPORTUNITY.Customer" Multiplicity="0..1" Role="ToRole_Account_To_0_Customer"/>
+            </Association>
+            <Association Name="Account_To_0_Role" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Account" Multiplicity="0..1" Role="FromRole_Account_To_0_Role"/>
+                <End Type="CRM_OPPORTUNITY.Role" Multiplicity="0..1" Role="ToRole_Account_To_0_Role"/>
+            </Association>
+            <Association Name="Contact_To_0_Address" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="FromRole_Contact_To_0_Address"/>
+                <End Type="CRM_OPPORTUNITY.Address" Multiplicity="0..1" Role="ToRole_Contact_To_0_Address"/>
+            </Association>
+            <Association Name="Contact_To_0_Attachment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="FromRole_Contact_To_0_Attachment"/>
+                <End Type="CRM_OPPORTUNITY.Attachment" Multiplicity="0..1" Role="ToRole_Contact_To_0_Attachment"/>
+            </Association>
+            <Association Name="Contact_To_M_Note" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="FromRole_Contact_To_M_Note"/>
+                <End Type="CRM_OPPORTUNITY.Note" Multiplicity="*" Role="ToRole_Contact_To_M_Note"/>
+            </Association>
+            <Association Name="Contact_To_M_Attachment" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="FromRole_Contact_To_M_Attachment"/>
+                <End Type="CRM_OPPORTUNITY.Attachment" Multiplicity="*" Role="ToRole_Contact_To_M_Attachment"/>
+            </Association>
+            <Association Name="Contact_To_M_MarketingAttribute" sap:content-version="1">
+                <End Type="CRM_OPPORTUNITY.Contact" Multiplicity="0..1" Role="FromRole_Contact_To_M_MarketingAttribute"/>
+                <End Type="CRM_OPPORTUNITY.MarketingAttribute" Multiplicity="*" Role="ToRole_Contact_To_M_MarketingAttribute"/>
+            </Association>
+            <EntityContainer Name="CRM_OPPORTUNITY_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="AccountCollection" EntityType="CRM_OPPORTUNITY.Account" sap:content-version="1"/>
+                <EntitySet Name="ContactCollection" EntityType="CRM_OPPORTUNITY.Contact" sap:content-version="1"/>
+                <EntitySet Name="ClassificationCollection" EntityType="CRM_OPPORTUNITY.Classification" sap:content-version="1"/>
+                <EntitySet Name="AttachmentCollection" EntityType="CRM_OPPORTUNITY.Attachment" sap:content-version="1"/>
+                <EntitySet Name="AddressCollection" EntityType="CRM_OPPORTUNITY.Address" sap:content-version="1"/>
+                <EntitySet Name="MarketingAttributeCollection" EntityType="CRM_OPPORTUNITY.MarketingAttribute" sap:content-version="1"/>
+                <EntitySet Name="LeadCollection" EntityType="CRM_OPPORTUNITY.Lead" sap:content-version="1"/>
+                <EntitySet Name="EmployeeCollection" EntityType="CRM_OPPORTUNITY.Employee" sap:content-version="1"/>
+                <EntitySet Name="NoteCollection" EntityType="CRM_OPPORTUNITY.Note" sap:content-version="1"/>
+                <EntitySet Name="AppointmentCollection" EntityType="CRM_OPPORTUNITY.Appointment" sap:content-version="1"/>
+                <EntitySet Name="TaskCollection" EntityType="CRM_OPPORTUNITY.Task" sap:content-version="1"/>
+                <EntitySet Name="RelationshipCollection" EntityType="CRM_OPPORTUNITY.Relationship" sap:content-version="1"/>
+                <EntitySet Name="CustomerCollection" EntityType="CRM_OPPORTUNITY.Customer" sap:content-version="1"/>
+                <EntitySet Name="RoleCollection" EntityType="CRM_OPPORTUNITY.Role" sap:content-version="1"/>
+                <EntitySet Name="RequestedPartners" EntityType="CRM_OPPORTUNITY.REQUESTEDPARTNER" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityComplexNotesSet" EntityType="CRM_OPPORTUNITY.OpportunityComplexNotes" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="TextCustomizingSet" EntityType="CRM_OPPORTUNITY.TextCustomizing" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="TextLanguageSet" EntityType="CRM_OPPORTUNITY.TextLanguage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityStatuses" EntityType="CRM_OPPORTUNITY.OpportunityStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityProducts" EntityType="CRM_OPPORTUNITY.OpportunityProduct" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunitySalesTeamSet" EntityType="CRM_OPPORTUNITY.OpportunitySalesTeam" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityCompetitors" EntityType="CRM_OPPORTUNITY.OpportunityCompetitor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityChangeDocs" EntityType="CRM_OPPORTUNITY.OpportunityChangeDoc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Opportunities" EntityType="CRM_OPPORTUNITY.Opportunity" sap:deletable="false" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityAttachments" EntityType="CRM_OPPORTUNITY.OpportunityAttachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Products" EntityType="CRM_OPPORTUNITY.Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityNotesSet" EntityType="CRM_OPPORTUNITY.OpportunityNotes" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SalesStages" EntityType="CRM_OPPORTUNITY.SalesStage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="UserStatuses" EntityType="CRM_OPPORTUNITY.UserStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ProcessTypes" EntityType="CRM_OPPORTUNITY.ProcessType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Priorities" EntityType="CRM_OPPORTUNITY.Priority" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Currencies" EntityType="CRM_OPPORTUNITY.Currency" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="OpportunityLogs" EntityType="CRM_OPPORTUNITY.OpportunityLog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="DocumentHistorySet" EntityType="CRM_OPPORTUNITY.DocumentHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="PartnerFunctions" EntityType="CRM_OPPORTUNITY.PartnerFunction" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="RetrieveMaxHitSet" EntityType="CRM_OPPORTUNITY.RetrieveMaxHit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SalesAreas" EntityType="CRM_OPPORTUNITY.SalesArea" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Account_To_0_Employee_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Employee"/>
+                    <End EntitySet="EmployeeCollection" Role="ToRole_Account_To_0_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Task_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Task" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Task"/>
+                    <End EntitySet="TaskCollection" Role="ToRole_Account_To_M_Task"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_CompetitorsSet" Association="CRM_OPPORTUNITY.Opportunity_Competitors" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Competitors"/>
+                    <End EntitySet="OpportunityCompetitors" Role="ToRole_Opportunity_Competitors"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Employee_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Employee"/>
+                    <End EntitySet="EmployeeCollection" Role="ToRole_Account_To_M_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_ChangeDocsSet" Association="CRM_OPPORTUNITY.Opportunity_ChangeDocs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_ChangeDocs"/>
+                    <End EntitySet="OpportunityChangeDocs" Role="ToRole_Opportunity_ChangeDocs"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_SalesTeamSet" Association="CRM_OPPORTUNITY.Opportunity_SalesTeam" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_SalesTeam"/>
+                    <End EntitySet="OpportunitySalesTeamSet" Role="ToRole_Opportunity_SalesTeam"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Relationship_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Relationship" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Relationship"/>
+                    <End EntitySet="RelationshipCollection" Role="ToRole_Account_To_M_Relationship"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Address_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Address" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Address"/>
+                    <End EntitySet="AddressCollection" Role="ToRole_Account_To_M_Address"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_To_M_Employee_AssocSet" Association="CRM_OPPORTUNITY.Opportunity_To_M_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_To_M_Employee"/>
+                    <End EntitySet="EmployeeCollection" Role="ToRole_Opportunity_To_M_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_NotesSet" Association="CRM_OPPORTUNITY.Opportunity_Notes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Notes"/>
+                    <End EntitySet="OpportunityNotesSet" Role="ToRole_Opportunity_Notes"/>
+                </AssociationSet>
+                <AssociationSet Name="Contact_To_0_Attachment_AssocSet" Association="CRM_OPPORTUNITY.Contact_To_0_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContactCollection" Role="FromRole_Contact_To_0_Attachment"/>
+                    <End EntitySet="AttachmentCollection" Role="ToRole_Contact_To_0_Attachment"/>
+                </AssociationSet>
+                <AssociationSet Name="Employee_To_0_Attachment_AssocSet" Association="CRM_OPPORTUNITY.Employee_To_0_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EmployeeCollection" Role="FromRole_Employee_To_0_Attachment"/>
+                    <End EntitySet="AttachmentCollection" Role="ToRole_Employee_To_0_Attachment"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Opportunity_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Opportunity" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Opportunity"/>
+                    <End EntitySet="Opportunities" Role="ToRole_Account_To_M_Opportunity"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Classification_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Classification" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Classification"/>
+                    <End EntitySet="ClassificationCollection" Role="ToRole_Account_To_0_Classification"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Address_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Address" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Address"/>
+                    <End EntitySet="AddressCollection" Role="ToRole_Account_To_0_Address"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_To_0_Contact_AssocSet" Association="CRM_OPPORTUNITY.Opportunity_To_0_Contact" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_To_0_Contact"/>
+                    <End EntitySet="ContactCollection" Role="ToRole_Opportunity_To_0_Contact"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_To_M_Account_AssocSet" Association="CRM_OPPORTUNITY.Opportunity_To_M_Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_To_M_Account"/>
+                    <End EntitySet="AccountCollection" Role="ToRole_Opportunity_To_M_Account"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_ComplexNotesSet" Association="CRM_OPPORTUNITY.Opportunity_ComplexNotes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_ComplexNotes"/>
+                    <End EntitySet="OpportunityComplexNotesSet" Role="ToRole_Opportunity_ComplexNotes"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Lead_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Lead" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Lead"/>
+                    <End EntitySet="LeadCollection" Role="ToRole_Account_To_M_Lead"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Appointment_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Appointment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Appointment"/>
+                    <End EntitySet="AppointmentCollection" Role="ToRole_Account_To_M_Appointment"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Contact_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Contact" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Contact"/>
+                    <End EntitySet="ContactCollection" Role="ToRole_Account_To_M_Contact"/>
+                </AssociationSet>
+                <AssociationSet Name="Contact_To_M_Attachment_AssocSet" Association="CRM_OPPORTUNITY.Contact_To_M_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContactCollection" Role="FromRole_Contact_To_M_Attachment"/>
+                    <End EntitySet="AttachmentCollection" Role="ToRole_Contact_To_M_Attachment"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_ProductsSet" Association="CRM_OPPORTUNITY.Opportunity_Products" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Products"/>
+                    <End EntitySet="OpportunityProducts" Role="ToRole_Opportunity_Products"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Contact_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Contact" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Contact"/>
+                    <End EntitySet="ContactCollection" Role="ToRole_Account_To_0_Contact"/>
+                </AssociationSet>
+                <AssociationSet Name="Employee_To_0_Account_AssocSet" Association="CRM_OPPORTUNITY.Employee_To_0_Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EmployeeCollection" Role="FromRole_Employee_To_0_Account"/>
+                    <End EntitySet="AccountCollection" Role="ToRole_Employee_To_0_Account"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Role_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Role" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Role"/>
+                    <End EntitySet="RoleCollection" Role="ToRole_Account_To_0_Role"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Note_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Note" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Note"/>
+                    <End EntitySet="NoteCollection" Role="ToRole_Account_To_M_Note"/>
+                </AssociationSet>
+                <AssociationSet Name="Contact_To_M_Note_AssocSet" Association="CRM_OPPORTUNITY.Contact_To_M_Note" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContactCollection" Role="FromRole_Contact_To_M_Note"/>
+                    <End EntitySet="NoteCollection" Role="ToRole_Contact_To_M_Note"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_To_M_Contact_AssocSet" Association="CRM_OPPORTUNITY.Opportunity_To_M_Contact" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_To_M_Contact"/>
+                    <End EntitySet="ContactCollection" Role="ToRole_Opportunity_To_M_Contact"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_LogsSet" Association="CRM_OPPORTUNITY.Opportunity_Logs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Logs"/>
+                    <End EntitySet="OpportunityLogs" Role="ToRole_Opportunity_Logs"/>
+                </AssociationSet>
+                <AssociationSet Name="Contact_To_M_MarketingAttribute_AssocSet" Association="CRM_OPPORTUNITY.Contact_To_M_MarketingAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContactCollection" Role="FromRole_Contact_To_M_MarketingAttribute"/>
+                    <End EntitySet="MarketingAttributeCollection" Role="ToRole_Contact_To_M_MarketingAttribute"/>
+                </AssociationSet>
+                <AssociationSet Name="Contact_To_0_Address_AssocSet" Association="CRM_OPPORTUNITY.Contact_To_0_Address" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContactCollection" Role="FromRole_Contact_To_0_Address"/>
+                    <End EntitySet="AddressCollection" Role="ToRole_Contact_To_0_Address"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_Attachment_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_Attachment"/>
+                    <End EntitySet="AttachmentCollection" Role="ToRole_Account_To_M_Attachment"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_DocHistory_AssocSet" Association="CRM_OPPORTUNITY.Opportunity_DocHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_DocHistory"/>
+                    <End EntitySet="DocumentHistorySet" Role="ToRole_Opportunity_DocHistory"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Relationship_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Relationship" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Relationship"/>
+                    <End EntitySet="RelationshipCollection" Role="ToRole_Account_To_0_Relationship"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Customer_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Customer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Customer"/>
+                    <End EntitySet="CustomerCollection" Role="ToRole_Account_To_0_Customer"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_0_Attachment_AssocSet" Association="CRM_OPPORTUNITY.Account_To_0_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_0_Attachment"/>
+                    <End EntitySet="AttachmentCollection" Role="ToRole_Account_To_0_Attachment"/>
+                </AssociationSet>
+                <AssociationSet Name="Account_To_M_MarketingAttribute_AssocSet" Association="CRM_OPPORTUNITY.Account_To_M_MarketingAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AccountCollection" Role="FromRole_Account_To_M_MarketingAttribute"/>
+                    <End EntitySet="MarketingAttributeCollection" Role="ToRole_Account_To_M_MarketingAttribute"/>
+                </AssociationSet>
+                <AssociationSet Name="AttachmentsSet" Association="CRM_OPPORTUNITY.Opportunity_Attachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Attachments"/>
+                    <End EntitySet="OpportunityAttachments" Role="ToRole_Opportunity_Attachments"/>
+                </AssociationSet>
+                <AssociationSet Name="Employee_To_0_Address_AssocSet" Association="CRM_OPPORTUNITY.Employee_To_0_Address" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EmployeeCollection" Role="FromRole_Employee_To_0_Address"/>
+                    <End EntitySet="AddressCollection" Role="ToRole_Employee_To_0_Address"/>
+                </AssociationSet>
+                <AssociationSet Name="Lead_To_0_Employee_AssocSet" Association="CRM_OPPORTUNITY.Lead_To_0_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="LeadCollection" Role="FromRole_Lead_To_0_Employee"/>
+                    <End EntitySet="EmployeeCollection" Role="ToRole_Lead_To_0_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="Opportunity_StatusesSet" Association="CRM_OPPORTUNITY.Opportunity_Statuses" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Opportunities" Role="FromRole_Opportunity_Statuses"/>
+                    <End EntitySet="OpportunityStatuses" Role="ToRole_Opportunity_Statuses"/>
+                </AssociationSet>
+                <FunctionImport Name="AppFollowupTransTypes" ReturnType="Collection(CRM_OPPORTUNITY.AppointProcTypeList)" m:HttpMethod="GET">
+                    <Parameter Name="Guid" Type="Edm.String" Mode="In" MaxLength="32"/>
+                    <Parameter Name="TransactionType" Type="Edm.String" Mode="In" MaxLength="4"/>
+                </FunctionImport>
+                <FunctionImport Name="TaskFollowupTransTypes" ReturnType="Collection(CRM_OPPORTUNITY.TaskProcTypeList)" m:HttpMethod="GET">
+                    <Parameter Name="Guid" Type="Edm.String" Mode="In" MaxLength="32"/>
+                    <Parameter Name="TransactionType" Type="Edm.String" Mode="In" MaxLength="4"/>
+                </FunctionImport>
+                <FunctionImport Name="OpptPartnerFctTypes" ReturnType="Collection(CRM_OPPORTUNITY.OpptPartnerFctTypeList)" m:HttpMethod="GET">
+                    <Parameter Name="TransactionType" Type="Edm.String" Mode="In" MaxLength="4"/>
+                </FunctionImport>
+                <FunctionImport Name="OpptFollowupTransTypes" ReturnType="Collection(CRM_OPPORTUNITY.OpportunityProcTypeList)" m:HttpMethod="GET">
+                    <Parameter Name="Guid" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="TransactionType" Type="Edm.String" Mode="In" MaxLength="4"/>
+                </FunctionImport>
+                <FunctionImport Name="RetrieveMaxHit" ReturnType="CRM_OPPORTUNITY.MaxHit" m:HttpMethod="GET" sap:label="Get Maximum Hit" sap:action-for="CRM_OPPORTUNITY.Opportunity"/>
+                <FunctionImport Name="UpdateMaxHit" ReturnType="CRM_OPPORTUNITY.MaxHit" m:HttpMethod="POST" sap:label="Set Maximum Hit" sap:action-for="CRM_OPPORTUNITY.Opportunity">
+                    <Parameter Name="MaxHitNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+                <FunctionImport Name="EditAuthorizationCheck" ReturnType="CRM_OPPORTUNITY.ActionResult" m:HttpMethod="GET" sap:label="Check Edit Authorization">
+                    <Parameter Name="ObjectGuid" Type="Edm.Guid" Mode="In"/>
+                </FunctionImport>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZCRM_OPPORTUNITY_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZCRM_OPPORTUNITY_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

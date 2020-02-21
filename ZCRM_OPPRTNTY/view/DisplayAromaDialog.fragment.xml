@@ -1,0 +1,508 @@
+<Dialog 
+	xmlns="sap.m" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	showHeader="false"
+	stretch="true"
+	verticalScrolling="true">
+	    <Panel id="projectPanelID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>PROJECTINFORMATION}" width="auto" class="sapUiResponsiveMargin">
+    		<f:SimpleForm id="SimpleFormProjectInfo"
+    		    class="sapUiResponsiveMargin"
+    			editable="false"
+    			layout="ResponsiveGridLayout"
+    			labelSpanXL="3"
+    			labelSpanL="3"
+    			labelSpanM="3"
+    			labelSpanS="12"
+    			adjustLabelSpan="false"
+    			emptySpanXL="4"
+    			emptySpanL="4"
+    			emptySpanM="4"
+    			emptySpanS="0"
+    			columnsXL="1"
+    			columnsL="2"
+    			columnsM="1"
+    			singleContainerFullSize="false" >
+    			<f:content>
+    			    <core:Title text="" />
+        				<Label text="{i18n>PYPDESCRIPTION}" />
+        				<Text text="{AromaDetail>/Detail/PypTanim}" />
+        				<Label text="{i18n>PROJETYPE}" />
+        				<Text text="{AromaDetail>/Detail/ProjeTuruDesc}" />
+        				<Label text="{i18n>PROJENAME}" />
+        				<Text text="{AromaDetail>/Detail/MusteriAdi}" />
+        				<Label text="{i18n>CUSTOMERSIZE}" />
+        				<Text text="{AromaDetail>/Detail/MusteriBuyukDesc}" />
+        				<Label text="{i18n>CONVERTOSALE}" />
+        				<Text text="{AromaDetail>/Detail/SatisaDonusDesc}" />
+        				<Label text="{i18n>CONVERTPOSSIBILITY}" />
+        				<Text text="{AromaDetail>/Detail/SatisaDonOlasDesc}" />
+        				<Label text="{i18n>SENDER}" />
+        				<Text text="{AromaDetail>/Detail/GonderKisi}" />
+        				<Label text="{i18n>SENDINGFORM}" />
+        				<Text text="{AromaDetail>/Detail/GondermeSekliDesc}" />
+        				<Label text="{i18n>CARGOSENDING}" />
+        				<Text text="{AromaDetail>/Detail/KargoOdemesiDesc}" />
+        				
+        				<Label text="{i18n>PROJECTTARGET}" />
+        				<Text text="{AromaDetail>/Detail/ProjeAmaci}" />
+        				
+        				
+        				<Label text="{i18n>MINTONNAGE}" visible="false"/>
+        				<Text text="{AromaDetail>/Detail/MinTonaj}" visible="false"/>
+        			<core:Title text=""/>
+        				<Label text="{i18n>MAXTONNAGE}" visible="false" />
+        				<Text text="{AromaDetail>/Detail/MaxTonaj}" visible="false"/>
+        				<Label text="{i18n>FACTORYVISIT}" />
+        				<Text text="{AromaDetail>/Detail/MstriFZiyrtiDesc}" />
+        				<Label text="{i18n>SAMPLERATE}" />
+        				<Text text="{AromaDetail>/Detail/NumuneBedeliDesc}" />
+        				<Label text="{i18n>PROACTIVE}" />
+        				<Text text="{AromaDetail>/Detail/ProaktifDesc}" />
+        				<Label text="{i18n>ANNUALSALESAMOUNT}" />
+        				<Text text="{AromaDetail>/Detail/YillikSatisMik}" />
+        				<Text text="{AromaDetail>/Detail/YillikSatisMik2}" />  
+        				<Label text="{i18n>ESTIMATEDRMC}" />
+        				<Text text="{AromaDetail>/Detail/TahRmcBrm}" />
+        				<Text text="{AromaDetail>/Detail/TahRmBrm}" />
+        				<Label text="{i18n>DELIVERYTIME}" />
+        				<!--<Text text="{AromaDetail>/Detail/TeslimSuresi}" />-->
+        				<Text text="{AromaDetail>/Detail/TeslimSuresiDesc}" />
+        				<Label text="{i18n>DELIVERYDATE}" />
+        	<!--			<Text text="{AromaDetail>/Detail/TeslimTarih}" />	-->
+        			    <Text text="{path:'AromaDetail>/Detail/TeslimTarih', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}}"
+                			class="sapUiSmallMarginBottom" 	/>
+        				<Label visible="false" text="{i18n>PROJECTOUTCOME}" />
+        				<Text visible="false" text="{AromaDetail>/Detail/ProjeSonuc}" />
+        				<Label text="{i18n>ARGEPRIORITY}" />
+        				<Text text="{AromaDetail>/Detail/ArgeOncelik}" />
+        			
+    			</f:content>
+    		</f:SimpleForm>
+    	</Panel>
+    	<Panel id="aromaPanelID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>AROMAINFO}" width="auto" class="sapUiResponsiveMargin">
+    		<f:SimpleForm id="SimpleFormAromaInfoID"
+    		    class="sapUiResponsiveMargin"
+    			editable="false"
+    			layout="ResponsiveGridLayout"
+    			labelSpanXL="3"
+    			labelSpanL="3"
+    			labelSpanM="3"
+    			labelSpanS="12"
+    			adjustLabelSpan="false"
+    			emptySpanXL="4"
+    			emptySpanL="4"
+    			emptySpanM="4"
+    			emptySpanS="0"
+    			columnsXL="1"
+    			columnsL="2"
+    			columnsM="1"
+    			singleContainerFullSize="false" >
+    			<f:content>
+        			<core:Title text="" />
+        				<Label text="{i18n>AROMAFEATURE}" />
+        				<Text text="{AromaDetail>/Detail/AromaOzellikDesc}" />
+        				<Label text="{i18n>FINISHEDCODE}" />
+        				<Text text="{AromaDetail>/Detail/BitmisUrun}" />
+        				<Label text="{i18n>FINISHEDREQUEST}" />
+        				<Text text="{AromaDetail>/Detail/BtmsUrunIstk}" />
+        				<Label text="{i18n>FINISHEDQUANTITY}" />
+        				<Text text="{AromaDetail>/Detail/BtmsUrunAdet}" />
+        				<Label text="{i18n>RECIPE}" />
+        				<Text text="{AromaDetail>/Detail/BUReceteDesc}" />
+        				<Label text="{i18n>RESOLUTION}" />
+        				<Text text="{AromaDetail>/Detail/CozunurlukDesc}" />
+        				<Label text="{i18n>MATERIALCODE}" />
+        				<Text text="{AromaDetail>/Detail/MalzemeKod}" />
+        				<Label text="{i18n>ORIGINALCODE}" visible="{Update>/BayiDurumu}" />
+        				<Text text="{AromaDetail>/Detail/Malzeme}" visible="{Update>/BayiDurumu}"/>
+        				<Label id="ZZDOUBLE_KOD_L" text="{i18n>MATERIALDOUBLECODE}" visible="{Update>/BayiDurumu}"/>
+        				<Text id="ZZDOUBLE_KOD_T" text="{AromaDetail>/Detail/DoubleKod}" visible="{Update>/BayiDurumu}"/>
+        				<Label text="{i18n>PHYSICALCONDITION}" />
+        				<Text text="{AromaDetail>/Detail/FizikDurumDesc}" />
+        				<Label text="{i18n>ALTERNATIVE}" />
+        				<Text text="{AromaDetail>/Detail/AlternatifDesc}" />
+        				<Label id="ZZHANGI_KOD_L" text="{i18n>WITHWHICHCODE}" visible="{Update>/BayiDurumu}"/>
+        				<Text id="ZZHANGI_KOD" text="{AromaDetail>/Detail/HangiKodDesc}" visible="{Update>/BayiDurumu}"/>
+        			<core:Title text="" />	
+        				<Label text="{i18n>DESIREDAMOUNT}" />
+        				<Text text="{AromaDetail>/Detail/IstnnArmMik}" />
+        				<Text text="{AromaDetail>/Detail/IstnnArmMik2}"/>
+        				<Label text="{i18n>DESIREDQUANTITY}" />
+        				<Text text="{AromaDetail>/Detail/Quantity}" />
+        				<Text visible="false" text="{AromaDetail>/Detail/IstenenAromaBirim}"/>
+        				<Label text="{i18n>CODEDESCRIPTION}" />
+        				<Text text="{AromaDetail>/Detail/KodAciklamaDesc}" />
+        				<Label text="{i18n>MODE}" />
+        				<Text text="{AromaDetail>/Detail/ModDesc}" />
+        				<Label text="{i18n>DESIREDTYPE}" />
+        				<Text text="{AromaDetail>/Detail/NumuneTipiDesc}" />
+        				<Label text="{i18n>CLASSREQUEST}" />
+        				<Text text="{AromaDetail>/Detail/SinifIstegiDesc}" />
+        				<Label text="{i18n>CLASS1}" />
+        				<Text text="{AromaDetail>/Detail/Sinif1Desc}" />
+        				<Label text="{i18n>CLASS2}" />
+        				<Text text="{AromaDetail>/Detail/Sinif2Desc}" />
+        				<Label text="{i18n>PRODUCTBASE}" />
+        				<Text text="{AromaDetail>/Detail/UrunBaziDesc}" />
+        				<Label text="{i18n>PRODUCTFEATURE}" />
+        				<Text text="{AromaDetail>/Detail/UrunOz}" />
+        				<Label text="{i18n>PRACTICE}" />
+        				<Text text="{AromaDetail>/Detail/UygulamaDesc}" /> 
+        				<Label text="{i18n>PRACTICEAREA}" />
+        				<Text text="{AromaDetail>/Detail/UyguAlani}" />
+        				<Text text="{AromaDetail>/Detail/TanimUyg}" />
+        				<Label text="{i18n>CUSTOMERGROUP}" />
+        				<Text text="{AromaDetail>/Detail/MusteriGrubu}" />
+    			</f:content>
+    		</f:SimpleForm>
+    	</Panel>
+    	<Panel id="sosPanelID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>SOSINFO}" width="auto" class="sapUiResponsiveMargin">
+    		<f:SimpleForm id="SimpleFormSOSInfoID"
+    		    class="sapUiResponsiveMargin"
+    			editable="false"
+    			layout="ResponsiveGridLayout"
+    			labelSpanXL="3"
+    			labelSpanL="3"
+    			labelSpanM="3"
+    			labelSpanS="12"
+    			adjustLabelSpan="false"
+    			emptySpanXL="4"
+    			emptySpanL="4"
+    			emptySpanM="4"
+    			emptySpanS="0"
+    			columnsXL="1"
+    			columnsL="2"
+    			columnsM="1"
+    			singleContainerFullSize="false" >
+    			<f:content>
+        			<core:Title text="" />
+        				<Label text="{i18n>ALCOHOL}" />
+        				<Text text="{AromaDetail>/Detail/AlkolYuzde}" />
+        				<Label text="{i18n>BASENAME}" />
+        				<Text text="{AromaDetail>/Detail/AromasizBaz}" />
+        				<Label text="{i18n>ACIDRANGE}" />
+        				<Text text="{AromaDetail>/Detail/AsitAralik}" />
+        				<Label text="{i18n>ACIDTYPE}" />
+        				<Text text="{AromaDetail>/Detail/AsitTipi}" />
+        				<Label text="{i18n>PAINTTYPE}" />
+        				<Text text="{AromaDetail>/Detail/BoyaTipiDesc}" />
+        				<Label text="{i18n>BRIXINTERVAL}" />
+        				<Text text="{AromaDetail>/Detail/BrixAralik}" />
+        				<Label text="{i18n>PACKAGINGTYPE}" />
+        				<Text text="{AromaDetail>/Detail/BtmsAmbTip}" />
+        				<Label text="{i18n>COOKINGTYPE}" />
+        				<Text text="{AromaDetail>/Detail/BUSureSicak}" />
+        				<Label text="{i18n>MILKDOSAGE}" />
+        				<Text text="{AromaDetail>/Detail/BUSutDoz}" />
+        				<Label text="{i18n>PROTECTOR}" />
+        				<Text text="{AromaDetail>/Detail/KoruyucuDesc}" />
+        				<Label text="{i18n>FRUIT}" />
+        				<Text text="{AromaDetail>/Detail/MeyveYuzde}" />
+        				
+        			<core:Title text="" />
+        				<Label text="{i18n>SAMPLEPACKAGETYPE}" />
+        				<Text text="{AromaDetail>/Detail/NumuneAmbTipDesc}" />
+        				<Label text="{i18n>PASTEURIZATION}" />
+        				<Text text="{AromaDetail>/Detail/Pastorizasyon}" />
+        				<Label text="{i18n>PH_INTERVAL}" />
+        				<Text text="{AromaDetail>/Detail/AsitAralik}" />
+        				<Label text="{i18n>PULP}" />
+        				<Text text="{AromaDetail>/Detail/PulpYuzde}" />
+        				<Label text="{i18n>SOSPACKAGINGTYPE}" />
+        				<Text text="{AromaDetail>/Detail/SosAmbTipDesc}" />
+        				<Label text="{i18n>SOSFEATURE}" />
+        				<Text text="{AromaDetail>/Detail/SosOzellik}" />
+        				<Label text="{i18n>SOSTYPE}" />
+        				<Text text="{AromaDetail>/Detail/SosTipiDesc}" />
+        				<Label text="{i18n>SOSPRACTICETIME}" />
+        				<Text text="{AromaDetail>/Detail/SosUygZmn}" />
+        				<Label text="{i18n>WATERACTIVATION}" />
+        				<Text text="{AromaDetail>/Detail/SuAktivitesi}" />
+        				<Label text="{i18n>SWEETENER_TYPE}" />
+        				<Text text="{AromaDetail>/Detail/TatlanCesit}" />
+        				<Label text="{i18n>VISCO_AND_MEASURE}" />
+        				<Text text="{AromaDetail>/Detail/Vizkozite}" />
+        				
+    			</f:content>
+    		</f:SimpleForm>
+    	</Panel>
+    	<Panel id="pypPanelID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>PYPINFO}" width="auto" backgroundDesign="Solid " class="sapUiResponsiveMargin">
+			<t:TreeTable
+				id="customProduct_Tab"
+				visibleRowCount="5"
+				rows="{path: 'AromaDetail>/PYPList/PYPs', parameters: {arrayNames:['Childs']}}"
+				noDataText="{i18n>NOPRODUCTS}"
+				selectionMode="None"
+				ariaLabelledBy="title">
+                <t:toolbar>
+                    <Toolbar id="customProductHeaderToolbar">
+                        <Title id="title" text="{{path:'i18n>PRODUCTS_HEADER'}, formatter:'cus.crm.opportunity.util.Formatter.formatTabHeader'}"/>
+                    </Toolbar>
+                </t:toolbar>
+                <t:columns>
+            		<t:Column width="12rem">
+                    <Label text="{i18n>PYP_NUMBER}"/>
+                    <t:template>
+                        <Text text="{AromaDetail>PypNo}" wrapping="false" />
+                    </t:template>
+					</t:Column>
+            		<t:Column width="9rem">
+                    <Label text="{i18n>MALZEME_NO}"/>          
+                    <t:template>
+                        <ObjectIdentifier title="{AromaDetail>MalzemeNo}" 
+    						titleActive="{parts: [{path: 'AromaDetail>MalzemeTuru'},{path: 'AromaDetail>TeslimatNo'},{path: 'AromaDetail>MusteriSipNoEki'}],formatter: '.customFormatter.isMalzemeClick'}"
+                            titlePress="onDisplayMalzemeDetail" />
+                    </t:template>
+					</t:Column>
+					<t:Column width="5rem">
+                        <Label text="{i18n>MODE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>Mod}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>MALZEME_KOD_TANIM}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>OrjKodTanim}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem" visible="{path : 'json>/ProcessType', formatter : '.customFormatter.isDoubleKodVisible'}">
+                        <Label text="{i18n>DOUBLE_CODE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>DoubleKod}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem" visible="{path : 'json>/ProcessType', formatter : '.customFormatter.isDoubleKodVisible'}">
+                        <Label text="{i18n>DOUBLECODE_DESC}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>DoubleKodTanim}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SAMPLE_STATUS}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>NumuneDurumDesc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>ARGE_DURUMU}"/>
+                        <t:template>
+                            <Text text="{AromaDetail>ArgeDurumuDesc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+            		<t:Column width="9rem">
+                    <Label text="{i18n>SONRAKI_ADIM}"/>
+                    <t:template>
+                        <Text text="{AromaDetail>SonrakiAdimDesc}" wrapping="false" />
+                    </t:template>
+					</t:Column>
+            		<t:Column width="9rem" visible="{path : 'AromaDetail>MusteriSipNoEki',formatter: '.customFormatter.isHideUrunAgaci'}">
+                    <Label text="{i18n>URUN_AGACI}"/>
+                    <t:template>
+                        <Text text="{path : 'AromaDetail>MusteriSipNoEki',formatter: '.customFormatter.isChangeText'}" wrapping="false" />
+                    </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>RESULT}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>SonucDesc}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SHIPMENT_DATE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>TeslimatTarih}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>APPLICATION_AREA}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>UygAlaniTanim}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>DOSAGE_MIN}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>DozajMin}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>DOSAGE_MAX}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>DozajMax}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>LEGAL_STATUS_1}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>YasalSinif1Desc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>LEGAL_STATUS_2}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>YasalSinif2Desc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>DELIVERY_NUMBER}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>TeslimatNo}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SHIPMENT_ADDRESS}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>TeslimatAdres}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SHIPMENT_ATTENTION}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>GonderilecekKisi}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>DELIVERY_METHOD}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>GondermeSekliDesc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SHIPMENT_QUANTITY}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>TeslimatMiktar}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>SHIPMENT_QUANTITY_Q}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>TeslimatMiktar2}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+            		<t:Column width="9rem">
+                    <Label text="{i18n>PROJECT_TYPE}"/>
+                    <t:template>
+                        <Text text="{AromaDetail>AromsaProjeTuruDesc}" wrapping="false" />
+                    </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>PROJECTTYPE_DESC}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>ProjeTuruDesc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>AROMATISYEN}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>Aromatisyen}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>APPLICATION_DONE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>UygYapan}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>APPLICATION_PHASE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>UygDurumDesc}" wrapping="true"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>HALAL_INFORMATION}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>HelalBilgisiDesc}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>CUSTOMER_SAMPLE_CODE}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>MustEsantKod}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+					<t:Column width="9rem">
+                        <Label text="{i18n>EQUIVALENT_MARKET}"/>
+                        <t:template>
+                         <Text text="{AromaDetail>MuadPiyUrunu}" wrapping="false"  />
+                        </t:template>
+					</t:Column>
+<!--					<t:Column width="9rem">
+                        <Label text="Aromsa Proje Türü"/>
+                        <t:template>
+                         <Text text="{AromaDetail>AromsaProjeTuru}" wrapping="true"  />
+                        </t:template>
+					</t:Column>-->
+                </t:columns>
+			</t:TreeTable>
+    	</Panel>
+    	<Panel id="ilgiliPanelID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>ILGILIKISILER}" width="auto" backgroundDesign="Solid " class="sapUiResponsiveMargin">
+        	<Table id="ilgiliKisilerTableID"
+        		inset="false"
+        		items="{
+        			path: 'AromaDetail>/Detail/SalesTeam/results'}">
+        		<columns>
+        			<Column>
+        				<Text text="{i18n>KISILERCOLUMN_ISLEV}" />
+        			</Column>
+        			<Column
+        				minScreenWidth="Tablet"
+        				demandPopin="true">
+        				<Text  text="{i18n>KISILERCOLUMN_TANITICI}"/>
+        			</Column>
+        			<Column
+        				minScreenWidth="Tablet"
+        				demandPopin="true">
+        				<Text text="{i18n>KISILERCOLUMN_AD}" />
+        			</Column>
+        			<Column
+        				minScreenWidth="Tablet"
+        				demandPopin="true">
+        				<Text text="{i18n>KISILERCOLUMN_ADDRESS}" />
+        			</Column>
+        		</columns>
+        		<items>
+        			<ColumnListItem>
+        				<cells>
+        					<Text
+            					text="{AromaDetail>PartnerFunctionText}"/>
+        					<Text
+        						text="{AromaDetail>PartnerNumber}" />
+        					<Text
+        						text="{AromaDetail>PartnerName}" />
+        					<Text
+        					    text="{AromaDetail>TelephoneNumber}" />	
+        				</cells>
+        			</ColumnListItem>
+        		</items>
+        	</Table>
+    	    
+    	</Panel>
+    	<Panel id="NotlarID" expand="onAdjustPanelExpand" expandable="true" expanded="false" headerText="{i18n>NOTES}" width="auto" backgroundDesign="Solid " class="sapUiResponsiveMargin">
+		<List id="listNoteID" showSeparators="Inner" growing="true"
+			growingThreshold="4" growingScrollToLoad="false"
+			items="{path : 'AromaDetail>/Detail/ComplexNotes/results'}">
+			<FeedListItem sender="{path : 'AromaDetail>Creator'}"
+				senderActive="false"
+				info="{path : 'AromaDetail>TextLanguageID'}"
+				timestamp="{path:'AromaDetail>CreatedAt' , formatter: 'cus.crm.opportunity.util.Formatter.notesDateFormatter'}"
+				text="{path : 'AromaDetail>Content'}" />	
+		</List>
+<!--    	    <TextArea value="{AromaDetail>/Detail/ComplexNotes/results/0/Content}" 
+    	    	growing="true" 
+	    		editable="false" 
+	    		growingMaxLines="7" 
+	    		width="100%"/>
+    	    <TextArea value="{AromaDetail>/Detail/ComplexNotes/results/1/Content}" 
+    	    	growing="true" 
+    	    	editable="false" 
+    	    	growingMaxLines="7" 
+    	    	width="100%"/>-->
+    	</Panel>
+		<buttons>
+			<Button text="{i18n>CLOSEAROMA}" press="onDisplayAromaClose"/>
+		</buttons>
+</Dialog>

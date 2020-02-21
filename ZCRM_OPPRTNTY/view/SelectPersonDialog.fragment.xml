@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		noDataText="{i18n>NODATATEXT}"
+		title="{i18n>SELECTPERSONTITLE}"
+		search="onHandlePersonSearch"
+		confirm="onHandlePersonSelect"
+		cancel="onHandlePersonClose"
+		items="{
+			path: 'AromaDetail>/PersonCollection'
+		}" >
+		<StandardListItem
+			title="{AromaDetail>FullName}"
+			info="{AromaDetail>ID}"
+			description="{AromaDetail>Address}"
+			icon="sap-icon://employee"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>
